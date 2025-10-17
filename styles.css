@@ -187,10 +187,90 @@ nav {
     line-height: 1.7;
 }
 
+/* Experience Section */
+.experience {
+    padding: 6rem 2rem;
+    background: #fafafa;
+}
+
+.experience h2 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 4rem;
+    text-align: center;
+    letter-spacing: -0.02em;
+}
+
+.experience-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    max-width: 1280px;
+    margin: 0 auto 4rem auto;
+}
+
+.experience-item {
+    background: #ffffff;
+    padding: 2rem;
+    border-radius: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.experience-item h3 {
+    color: #111827;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.01em;
+}
+
+.experience-item .role {
+    color: #047857;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+
+.experience-item p:not(.role) {
+    color: #6b7280;
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+/* Metrics */
+.metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 3rem;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 3rem 0;
+}
+
+.metric {
+    text-align: center;
+}
+
+.metric-number {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: #047857;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.02em;
+}
+
+.metric-label {
+    font-size: 1.125rem;
+    color: #6b7280;
+    font-weight: 500;
+}
+
 /* Contact Section */
 .contact {
     padding: 6rem 2rem;
-    background: #fafafa;
+    background: #ffffff;
     text-align: center;
 }
 
@@ -256,6 +336,7 @@ footer {
 
     .about h2,
     .services h2,
+    .experience h2,
     .contact h2 {
         font-size: 2.25rem;
     }
@@ -274,8 +355,17 @@ footer {
         padding: 1rem;
     }
 
-    .services-grid {
+    .services-grid,
+    .experience-grid {
         grid-template-columns: 1fr;
+    }
+
+    .metrics {
+        gap: 2rem;
+    }
+
+    .metric-number {
+        font-size: 2.5rem;
     }
 
     .container {
