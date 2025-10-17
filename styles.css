@@ -136,6 +136,31 @@ nav {
     font-weight: 400;
 }
 
+/* Company Logos */
+.companies {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem 3rem;
+    max-width: 1000px;
+    margin: 3rem auto 0 auto;
+    padding-top: 3rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.company-logo {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #6b7280;
+    letter-spacing: -0.01em;
+    transition: color 0.2s;
+}
+
+.company-logo:hover {
+    color: #047857;
+}
+
 /* Services Section */
 .services {
     padding: 6rem 2rem;
@@ -343,6 +368,16 @@ footer {
 
     .about p {
         font-size: 1.0625rem;
+    }
+
+    .companies {
+        gap: 1.5rem 2rem;
+        padding-top: 2rem;
+        margin-top: 2rem;
+    }
+
+    .company-logo {
+        font-size: 1.125rem;
     }
 
     .nav-links {
