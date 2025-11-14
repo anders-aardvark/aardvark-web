@@ -1,3 +1,26 @@
+/*
+ * COLOR CONTRAST AUDIT (WCAG AA Compliance)
+ * Tested: 2025-11-14
+ * Method: Calculated using WCAG 2.1 relative luminance formula
+ *
+ * Requirements:
+ * - Normal text (under 18pt): 4.5:1 minimum
+ * - Large text (18pt+ or 14pt+ bold): 3.0:1 minimum
+ *
+ * Results:
+ * #1D1E18 on #FFFFFF: 16.78:1 - PASS (main text on white)
+ * #1D1E18 on #FAFAFA: 16.08:1 - PASS (main text on light gray)
+ * #6b7280 on #FFFFFF: 4.83:1 - PASS (secondary text on white)
+ * #6b7280 on #FAFAFA: 4.63:1 - PASS (secondary text on light gray)
+ * #4b5563 on #FFFFFF: 7.56:1 - PASS (nav links)
+ * #1D1E18 on #FDA10D: 8.22:1 - PASS (CTA button text)
+ * #CC7700 on #FFFFFF: 3.38:1 - PASS (email link - large text 22px/600)
+ * #9ca3af on #1D1E18: 6.61:1 - PASS (footer text)
+ *
+ * Note: Original accent color #FDA10D had only 2.04:1 on white (FAIL).
+ * Email link updated to #CC7700 for accessibility compliance.
+ */
+
 * {
     margin: 0;
     padding: 0;
@@ -68,6 +91,22 @@ nav {
 
 .nav-links a:hover {
     color: #FDA10D;
+}
+
+/* Keyboard Focus States - WCAG Accessibility */
+.nav-links a:focus-visible,
+.cta-button:focus-visible,
+.contact-email a:focus-visible,
+.logo:focus-visible {
+    outline: 2px solid #FDA10D;
+    outline-offset: 4px;
+    border-radius: 2px;
+}
+
+/* Global focus state for all interactive elements */
+*:focus-visible {
+    outline: 2px solid #FDA10D;
+    outline-offset: 2px;
 }
 
 /* Hero Section - Notion/Hey inspired */
@@ -337,7 +376,7 @@ nav {
 }
 
 .contact-email a {
-    color: #FDA10D;
+    color: #CC7700;
     text-decoration: none;
     font-weight: 600;
     border-bottom: 2px solid transparent;
@@ -345,7 +384,7 @@ nav {
 }
 
 .contact-email a:hover {
-    border-bottom-color: #FDA10D;
+    border-bottom-color: #CC7700;
 }
 
 /* Footer */
