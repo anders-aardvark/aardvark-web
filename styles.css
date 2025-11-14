@@ -111,9 +111,16 @@ nav {
 
 /* Hero Section - Notion/Hey inspired */
 .hero {
+    position: relative;
     background: #ffffff;
     padding: 8rem 2rem 10rem 2rem;
     text-align: center;
+    overflow: hidden; /* Clip circles at edges */
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1; /* Above circles */
 }
 
 .hero-logo {
@@ -128,7 +135,7 @@ nav {
     font-size: 5rem;
     font-weight: 400;
     line-height: 1.1;
-    letter-spacing: -0.03em;
+    letter-spacing: 0;
     color: #1D1E18;
     margin-bottom: 1.5rem;
     max-width: 1100px;
@@ -200,17 +207,24 @@ nav {
 
 /* About Section */
 .about {
+    position: relative;
     padding: 6rem 2rem;
-    background: #fafafa;
+    background: #1F2120;
+    overflow: hidden; /* Clip circles at edges */
+}
+
+.about .container {
+    position: relative;
+    z-index: 1; /* Above circles */
 }
 
 .about h2 {
     font-size: 3rem;
     font-weight: 400;
-    color: #1D1E18;
+    color: #FDA10D;
     margin-bottom: 2rem;
     text-align: center;
-    letter-spacing: -0.02em;
+    letter-spacing: 0;
 }
 
 .about p {
@@ -219,7 +233,7 @@ nav {
     max-width: 900px;
     margin: 0 auto;
     text-align: center;
-    color: #4b5563;
+    color: #E5E5E5;
     font-weight: 400;
 }
 
@@ -233,21 +247,21 @@ nav {
     max-width: 1000px;
     margin: 3rem auto 0 auto;
     padding-top: 3rem;
-    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .company-logo {
     height: 40px;
     width: auto;
     object-fit: contain;
-    opacity: 0.6;
-    transition: opacity 0.2s;
-    filter: grayscale(100%);
+    opacity: 0.8;
+    transition: opacity 0.2s, filter 0.2s;
+    filter: brightness(0) invert(1); /* Make logos white on dark background */
 }
 
 .company-logo:hover {
     opacity: 1;
-    filter: grayscale(0%);
+    filter: brightness(0) invert(1);
 }
 
 /* Services Section */
@@ -262,7 +276,7 @@ nav {
     color: #1D1E18;
     margin-bottom: 4rem;
     text-align: center;
-    letter-spacing: -0.02em;
+    letter-spacing: 0;
 }
 
 .services-grid {
@@ -292,7 +306,7 @@ nav {
     font-size: 1.5rem;
     font-weight: 400;
     margin-bottom: 0.75rem;
-    letter-spacing: -0.01em;
+    letter-spacing: 0;
 }
 
 .service-card p {
@@ -313,7 +327,7 @@ nav {
     color: #1D1E18;
     margin-bottom: 4rem;
     text-align: center;
-    letter-spacing: -0.02em;
+    letter-spacing: 0;
 }
 
 .experience-grid {
@@ -336,7 +350,7 @@ nav {
     font-size: 1.5rem;
     font-weight: 400;
     margin-bottom: 0.5rem;
-    letter-spacing: -0.01em;
+    letter-spacing: 0;
 }
 
 .experience-item .role {
@@ -372,7 +386,7 @@ nav {
     color: #FDA10D;
     line-height: 1;
     margin-bottom: 0.5rem;
-    letter-spacing: -0.02em;
+    letter-spacing: 0;
 }
 
 .metric-label {
@@ -393,7 +407,7 @@ nav {
     font-weight: 400;
     color: #1D1E18;
     margin-bottom: 1.5rem;
-    letter-spacing: -0.02em;
+    letter-spacing: 0;
 }
 
 .contact p {
@@ -426,6 +440,138 @@ footer {
     text-align: center;
     padding: 2.5rem;
     font-size: 0.9375rem;
+}
+
+/* ========================================
+   CIRCULAR PATTERN SYSTEM
+   Signature visual element - static concentric circles
+   ======================================== */
+
+/* Container for circular patterns */
+.circle-pattern {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none; /* Allow clicks to pass through */
+    z-index: 0;
+}
+
+/* Individual circle styling */
+.circle {
+    position: absolute;
+    border-radius: 50%;
+}
+
+/* Hero Section Circles (Warm Tones - Brand Accent Variations) */
+/* Circles are centered horizontally and positioned at bottom */
+/* Only top half visible - bottom half cut by section break */
+/* Outermost circle covers 80% of viewport width, increments of 16vw */
+.hero .circle-pattern .circle:nth-child(1) {
+    width: 16vw;  /* Innermost */
+    height: 16vw;
+    background: #FDA10D; /* Brand accent */
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    opacity: 0.3;
+}
+
+.hero .circle-pattern .circle:nth-child(2) {
+    width: 32vw;
+    height: 32vw;
+    background: #FDA10D; /* Same orange, different opacity */
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    opacity: 0.25;
+}
+
+.hero .circle-pattern .circle:nth-child(3) {
+    width: 48vw;
+    height: 48vw;
+    background: #E8C9A0; /* Tan */
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    opacity: 0.2;
+}
+
+.hero .circle-pattern .circle:nth-child(4) {
+    width: 64vw;
+    height: 64vw;
+    background: #E5D4BC; /* Light tan */
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    opacity: 0.15;
+}
+
+.hero .circle-pattern .circle:nth-child(5) {
+    width: 80vw;  /* Outermost: 80% of viewport width */
+    height: 80vw;
+    background: #EBE0D0; /* Very light beige */
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    opacity: 0.12;
+}
+
+/* About Section Circles (Cool/Dark Tones - Purple Variations) */
+/* Circles are centered horizontally and positioned at TOP */
+/* Only bottom half visible - top half cut by section break */
+/* Aligns with Hero circles above to form complete circles at boundary */
+/* Outermost circle covers 80% of viewport width, increments of 16vw */
+.about .circle-pattern .circle:nth-child(1) {
+    width: 16vw;  /* Innermost */
+    height: 16vw;
+    background: #5842C3; /* Medium purple */
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.3;
+}
+
+.about .circle-pattern .circle:nth-child(2) {
+    width: 32vw;
+    height: 32vw;
+    background: #3B2F8F; /* Darker purple */
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.25;
+}
+
+.about .circle-pattern .circle:nth-child(3) {
+    width: 48vw;
+    height: 48vw;
+    background: #2D2366; /* Deep purple */
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.2;
+}
+
+.about .circle-pattern .circle:nth-child(4) {
+    width: 64vw;
+    height: 64vw;
+    background: #1F1B3D; /* Very dark purple */
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.15;
+}
+
+.about .circle-pattern .circle:nth-child(5) {
+    width: 80vw;  /* Outermost: 80% of viewport width */
+    height: 80vw;
+    background: #1A1520; /* Almost black purple */
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.12;
 }
 
 /* Responsive Design */
