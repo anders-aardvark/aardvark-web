@@ -52,40 +52,50 @@ gh run list --limit 5
 
 ```
 aardvark-web/
-├── index.html          # Main landing page
-├── styles.css          # All styling (Notion/Hey-inspired design)
-├── images/            # Company logos
-│   ├── spotify.png
+├── index.html               # Main landing page
+├── styles.css               # All styling
+├── CLAUDE.md                # Project documentation for Claude Code
+├── DESIGN-PRINCIPLES.md     # Comprehensive design guidelines
+├── images/                  # Logos and images
+│   ├── logo-nav.svg         # Navigation logo (icon only)
+│   ├── logo-hero.svg        # Hero logo (full with text)
+│   ├── spotify.png          # Company logos
 │   ├── electrolux.png
 │   ├── kry.svg
 │   ├── truecaller.png
 │   ├── fyndiq.png
 │   └── rebtel.png
-├── CNAME              # Custom domain configuration (aardvark.pm)
-└── README.md          # Project documentation
+├── CNAME                    # Custom domain configuration (aardvark.pm)
+└── README.md                # Project documentation
 ```
 
 ## Design System
 
-**Inspired by:** Notion and Hey.com - clean, minimal, professional
+**📖 See [DESIGN-PRINCIPLES.md](DESIGN-PRINCIPLES.md) for comprehensive design guidelines.**
 
 **Color Palette:**
-- Primary text: `#111827` (near black)
+- Background: `#F8FAF9` (warm light gray)
+- Main text: `#1D1E18` (almost black)
+- Accent: `#FDA10D` (vibrant orange/gold)
 - Secondary text: `#6b7280` (gray)
-- Accent color: `#047857` (forest green)
-- Background: `#ffffff` (white)
-- Alternate sections: `#fafafa` (light gray)
 
 **Typography:**
-- Font stack: System fonts (-apple-system, BlinkMacSystemFont, Segoe UI, Roboto...)
-- Hero headline: 5rem (80px), weight 800
-- Section headings: 3rem (48px), weight 700
+- Headings: `Jomhuria` (Google Fonts) - distinctive display font
+- Body: `Oxygen` (Google Fonts) - clean, readable
+- Hero headline: 5rem (80px), weight 400 (Jomhuria is naturally bold)
+- Section headings: 3rem (48px), weight 400
 - Body text: 1.25rem (20px)
 - Tight letter-spacing (-0.02em to -0.03em) for headlines
 
+**Layout Rule: 60-30-10**
+- 60% Whitespace (breathing room, margins, padding)
+- 30% Text Content (body copy, descriptions)
+- 10% Accent Elements (CTAs, highlights)
+
 **Key Design Principles:**
 - Generous white space (6rem padding between sections)
-- White backgrounds with green accents (NOT colored hero sections)
+- White content areas on warm gray background
+- Orange/gold accents for CTAs and interactive elements
 - Subtle borders: `1px solid rgba(0, 0, 0, 0.06)`
 - Smooth transitions: 0.2s for interactive elements
 - Mobile-first responsive design
