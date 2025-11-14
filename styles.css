@@ -126,7 +126,7 @@ nav {
 
 .hero-content h1 {
     font-size: 5rem;
-    font-weight: 800;
+    font-weight: 400;
     line-height: 1.1;
     letter-spacing: -0.03em;
     color: #1D1E18;
@@ -166,6 +166,38 @@ nav {
     box-shadow: 0 4px 12px rgba(253, 161, 13, 0.4);
 }
 
+/* Scroll Indicator */
+.scroll-indicator {
+    margin-top: 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0.6;
+    animation: scrollBounce 2s ease-in-out infinite;
+}
+
+.scroll-arrow {
+    font-size: 2rem;
+    color: #FDA10D;
+}
+
+.scroll-text {
+    font-size: 0.875rem;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+@keyframes scrollBounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(8px);
+    }
+}
+
 /* About Section */
 .about {
     padding: 6rem 2rem;
@@ -174,7 +206,7 @@ nav {
 
 .about h2 {
     font-size: 3rem;
-    font-weight: 700;
+    font-weight: 400;
     color: #1D1E18;
     margin-bottom: 2rem;
     text-align: center;
@@ -226,7 +258,7 @@ nav {
 
 .services h2 {
     font-size: 3rem;
-    font-weight: 700;
+    font-weight: 400;
     color: #1D1E18;
     margin-bottom: 4rem;
     text-align: center;
@@ -256,9 +288,9 @@ nav {
 }
 
 .service-card h3 {
-    color: #FDA10D;
+    color: #1D1E18;
     font-size: 1.5rem;
-    font-weight: 700;
+    font-weight: 400;
     margin-bottom: 0.75rem;
     letter-spacing: -0.01em;
 }
@@ -277,7 +309,7 @@ nav {
 
 .experience h2 {
     font-size: 3rem;
-    font-weight: 700;
+    font-weight: 400;
     color: #1D1E18;
     margin-bottom: 4rem;
     text-align: center;
@@ -294,7 +326,7 @@ nav {
 
 .experience-item {
     background: #ffffff;
-    padding: 2rem;
+    padding: 2.5rem;
     border-radius: 12px;
     border: 1px solid rgba(0, 0, 0, 0.06);
 }
@@ -302,13 +334,13 @@ nav {
 .experience-item h3 {
     color: #1D1E18;
     font-size: 1.5rem;
-    font-weight: 700;
+    font-weight: 400;
     margin-bottom: 0.5rem;
     letter-spacing: -0.01em;
 }
 
 .experience-item .role {
-    color: #FDA10D;
+    color: #6b7280;
     font-size: 0.9375rem;
     font-weight: 600;
     margin-bottom: 0.75rem;
@@ -358,7 +390,7 @@ nav {
 
 .contact h2 {
     font-size: 3rem;
-    font-weight: 700;
+    font-weight: 400;
     color: #1D1E18;
     margin-bottom: 1.5rem;
     letter-spacing: -0.02em;
@@ -427,6 +459,10 @@ footer {
 
     .tagline {
         font-size: 1.125rem;
+    }
+
+    .scroll-indicator {
+        display: none;
     }
 
     .about h2,
