@@ -1,0 +1,1608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Niche Finder — Swedish Industry Analysis</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════
+   MODERNIST INTELLIGENCE
+   Bricolage Grotesque × DM Mono
+   Teal + Amber · Light · Bold · Clear
+   ═══════════════════════════════════════ */
+
+:root {
+  /* Surfaces */
+  --bg:          #F4F6F9;
+  --surface:     #FFFFFF;
+  --surface-2:   #F0F2F5;
+  --border:      #E2E6EC;
+  --border-soft: #ECEEF2;
+
+  /* Text */
+  --text:        #0C1117;
+  --text-2:      #4A5568;
+  --text-3:      #8E9AAB;
+
+  /* Teal */
+  --teal:        #0D9488;
+  --teal-mid:    #14B8A6;
+  --teal-light:  #EDFAF8;
+  --teal-xlight: #F5FFFE;
+
+  /* Amber / Yellow */
+  --amber:       #D97706;
+  --amber-mid:   #F59E0B;
+  --amber-light: #FEF3C7;
+  --amber-xlight:#FFFDF5;
+
+  /* Accents */
+  --red-soft:    #FEE2E2;
+  --red:         #DC2626;
+
+  /* Typography */
+  --display: 'Bricolage Grotesque', system-ui, sans-serif;
+  --body:    'DM Sans', system-ui, sans-serif;
+  --mono:    'DM Mono', 'Courier New', monospace;
+
+  /* Sizing — everything ~50% larger than convention */
+  --sz-xs:   0.875rem;   /* 14px — labels */
+  --sz-sm:   1rem;       /* 16px — secondary text */
+  --sz-base: 1.125rem;   /* 18px — body/table */
+  --sz-md:   1.25rem;    /* 20px — emphasis */
+  --sz-lg:   1.5rem;     /* 24px — subheadings */
+  --sz-xl:   2rem;       /* 32px — section heads */
+  --sz-2xl:  2.75rem;    /* 44px — metric values */
+  --sz-3xl:  4rem;       /* 64px — hero */
+
+  --radius: 14px;
+  --radius-sm: 8px;
+  --shadow: 0 2px 12px rgba(12,17,23,.07), 0 1px 3px rgba(12,17,23,.05);
+  --shadow-hover: 0 6px 24px rgba(12,17,23,.11), 0 2px 6px rgba(12,17,23,.07);
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family: var(--body);
+  font-size: var(--sz-base);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Animations ── */
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(20px) }
+  to   { opacity:1; transform:none }
+}
+@keyframes fadeIn { from { opacity:0 } to { opacity:1 } }
+
+/* ── Hero header ── */
+.hero {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 3.5rem 4rem 3rem;
+  animation: fadeIn .5s ease both;
+}
+
+.hero-inner {
+  max-width: 1360px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  gap: 2rem;
+}
+
+.hero-eyebrow {
+  font-family: var(--mono);
+  font-size: var(--sz-xs);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--teal);
+  font-weight: 500;
+  margin-bottom: .75rem;
+}
+
+.hero h1 {
+  font-family: var(--display);
+  font-size: var(--sz-3xl);
+  font-weight: 800;
+  letter-spacing: -.03em;
+  line-height: .95;
+  color: var(--text);
+}
+
+.hero h1 span {
+  color: var(--teal);
+}
+
+.hero-desc {
+  margin-top: 1.1rem;
+  font-size: var(--sz-md);
+  color: var(--text-2);
+  font-weight: 300;
+  max-width: 540px;
+  line-height: 1.5;
+}
+
+.hero-meta {
+  text-align: right;
+}
+
+.hero-stat {
+  font-family: var(--display);
+  font-size: var(--sz-2xl);
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -.03em;
+  line-height: 1;
+}
+
+.hero-stat-label {
+  font-size: var(--sz-xs);
+  color: var(--text-3);
+  font-family: var(--mono);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  margin-top: .4rem;
+}
+
+/* ── Page wrapper ── */
+.page {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 0 4rem 5rem;
+}
+
+/* ── Section headings ── */
+.section-head {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 2.5rem 0 1.5rem;
+}
+
+.section-head-label {
+  font-family: var(--display);
+  font-size: var(--sz-lg);
+  font-weight: 700;
+  letter-spacing: -.025em;
+  color: var(--text);
+}
+
+.section-head-line {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* ── Metric cards ── */
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1rem;
+}
+
+.metric {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem 1.75rem;
+  box-shadow: var(--shadow);
+  animation: fadeUp .4s ease both;
+  transition: box-shadow .2s ease;
+}
+.metric:hover { box-shadow: var(--shadow-hover); }
+
+.metric.teal-card {
+  background: var(--teal);
+  border-color: var(--teal);
+}
+.metric.teal-card .metric-label { color: rgba(255,255,255,.7); }
+.metric.teal-card .metric-value { color: #fff; }
+.metric.teal-card .metric-detail { color: rgba(255,255,255,.6); }
+
+.metric.amber-card {
+  background: var(--amber-light);
+  border-color: var(--amber-mid);
+}
+.metric.amber-card .metric-value { color: var(--amber); }
+
+.metric-label {
+  font-family: var(--mono);
+  font-size: var(--sz-xs);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-bottom: .6rem;
+  font-weight: 400;
+}
+
+.metric-value {
+  font-family: var(--display);
+  font-size: var(--sz-2xl);
+  font-weight: 700;
+  letter-spacing: -.04em;
+  line-height: 1;
+  color: var(--text);
+}
+
+.metric-detail {
+  font-size: var(--sz-xs);
+  color: var(--text-3);
+  margin-top: .5rem;
+  font-family: var(--mono);
+}
+
+/* ── Filter panel ── */
+.filter-panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.75rem 2rem;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  align-items: flex-end;
+  animation: fadeUp .4s .1s ease both;
+}
+
+.fg {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+.fg-label {
+  font-family: var(--mono);
+  font-size: var(--sz-xs);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  font-weight: 400;
+}
+
+select {
+  font-family: var(--body);
+  font-size: var(--sz-sm);
+  padding: .6rem 2.25rem .6rem .9rem;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%238E9AAB'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right .75rem center;
+  min-width: 200px;
+  transition: border-color .15s, box-shadow .15s;
+  font-weight: 400;
+}
+select:focus {
+  outline: none;
+  border-color: var(--teal);
+  box-shadow: 0 0 0 3px rgba(13,148,136,.12);
+}
+
+.rw {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+}
+
+input[type=range] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 130px;
+  height: 3px;
+  background: var(--border);
+  border-radius: 99px;
+  outline: none;
+  cursor: pointer;
+}
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: var(--teal);
+  border: 3px solid #fff;
+  box-shadow: 0 0 0 1.5px var(--teal), var(--shadow);
+  cursor: pointer;
+  transition: transform .15s;
+}
+input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.15); }
+input[type=range]::-moz-range-thumb {
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: var(--teal);
+  border: 3px solid #fff;
+  cursor: pointer;
+}
+
+.rv {
+  font-family: var(--mono);
+  font-size: var(--sz-sm);
+  color: var(--text-2);
+  font-weight: 500;
+  min-width: 62px;
+}
+
+/* ── Chart ── */
+.chart-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem;
+  box-shadow: var(--shadow);
+  animation: fadeUp .4s .15s ease both;
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: .75rem;
+}
+
+.chart-title {
+  font-family: var(--display);
+  font-size: var(--sz-md);
+  font-weight: 600;
+  letter-spacing: -.02em;
+}
+
+.chart-hint {
+  font-family: var(--mono);
+  font-size: var(--sz-xs);
+  color: var(--text-3);
+  font-weight: 400;
+}
+
+.chart-container {
+  position: relative;
+  width: 100%;
+  height: 460px;
+}
+
+/* ── Table ── */
+.table-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  animation: fadeUp .4s .2s ease both;
+}
+
+.table-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 1.75rem;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.table-topbar-title {
+  font-family: var(--display);
+  font-size: var(--sz-md);
+  font-weight: 600;
+  letter-spacing: -.02em;
+}
+
+.table-count-badge {
+  font-family: var(--mono);
+  font-size: var(--sz-xs);
+  color: var(--text-3);
+  background: var(--surface-2);
+  padding: .3rem .75rem;
+  border-radius: 99px;
+  border: 1px solid var(--border);
+}
+
+.table-scroll { overflow-x: auto; }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--sz-base);
+}
+
+thead {
+  background: var(--surface-2);
+  border-bottom: 1.5px solid var(--border);
+}
+
+thead th {
+  text-align: left;
+  padding: .85rem 1.25rem;
+  font-family: var(--mono);
+  font-size: var(--sz-xs);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  font-weight: 500;
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+  transition: color .12s;
+}
+thead th.num { text-align: right; }
+thead th:hover { color: var(--text); }
+thead th.sorted { color: var(--teal); font-weight: 600; }
+
+tbody tr {
+  border-bottom: 1px solid var(--border-soft);
+  transition: background .12s;
+}
+tbody tr:last-child { border-bottom: none; }
+tbody tr:hover { background: var(--teal-xlight); }
+
+tbody td {
+  padding: .9rem 1.25rem;
+  vertical-align: middle;
+}
+
+.sni { font-family: var(--mono); font-size: var(--sz-xs); color: var(--text-3); white-space: nowrap; }
+.ind { font-size: var(--sz-base); font-weight: 500; max-width: 280px; color: var(--text); }
+.num { text-align: right; }
+.dv  { font-family: var(--mono); font-size: var(--sz-sm); color: var(--text-2); text-align: right; }
+.dvb { font-family: var(--mono); font-size: var(--sz-sm); font-weight: 600; color: var(--text); text-align: right; }
+
+/* Sector pill */
+.sec-pill {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  padding: .25rem .7rem;
+  border-radius: 99px;
+  font-weight: 500;
+  white-space: nowrap;
+  background: var(--surface-2);
+  color: var(--text-2);
+  border: 1px solid var(--border);
+}
+
+/* Margin */
+.mg { font-family: var(--mono); font-size: var(--sz-sm); font-weight: 600; }
+.mg-hi  { color: var(--teal); }
+.mg-mid { color: var(--amber); }
+.mg-ok  { color: var(--text-2); }
+.mg-neg { color: var(--text-3); }
+
+/* Score badge */
+.sc {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--mono);
+  font-size: var(--sz-xs);
+  font-weight: 600;
+  min-width: 2.75rem;
+  padding: .3rem .5rem;
+  border-radius: var(--radius-sm);
+  letter-spacing: .02em;
+}
+.sc-top { background: var(--teal); color: #fff; }
+.sc-hi  { background: var(--teal-light); color: var(--teal); border: 1.5px solid var(--teal-mid); }
+.sc-mid { background: var(--amber-light); color: var(--amber); }
+.sc-lo  { background: var(--surface-2); color: var(--text-3); border: 1px solid var(--border); }
+
+.sort-arrow { font-size: .6rem; margin-left: 3px; }
+
+/* ── Footer ── */
+.footer {
+  margin-top: 2.5rem;
+  padding: 1.5rem 2rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-family: var(--mono);
+  font-size: var(--sz-xs);
+  color: var(--text-3);
+  line-height: 1.8;
+  animation: fadeUp .4s .25s ease both;
+}
+.footer strong { color: var(--text-2); font-weight: 600; }
+
+/* ── Responsive ── */
+@media (max-width: 1100px) {
+  .metrics { grid-template-columns: repeat(3, 1fr); }
+  .hero { padding: 2.5rem 2rem; }
+  .page { padding: 0 2rem 4rem; }
+}
+@media (max-width: 700px) {
+  .metrics { grid-template-columns: 1fr 1fr; }
+  .hero h1 { font-size: 2.5rem; }
+  .hero-meta { display: none; }
+  .hero, .page { padding-left: 1.25rem; padding-right: 1.25rem; }
+}
+</style>
+</head>
+<body>
+
+<div style="background:#0D9488;padding:0.6rem 2rem;font-family:'DM Sans',sans-serif;font-size:0.9rem;color:rgba(255,255,255,0.85);display:flex;align-items:center;gap:0.5rem;">
+  <a href="https://aardvark.pm" style="color:#ffffff;text-decoration:none;font-weight:500;">← aardvark.pm</a>
+  <span style="opacity:0.4;">/</span>
+  <span>Niche Finder</span>
+</div>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow">SCB Branschnyckeltal 2024 &nbsp;&middot;&nbsp; F&ouml;retagsregistret 2025</div>
+      <h1>Niche <span>Finder</span></h1>
+      <p class="hero-desc">Find high-margin, few-person Swedish industries hiding in plain sight. Data-driven startup intelligence.</p>
+    </div>
+    <div class="hero-meta">
+      <div class="hero-stat" id="heroCount">716</div>
+      <div class="hero-stat-label">Industries indexed</div>
+    </div>
+  </div>
+</header>
+
+<div class="page">
+
+  <div class="section-head" style="animation:fadeUp .35s .05s ease both">
+    <span class="section-head-label">Overview</span>
+    <div class="section-head-line"></div>
+  </div>
+  <div class="metrics" id="metrics"></div>
+
+  <div class="section-head" style="animation:fadeUp .35s .1s ease both">
+    <span class="section-head-label">Filter</span>
+    <div class="section-head-line"></div>
+  </div>
+  <div class="filter-panel" id="controls">
+    <div class="fg">
+      <label class="fg-label">Sector</label>
+      <select id="sectorFilter"><option value="all">All sectors</option></select>
+    </div>
+    <div class="fg">
+      <label class="fg-label">Min. profit margin</label>
+      <div class="rw">
+        <input type="range" id="marginFilter" min="0" max="50" value="5" step="1">
+        <span class="rv" id="marginVal">5%</span>
+      </div>
+    </div>
+    <div class="fg">
+      <label class="fg-label">Max. median employees</label>
+      <div class="rw">
+        <input type="range" id="empFilter" min="1" max="100" value="50" step="1">
+        <span class="rv" id="empVal">50</span>
+      </div>
+    </div>
+    <div class="fg">
+      <label class="fg-label">Min. rev / employee (KSEK)</label>
+      <div class="rw">
+        <input type="range" id="revEmpFilter" min="0" max="10000" value="500" step="100">
+        <span class="rv" id="revEmpVal">500</span>
+      </div>
+    </div>
+    <div class="fg">
+      <label class="fg-label">Sector type</label>
+      <select id="techFilter">
+        <option value="no">All industries</option>
+        <option value="yes" selected>Exclude IT / Finance / Media</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="section-head" style="animation:fadeUp .35s .15s ease both">
+    <span class="section-head-label">Chart</span>
+    <div class="section-head-line"></div>
+  </div>
+  <div class="chart-card">
+    <div class="chart-header">
+      <span class="chart-title">Revenue per employee vs. profit margin</span>
+      <span class="chart-hint">Bubble size = number of companies &nbsp;&middot;&nbsp; Hover for details</span>
+    </div>
+    <div class="chart-container"><canvas id="scatterChart"></canvas></div>
+  </div>
+
+  <div class="section-head" style="animation:fadeUp .35s .2s ease both">
+    <span class="section-head-label">Industries</span>
+    <div class="section-head-line"></div>
+  </div>
+  <div class="table-card">
+    <div class="table-topbar">
+      <span class="table-topbar-title">Filtered industries</span>
+      <span class="table-count-badge" id="tableCount"></span>
+    </div>
+    <div class="table-scroll">
+      <table id="dataTable">
+        <thead>
+          <tr>
+            <th data-col="sni">SNI</th>
+            <th data-col="name">Industry</th>
+            <th data-col="sector">Sector</th>
+            <th data-col="companies" class="num">Companies</th>
+            <th data-col="medianEmployees" class="num">Med. emp.</th>
+            <th data-col="medianRevenue" class="num">Med. rev (MSEK)</th>
+            <th data-col="revPerEmployee" class="num">Rev / emp (KSEK)</th>
+            <th data-col="profitMargin" class="num">Margin</th>
+            <th data-col="score" class="num">Score</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="footer">
+    <strong>Source:</strong> SCB Branschnyckeltal 2024 (46 financial ratios, 716 SNI 2007 industries, November 2025)
+    merged with SCB F&ouml;retagsregistret 2025 (company counts).
+    All figures are medians across Swedish aktiebolag &amp; economic associations.
+    &nbsp;&middot;&nbsp;
+    <strong>Niche score</strong> = 40&percnt; profit margin rank + 30&percnt; rev/emp rank +
+    20&percnt; inverse company count + 10&percnt; inverse team size.
+  </div>
+
+</div>
+
+<script>
+const DATA = [
+  {sni:"35.220",name:"Distribution av gasformiga br\u00e4nslen via r\u00f6rn\u00e4t",sector:"Utilities",companies:14,medianEmployees:1.0,medianRevenue:145.2,revPerEmployee:51072,profitMargin:17.1,techFlag:false,score:94.8},
+  {sni:"35.210",name:"Gasverk",sector:"Utilities",companies:87,medianEmployees:0,medianRevenue:14.78,revPerEmployee:8220,profitMargin:15.2,techFlag:false,score:92.8},
+  {sni:"07.100",name:"J\u00e4rnmalmsgruvor",sector:"Mining",companies:13,medianEmployees:1.0,medianRevenue:2.64,revPerEmployee:2636,profitMargin:17.5,techFlag:false,score:92.0},
+  {sni:"25.910",name:"Industri f\u00f6r st\u00e5lfat o.d. beh\u00e5llare",sector:"Manufacturing",companies:15,medianEmployees:2.0,medianRevenue:6.33,revPerEmployee:4325,profitMargin:14.0,techFlag:false,score:89.3},
+  {sni:"01.640",name:"F\u00f6retag f\u00f6r bearbetning av uts\u00e4de",sector:"Agriculture",companies:17,medianEmployees:0,medianRevenue:2.33,revPerEmployee:2088,profitMargin:9.9,techFlag:false,score:86.5},
+  {sni:"10.620",name:"St\u00e4rkelseindustri",sector:"Manufacturing",companies:11,medianEmployees:16.0,medianRevenue:44.59,revPerEmployee:2787,profitMargin:24.1,techFlag:false,score:86.4},
+  {sni:"51.212",name:"Flygbolag, icke regulj\u00e4r godstrafik",sector:"Transport",companies:35,medianEmployees:1.0,medianRevenue:3.39,revPerEmployee:2237,profitMargin:15.8,techFlag:false,score:86.0},
+  {sni:"01.132",name:"Sockerbetsodlare",sector:"Agriculture",companies:236,medianEmployees:1.0,medianRevenue:3.58,revPerEmployee:3450,profitMargin:14.7,techFlag:false,score:85.9},
+  {sni:"20.530",name:"Industri f\u00f6r eteriska oljor",sector:"Manufacturing",companies:16,medianEmployees:0,medianRevenue:1.92,revPerEmployee:1922,profitMargin:9.7,techFlag:false,score:84.6},
+  {sni:"13.950",name:"Industri f\u00f6r bondad duk",sector:"Manufacturing",companies:8,medianEmployees:41.0,medianRevenue:169.84,revPerEmployee:4587,profitMargin:9.9,techFlag:false,score:83.7},
+  {sni:"08.920",name:"Torvt\u00e4kter",sector:"Mining",companies:56,medianEmployees:1.0,medianRevenue:2.01,revPerEmployee:1707,profitMargin:17.0,techFlag:false,score:83.0},
+  {sni:"25.210",name:"Industri f\u00f6r radiatorer och pannor f\u00f6r centraluppv\u00e4rmning",sector:"Manufacturing",companies:46,medianEmployees:2.0,medianRevenue:7.29,revPerEmployee:2401,profitMargin:12.5,techFlag:false,score:82.7},
+  {sni:"17.112",name:"Sulfatmassaindustri",sector:"Manufacturing",companies:11,medianEmployees:211.0,medianRevenue:1987.11,revPerEmployee:9404,profitMargin:8.8,techFlag:false,score:81.7},
+  {sni:"30.200",name:"R\u00e4lsfordonsindustri",sector:"Manufacturing",companies:32,medianEmployees:6.0,medianRevenue:63.2,revPerEmployee:2986,profitMargin:10.3,techFlag:false,score:81.3},
+  {sni:"25.400",name:"Vapen- och ammunitionsindustri",sector:"Manufacturing",companies:74,medianEmployees:4.0,medianRevenue:9.0,revPerEmployee:2603,profitMargin:13.9,techFlag:false,score:80.5},
+  {sni:"24.510",name:"J\u00e4rngjuterier",sector:"Manufacturing",companies:24,medianEmployees:4.0,medianRevenue:10.62,revPerEmployee:2299,profitMargin:9.8,techFlag:false,score:79.4},
+  {sni:"20.150",name:"Industri f\u00f6r g\u00f6dselmedel och kv\u00e4veprodukter",sector:"Manufacturing",companies:64,medianEmployees:7.0,medianRevenue:18.27,revPerEmployee:3135,profitMargin:9.5,techFlag:false,score:78.8},
+  {sni:"28.140",name:"Industri f\u00f6r andra kranar och ventiler",sector:"Manufacturing",companies:33,medianEmployees:26.0,medianRevenue:133.36,revPerEmployee:2876,profitMargin:9.2,techFlag:false,score:78.7},
+  {sni:"13.910",name:"Trik\u00e5v\u00e4verier",sector:"Manufacturing",companies:22,medianEmployees:6.0,medianRevenue:15.82,revPerEmployee:2554,profitMargin:9.0,techFlag:false,score:78.5},
+  {sni:"35.130",name:"Distribution av elektricitet",sector:"Utilities",companies:371,medianEmployees:4.0,medianRevenue:55.4,revPerEmployee:5173,profitMargin:13.4,techFlag:false,score:77.6},
+  {sni:"38.210",name:"Anl\u00e4ggningar f\u00f6r behandling och bortskaffande av icke-farligt avfall",sector:"Utilities",companies:222,medianEmployees:1.0,medianRevenue:9.29,revPerEmployee:2236,profitMargin:9.4,techFlag:false,score:77.2},
+  {sni:"46.640",name:"Partihandel med textil-, sy- och stickmaskiner",sector:"Trade",companies:21,medianEmployees:2.0,medianRevenue:2.48,revPerEmployee:1612,profitMargin:12.3,techFlag:false,score:77.2},
+  {sni:"01.462",name:"Slaktsvinsuppf\u00f6dare",sector:"Agriculture",companies:410,medianEmployees:2.0,medianRevenue:14.14,revPerEmployee:4785,profitMargin:9.7,techFlag:false,score:77.1},
+  {sni:"17.111",name:"Industri f\u00f6r mekanisk eller halvkemisk massa",sector:"Manufacturing",companies:13,medianEmployees:50.0,medianRevenue:8.16,revPerEmployee:1632,profitMargin:15.6,techFlag:false,score:76.8},
+  {sni:"28.230",name:"Industri f\u00f6r kontorsmaskiner och kontorsutrustning (utom datorer och kringutrustning)",sector:"Manufacturing",companies:15,medianEmployees:3.0,medianRevenue:5.88,revPerEmployee:1989,profitMargin:8.7,techFlag:false,score:76.1},
+  {sni:"27.330",name:"Industri f\u00f6r kabeltillbeh\u00f6r",sector:"Manufacturing",companies:17,medianEmployees:20.0,medianRevenue:79.87,revPerEmployee:2597,profitMargin:8.0,techFlag:false,score:76.0},
+  {sni:"27.320",name:"Industri f\u00f6r andra elektroniska och elektriska ledningar och kablar",sector:"Manufacturing",companies:47,medianEmployees:18.0,medianRevenue:36.2,revPerEmployee:2506,profitMargin:8.9,techFlag:false,score:75.8},
+  {sni:"08.120",name:"Sand-, grus-, berg- och lert\u00e4kter",sector:"Mining",companies:534,medianEmployees:1.0,medianRevenue:6.28,revPerEmployee:2972,profitMargin:8.6,techFlag:false,score:75.6},
+  {sni:"05.,08",name:"Utvinning av kol, torv och annan mineral",sector:"Mining",companies:336,medianEmployees:1.0,medianRevenue:5.29,revPerEmployee:2453,profitMargin:8.3,techFlag:false,score:75.2},
+  {sni:"46.692",name:"Partihandel med datoriserad materialhanteringsutrustning",sector:"Trade",companies:88,medianEmployees:1.0,medianRevenue:2.84,revPerEmployee:1546,profitMargin:10.4,techFlag:false,score:75.2},
+  {sni:"38.120",name:"Anl\u00e4ggningar f\u00f6r insamling av farligt avfall",sector:"Utilities",companies:93,medianEmployees:1.0,medianRevenue:2.74,revPerEmployee:1747,profitMargin:8.7,techFlag:false,score:75.1},
+  {sni:"28.240",name:"Industri f\u00f6r motordrivna handverktyg",sector:"Manufacturing",companies:34,medianEmployees:5.0,medianRevenue:8.06,revPerEmployee:2217,profitMargin:8.4,techFlag:false,score:74.9},
+  {sni:"32.910",name:"Borstbinderier",sector:"Manufacturing",companies:25,medianEmployees:3.0,medianRevenue:6.59,revPerEmployee:1970,profitMargin:8.6,techFlag:false,score:74.9},
+  {sni:"01.131",name:"Potatisodlare",sector:"Agriculture",companies:678,medianEmployees:2.0,medianRevenue:5.65,revPerEmployee:2386,profitMargin:15.5,techFlag:false,score:74.7},
+  {sni:"50.202",name:"Havs- och kustsj\u00f6fartsrederier, icke regulj\u00e4r godstrafik",sector:"Transport",companies:201,medianEmployees:0,medianRevenue:3.0,revPerEmployee:1500,profitMargin:10.9,techFlag:false,score:74.6},
+  {sni:"28.930",name:"Industri f\u00f6r maskiner f\u00f6r framst\u00e4llning av livsmedel, drycker och tobaksvaror",sector:"Manufacturing",companies:97,medianEmployees:1.0,medianRevenue:3.2,revPerEmployee:1609,profitMargin:8.8,techFlag:false,score:74.3},
+  {sni:"01.461",name:"Sm\u00e5grisuppf\u00f6dare",sector:"Agriculture",companies:406,medianEmployees:3.0,medianRevenue:12.66,revPerEmployee:3221,profitMargin:9.6,techFlag:false,score:74.2},
+  {sni:"23.991",name:"Sten- och mineralullsindustri",sector:"Manufacturing",companies:9,medianEmployees:3.0,medianRevenue:13.27,revPerEmployee:2558,profitMargin:6.2,techFlag:false,score:74.1},
+  {sni:"25.720",name:"Industri f\u00f6r l\u00e5s och g\u00e5ngj\u00e4rn",sector:"Manufacturing",companies:103,medianEmployees:4.0,medianRevenue:9.32,revPerEmployee:1918,profitMargin:11.1,techFlag:false,score:73.9},
+  {sni:"42.910",name:"Vattenbyggnadsentrepren\u00f6rer",sector:"Construction",companies:164,medianEmployees:1.0,medianRevenue:1.74,revPerEmployee:1386,profitMargin:14.5,techFlag:false,score:73.9},
+  {sni:"12.000",name:"Tobaksindustri",sector:"Manufacturing",companies:51,medianEmployees:4.0,medianRevenue:12.03,revPerEmployee:2788,profitMargin:6.9,techFlag:false,score:73.4},
+  {sni:"46.120",name:"Provisionshandel med br\u00e4nsle, malm, metaller och industrikemikalier",sector:"Trade",companies:168,medianEmployees:1.0,medianRevenue:2.4,revPerEmployee:1748,profitMargin:8.9,techFlag:false,score:73.1},
+  {sni:"29.102",name:"Lastbilsindustri",sector:"Manufacturing",companies:49,medianEmployees:37.0,medianRevenue:119.47,revPerEmployee:2800,profitMargin:7.2,techFlag:false,score:72.9},
+  {sni:"30.920",name:"Cykelindustri",sector:"Manufacturing",companies:73,medianEmployees:3.0,medianRevenue:9.08,revPerEmployee:2100,profitMargin:8.0,techFlag:false,score:72.6},
+  {sni:"05.-09",name:"Utvinning av mineral",sector:"Mining",companies:397,medianEmployees:1.0,medianRevenue:4.54,revPerEmployee:2307,profitMargin:7.6,techFlag:false,score:72.5},
+  {sni:"17.219",name:"\u00d6vrig industri f\u00f6r pappers- och pappf\u00f6rpackningar",sector:"Manufacturing",companies:64,medianEmployees:6.0,medianRevenue:17.1,revPerEmployee:2677,profitMargin:7.2,techFlag:false,score:72.5},
+  {sni:"20.410",name:"Tv\u00e4ttmedelsindustri",sector:"Manufacturing",companies:92,medianEmployees:4.0,medianRevenue:9.45,revPerEmployee:2159,profitMargin:8.3,techFlag:false,score:72.4},
+  {sni:"52.249",name:"\u00d6vriga godsterminaler",sector:"Transport",companies:162,medianEmployees:2.0,medianRevenue:5.34,revPerEmployee:1834,profitMargin:10.4,techFlag:false,score:72.4},
+  {sni:"46.761",name:"Partihandel med industrif\u00f6rn\u00f6denheter",sector:"Trade",companies:283,medianEmployees:1.0,medianRevenue:5.49,revPerEmployee:2833,profitMargin:6.9,techFlag:false,score:72.3},
+  {sni:"14.390",name:"Trik\u00e5varuindustri",sector:"Manufacturing",companies:82,medianEmployees:0,medianRevenue:1.02,revPerEmployee:1025,profitMargin:12.7,techFlag:false,score:72.2},
+  {sni:"01.472",name:"Fj\u00e4derf\u00e4f\u00f6retag",sector:"Agriculture",companies:227,medianEmployees:3.0,medianRevenue:26.7,revPerEmployee:7686,profitMargin:6.9,techFlag:false,score:72.1},
+  {sni:"17.123",name:"Kraftpappers- och kraftpappindustri",sector:"Manufacturing",companies:15,medianEmployees:306.0,medianRevenue:2692.11,revPerEmployee:8482,profitMargin:5.4,techFlag:false,score:72.0},
+  {sni:"25.930",name:"Industri f\u00f6r metalltr\u00e5dvaror, kedjor och fj\u00e4drar",sector:"Manufacturing",companies:111,medianEmployees:6.0,medianRevenue:13.95,revPerEmployee:2189,profitMargin:8.8,techFlag:false,score:72.0},
+  {sni:"26.700",name:"Industri f\u00f6r optiska instrument och fotoutrustning",sector:"Manufacturing",companies:65,medianEmployees:4.0,medianRevenue:6.86,revPerEmployee:1730,profitMargin:9.5,techFlag:false,score:72.0},
+  {sni:"27.110",name:"Industri f\u00f6r elmotorer, generatorer och transformatorer",sector:"Manufacturing",companies:114,medianEmployees:4.0,medianRevenue:8.82,revPerEmployee:2235,profitMargin:8.1,techFlag:false,score:71.9},
+  {sni:"01.630",name:"F\u00f6retag f\u00f6r bearbetning av sk\u00f6rdade v\u00e4xter",sector:"Agriculture",companies:31,medianEmployees:2.0,medianRevenue:8.76,revPerEmployee:3434,profitMargin:4.9,techFlag:false,score:71.7},
+  {sni:"28.210",name:"Industri f\u00f6r ugnar och br\u00e4nnare",sector:"Manufacturing",companies:64,medianEmployees:6.0,medianRevenue:10.39,revPerEmployee:2234,profitMargin:7.5,techFlag:false,score:71.3},
+  {sni:"28.920",name:"Industri f\u00f6r gruv-, bergbrytnings- och byggmaskiner",sector:"Manufacturing",companies:166,medianEmployees:5.0,medianRevenue:17.73,revPerEmployee:3166,profitMargin:7.2,techFlag:false,score:71.2},
+  {sni:"33.130",name:"Reparationsverkst\u00e4der f\u00f6r elektronisk och optisk utrustning",sector:"Manufacturing",companies:113,medianEmployees:1.0,medianRevenue:1.66,revPerEmployee:1235,profitMargin:11.3,techFlag:false,score:71.2},
+  {sni:"28.120",name:"Industri f\u00f6r fluidteknisk utrustning",sector:"Manufacturing",companies:94,medianEmployees:6.0,medianRevenue:23.96,revPerEmployee:2282,profitMargin:7.6,techFlag:false,score:71.1},
+  {sni:"23.200",name:"Industri f\u00f6r eldfasta keramiska produkter",sector:"Manufacturing",companies:27,medianEmployees:8.0,medianRevenue:13.84,revPerEmployee:2203,profitMargin:6.9,techFlag:false,score:70.9},
+  {sni:"01.471",name:"\u00c4ggproducenter",sector:"Agriculture",companies:471,medianEmployees:2.0,medianRevenue:11.7,revPerEmployee:4151,profitMargin:7.2,techFlag:false,score:70.8},
+  {sni:"43.130",name:"Firmor f\u00f6r markunders\u00f6kning",sector:"Construction",companies:74,medianEmployees:1.0,medianRevenue:2.3,revPerEmployee:1704,profitMargin:6.8,techFlag:false,score:70.6},
+  {sni:"43.229",name:"\u00d6vriga VVS-firmor",sector:"Construction",companies:177,medianEmployees:1.0,medianRevenue:2.47,revPerEmployee:1777,profitMargin:7.6,techFlag:false,score:70.6},
+  {sni:"28.490",name:"Industri f\u00f6r \u00f6vriga verktygsmaskiner",sector:"Manufacturing",companies:165,medianEmployees:2.0,medianRevenue:4.1,revPerEmployee:1610,profitMargin:10.0,techFlag:false,score:70.5},
+  {sni:"77.220",name:"Uthyrare av videokassetter och dvd-skivor",sector:"Services",companies:31,medianEmployees:2.0,medianRevenue:2.99,revPerEmployee:1800,profitMargin:7.0,techFlag:false,score:70.3},
+  {sni:"23.140",name:"Glasfiberindustri",sector:"Manufacturing",companies:7,medianEmployees:5.0,medianRevenue:5.66,revPerEmployee:1133,profitMargin:13.1,techFlag:false,score:69.8},
+  {sni:"20.300",name:"F\u00e4rgindustri",sector:"Manufacturing",companies:114,medianEmployees:5.0,medianRevenue:17.67,revPerEmployee:2817,profitMargin:6.4,techFlag:false,score:69.7},
+  {sni:"46.142",name:"Provisionshandel med kontorsutrustning och datorer",sector:"Trade",companies:117,medianEmployees:1.0,medianRevenue:1.97,revPerEmployee:1541,profitMargin:7.6,techFlag:false,score:69.7},
+  {sni:"22.110",name:"Industri f\u00f6r d\u00e4ck och slangar, regummeringsindustri",sector:"Manufacturing",companies:39,medianEmployees:3.0,medianRevenue:8.04,revPerEmployee:2228,profitMargin:6.0,techFlag:false,score:69.6},
+  {sni:"28.950",name:"Industri f\u00f6r maskiner f\u00f6r produktion av massa, papper och papp",sector:"Manufacturing",companies:60,medianEmployees:15.0,medianRevenue:22.84,revPerEmployee:1776,profitMargin:8.3,techFlag:false,score:69.2},
+  {sni:"20.160",name:"Basplastindustri",sector:"Manufacturing",companies:47,medianEmployees:20.0,medianRevenue:96.0,revPerEmployee:3699,profitMargin:5.4,techFlag:false,score:69.1},
+  {sni:"26.200",name:"Industri f\u00f6r datorer och kringutrustning",sector:"Manufacturing",companies:144,medianEmployees:3.0,medianRevenue:8.57,revPerEmployee:1920,profitMargin:8.0,techFlag:false,score:68.9},
+  {sni:"20.130",name:"Industri f\u00f6r andra oorganiska baskemikalier",sector:"Manufacturing",companies:40,medianEmployees:7.0,medianRevenue:12.22,revPerEmployee:3163,profitMargin:5.2,techFlag:false,score:68.6},
+  {sni:"20.200",name:"Industri f\u00f6r bek\u00e4mpningsmedel och andra lantbrukskemiska produkter",sector:"Manufacturing",companies:16,medianEmployees:0,medianRevenue:3.88,revPerEmployee:1905,profitMargin:4.3,techFlag:false,score:68.6},
+  {sni:"47.784",name:"Mynt- och frim\u00e4rksaff\u00e4rer",sector:"Trade",companies:86,medianEmployees:0,medianRevenue:0.79,revPerEmployee:785,profitMargin:14.6,techFlag:false,score:68.5},
+  {sni:"42.120",name:"Anl\u00e4ggningsentrepren\u00f6rer f\u00f6r j\u00e4rnv\u00e4gar och tunnelbanor",sector:"Construction",companies:631,medianEmployees:2.0,medianRevenue:3.24,revPerEmployee:1842,profitMargin:12.3,techFlag:false,score:68.4},
+  {sni:"52.241",name:"Hamngodsterminaler",sector:"Transport",companies:128,medianEmployees:12.0,medianRevenue:46.39,revPerEmployee:1778,profitMargin:8.9,techFlag:false,score:68.3},
+  {sni:"86.904",name:"Tandhygienistmottagningar",sector:"Health",companies:186,medianEmployees:1.0,medianRevenue:1.31,revPerEmployee:1222,profitMargin:14.6,techFlag:false,score:68.3},
+  {sni:"33.160",name:"Reparationsverkst\u00e4der f\u00f6r flygplan",sector:"Manufacturing",companies:239,medianEmployees:0,medianRevenue:1.0,revPerEmployee:999,profitMargin:14.1,techFlag:false,score:68.1},
+  {sni:"93.113",name:"Motorbanor",sector:"Culture",companies:97,medianEmployees:1.0,medianRevenue:2.04,revPerEmployee:1098,profitMargin:13.2,techFlag:false,score:68.0},
+  {sni:"13.930",name:"Mattindustri",sector:"Manufacturing",companies:34,medianEmployees:8.0,medianRevenue:9.84,revPerEmployee:1666,profitMargin:7.4,techFlag:false,score:67.8},
+  {sni:"50.201",name:"Havs- och kustsj\u00f6fartsrederier, regulj\u00e4r godstrafik",sector:"Transport",companies:99,medianEmployees:0,medianRevenue:40.95,revPerEmployee:14847,profitMargin:3.3,techFlag:false,score:67.8},
+  {sni:"86.101",name:"Slutenv\u00e5rdskliniker f\u00f6r prim\u00e4rv\u00e5rd",sector:"Health",companies:19,medianEmployees:0,medianRevenue:0.29,revPerEmployee:294,profitMargin:48.0,techFlag:false,score:67.8},
+  {sni:"16.291",name:"Industri f\u00f6r f\u00f6r\u00e4dlade tr\u00e4dbr\u00e4nslen",sector:"Manufacturing",companies:203,medianEmployees:2.0,medianRevenue:6.86,revPerEmployee:2898,profitMargin:5.6,techFlag:false,score:67.7},
+  {sni:"26.120",name:"Industri f\u00f6r kretskort",sector:"Manufacturing",companies:98,medianEmployees:7.0,medianRevenue:13.11,revPerEmployee:1974,profitMargin:7.3,techFlag:false,score:67.7},
+  {sni:"27.120",name:"Industri f\u00f6r eldistributions- och elkontrollapparater",sector:"Manufacturing",companies:229,medianEmployees:6.0,medianRevenue:15.55,revPerEmployee:1974,profitMargin:8.8,techFlag:false,score:67.7},
+  {sni:"51.211",name:"Flygbolag, regulj\u00e4r godstrafik",sector:"Transport",companies:33,medianEmployees:3.0,medianRevenue:78.52,revPerEmployee:7106,profitMargin:4.2,techFlag:false,score:67.5},
+  {sni:"58.120",name:"Utgivare av kataloger och s\u00e4ndlistor",sector:"Media",companies:9,medianEmployees:0,medianRevenue:0.18,revPerEmployee:184,profitMargin:17.7,techFlag:true,score:67.4},
+  {sni:"86.103",name:"Slutenv\u00e5rdskliniker f\u00f6r psykiatrisk sjukv\u00e5rd",sector:"Health",companies:106,medianEmployees:1.0,medianRevenue:0.99,revPerEmployee:901,profitMargin:21.6,techFlag:false,score:67.3},
+  {sni:"31.030",name:"Madrassindustri",sector:"Manufacturing",companies:25,medianEmployees:5.0,medianRevenue:17.53,revPerEmployee:2324,profitMargin:5.2,techFlag:false,score:67.2},
+  {sni:"46.691",name:"Partihandel med m\u00e4t- och precisionsinstrument",sector:"Trade",companies:440,medianEmployees:3.0,medianRevenue:13.3,revPerEmployee:3194,profitMargin:6.9,techFlag:false,score:67.2},
+  {sni:"80.300",name:"Detektivbyr\u00e5er",sector:"Services",companies:25,medianEmployees:0,medianRevenue:0.28,revPerEmployee:276,profitMargin:36.6,techFlag:false,score:67.2},
+  {sni:"22.220",name:"Plastf\u00f6rpackningsindustri",sector:"Manufacturing",companies:138,medianEmployees:8.0,medianRevenue:22.01,revPerEmployee:2666,profitMargin:6.3,techFlag:false,score:67.1},
+  {sni:"69.103",name:"Patentbyr\u00e5er m.m.",sector:"Professional",companies:335,medianEmployees:1.0,medianRevenue:1.3,revPerEmployee:1163,profitMargin:19.5,techFlag:false,score:67.1},
+  {sni:"23.999",name:"Diverse \u00f6vrig industri f\u00f6r icke-metalliska mineraliska produkter",sector:"Manufacturing",companies:148,medianEmployees:8.0,medianRevenue:18.19,revPerEmployee:2734,profitMargin:6.1,techFlag:false,score:66.8},
+  {sni:"33.170",name:"Reparationsverkst\u00e4der f\u00f6r andra transportmedel",sector:"Manufacturing",companies:168,medianEmployees:2.0,medianRevenue:3.05,revPerEmployee:1350,profitMargin:9.8,techFlag:false,score:66.6},
+  {sni:"38.319",name:"Anl\u00e4ggningar f\u00f6r demontering av \u00f6vrig kasserad utrustning",sector:"Utilities",companies:23,medianEmployees:2.0,medianRevenue:2.32,revPerEmployee:1025,profitMargin:9.6,techFlag:false,score:66.6},
+  {sni:"46.762",name:"Partihandel med emballage",sector:"Trade",companies:535,medianEmployees:1.0,medianRevenue:6.3,revPerEmployee:2858,profitMargin:5.8,techFlag:false,score:66.5},
+  {sni:"24.540",name:"Andra metallgjuterier",sector:"Manufacturing",companies:16,medianEmployees:1.0,medianRevenue:2.53,revPerEmployee:1315,profitMargin:5.9,techFlag:false,score:66.4},
+  {sni:"20.590",name:"Industri f\u00f6r \u00f6vriga kemiska produkter",sector:"Manufacturing",companies:135,medianEmployees:4.0,medianRevenue:9.15,revPerEmployee:2050,profitMargin:6.8,techFlag:false,score:66.3},
+  {sni:"43.223",name:"Kyl- och frysinstallationsfirmor",sector:"Construction",companies:426,medianEmployees:2.0,medianRevenue:3.96,revPerEmployee:1972,profitMargin:8.0,techFlag:false,score:66.3},
+  {sni:"28.130",name:"Industri f\u00f6r andra pumpar och kompressorer",sector:"Manufacturing",companies:71,medianEmployees:5.0,medianRevenue:8.47,revPerEmployee:2272,profitMargin:5.7,techFlag:false,score:66.2},
+  {sni:"28.220",name:"Industri f\u00f6r lyft- och godshanteringsanordningar",sector:"Manufacturing",companies:277,medianEmployees:8.0,medianRevenue:29.67,revPerEmployee:2731,profitMargin:6.9,techFlag:false,score:66.2},
+  {sni:"42.130",name:"Anl\u00e4ggningsentrepren\u00f6rer f\u00f6r broar och tunnlar",sector:"Construction",companies:137,medianEmployees:2.0,medianRevenue:5.42,revPerEmployee:1436,profitMargin:8.5,techFlag:false,score:66.2},
+  {sni:"28.290",name:"Industri f\u00f6r maskiner f\u00f6r allm\u00e4nt \u00e4ndam\u00e5l",sector:"Manufacturing",companies:419,medianEmployees:3.0,medianRevenue:4.54,revPerEmployee:1954,profitMargin:8.8,techFlag:false,score:66.1},
+  {sni:"68.203",name:"Fastighetsbolag, andra lokaler",sector:"Real Estate",companies:26148,medianEmployees:0,medianRevenue:1.9,revPerEmployee:1803,profitMargin:12.0,techFlag:false,score:66.0},
+  {sni:"77.400",name:"Leasinggivare av immateriell egendom och liknande produkter",sector:"Services",companies:393,medianEmployees:0,medianRevenue:1.01,revPerEmployee:981,profitMargin:16.3,techFlag:false,score:66.0},
+  {sni:"19.200",name:"Petroleumraffinaderier",sector:"Manufacturing",companies:37,medianEmployees:7.0,medianRevenue:117.73,revPerEmployee:6438,profitMargin:4.2,techFlag:false,score:65.8},
+  {sni:"23.709",name:"Prydnadsstenhuggerier, industri f\u00f6r prydnadsstenvaror",sector:"Manufacturing",companies:128,medianEmployees:2.0,medianRevenue:3.33,revPerEmployee:1303,profitMargin:8.8,techFlag:false,score:65.2},
+  {sni:"46.240",name:"Partihandel med hudar, skinn och l\u00e4der",sector:"Trade",companies:38,medianEmployees:1.0,medianRevenue:1.35,revPerEmployee:1347,profitMargin:6.0,techFlag:false,score:65.2},
+  {sni:"01.110",name:"Odlare av spannm\u00e5l (utom ris), baljv\u00e4xter och oljev\u00e4xter",sector:"Agriculture",companies:8304,medianEmployees:1.0,medianRevenue:3.31,revPerEmployee:2360,profitMargin:7.9,techFlag:false,score:65.1},
+  {sni:"01.290",name:"Odlare av andra fler\u00e5riga v\u00e4xter",sector:"Agriculture",companies:58,medianEmployees:1.0,medianRevenue:1.68,revPerEmployee:1304,profitMargin:6.1,techFlag:false,score:65.1},
+  {sni:"28.300",name:"Industri f\u00f6r jord- och skogsbruksmaskiner",sector:"Manufacturing",companies:204,medianEmployees:2.0,medianRevenue:6.85,revPerEmployee:2115,profitMargin:6.0,techFlag:false,score:65.1},
+  {sni:"20.140",name:"Industri f\u00f6r andra organiska baskemikalier",sector:"Manufacturing",companies:70,medianEmployees:4.0,medianRevenue:10.48,revPerEmployee:4842,profitMargin:4.2,techFlag:false,score:65.0},
+  {sni:"28.940",name:"Industri f\u00f6r maskiner f\u00f6r produktion av textil-, bekl\u00e4dnads- och l\u00e4dervaror",sector:"Manufacturing",companies:26,medianEmployees:5.0,medianRevenue:7.14,revPerEmployee:1702,profitMargin:6.0,techFlag:false,score:65.0},
+  {sni:"15.110",name:"Garverier",sector:"Manufacturing",companies:31,medianEmployees:3.0,medianRevenue:3.63,revPerEmployee:1250,profitMargin:7.7,techFlag:false,score:64.9},
+  {sni:"24.520",name:"St\u00e5lgjuterier",sector:"Manufacturing",companies:21,medianEmployees:17.0,medianRevenue:41.54,revPerEmployee:2183,profitMargin:5.1,techFlag:false,score:64.9},
+  {sni:"46.522",name:"Partihandel med teleprodukter",sector:"Trade",companies:297,medianEmployees:2.0,medianRevenue:6.69,revPerEmployee:2485,profitMargin:5.9,techFlag:false,score:64.9},
+  {sni:"24.200",name:"Industri f\u00f6r st\u00e5lr\u00f6r",sector:"Manufacturing",companies:73,medianEmployees:11.0,medianRevenue:38.88,revPerEmployee:3153,profitMargin:4.7,techFlag:false,score:64.7},
+  {sni:"24.420",name:"Aluminiumverk",sector:"Manufacturing",companies:35,medianEmployees:8.0,medianRevenue:22.74,revPerEmployee:2762,profitMargin:4.6,techFlag:false,score:64.6},
+  {sni:"51.102",name:"Charter- och taxiflygbolag",sector:"Transport",companies:233,medianEmployees:0,medianRevenue:1.14,revPerEmployee:1051,profitMargin:9.1,techFlag:false,score:64.6},
+  {sni:"82.910",name:"Inkasso- och kreditupplysningsf\u00f6retag",sector:"Services",companies:161,medianEmployees:2.0,medianRevenue:3.96,revPerEmployee:1248,profitMargin:10.2,techFlag:false,score:64.6},
+  {sni:"17.220",name:"Industri f\u00f6r hush\u00e5lls- och hygienartiklar av papper",sector:"Manufacturing",companies:30,medianEmployees:22.0,medianRevenue:76.12,revPerEmployee:3123,profitMargin:4.3,techFlag:false,score:64.4},
+  {sni:"50.402",name:"Rederier f\u00f6r sj\u00f6fart p\u00e5 inre vattenv\u00e4gar, icke regulj\u00e4r godstrafik",sector:"Transport",companies:82,medianEmployees:1.0,medianRevenue:1.2,revPerEmployee:1181,profitMargin:7.6,techFlag:false,score:64.2},
+  {sni:"69.101",name:"Advokatbyr\u00e5er",sector:"Professional",companies:3864,medianEmployees:1.0,medianRevenue:1.94,revPerEmployee:1454,profitMargin:26.1,techFlag:false,score:64.2},
+  {sni:"22.190",name:"Annan gummivaruindustri",sector:"Manufacturing",companies:151,medianEmployees:5.0,medianRevenue:12.67,revPerEmployee:2225,profitMargin:5.9,techFlag:false,score:64.1},
+  {sni:"03.111",name:"Tr\u00e5lfiskare, i saltvatten",sector:"Agriculture",companies:552,medianEmployees:1.0,medianRevenue:1.51,revPerEmployee:1185,profitMargin:10.4,techFlag:false,score:64.0},
+  {sni:"46.750",name:"Partihandel med kemiska produkter",sector:"Trade",companies:794,medianEmployees:1.0,medianRevenue:6.29,revPerEmployee:2774,profitMargin:5.7,techFlag:false,score:63.8},
+  {sni:"23.910",name:"Slipmedelsindustri",sector:"Manufacturing",companies:10,medianEmployees:2.0,medianRevenue:2.52,revPerEmployee:2515,profitMargin:3.5,techFlag:false,score:63.7},
+  {sni:"33.110",name:"Reparationsverkst\u00e4der f\u00f6r metallvaror",sector:"Manufacturing",companies:292,medianEmployees:1.0,medianRevenue:2.29,revPerEmployee:1293,profitMargin:8.0,techFlag:false,score:63.7},
+  {sni:"86.901",name:"Medicinska laboratorier o.d.",sector:"Health",companies:237,medianEmployees:1.0,medianRevenue:1.28,revPerEmployee:881,profitMargin:23.4,techFlag:false,score:63.6},
+  {sni:"01.410",name:"Mj\u00f6lkproducenter",sector:"Agriculture",companies:5296,medianEmployees:3.0,medianRevenue:7.42,revPerEmployee:2556,profitMargin:9.2,techFlag:false,score:63.5},
+  {sni:"16.103",name:"Tr\u00e4impregneringsverk",sector:"Manufacturing",companies:35,medianEmployees:2.0,medianRevenue:5.05,revPerEmployee:2525,profitMargin:3.8,techFlag:false,score:63.5},
+  {sni:"20.510",name:"Spr\u00e4ng\u00e4mnesindustri",sector:"Manufacturing",companies:34,medianEmployees:17.0,medianRevenue:29.07,revPerEmployee:3164,profitMargin:4.1,techFlag:false,score:63.5},
+  {sni:"33.140",name:"Reparationsverkst\u00e4der f\u00f6r elapparatur",sector:"Manufacturing",companies:185,medianEmployees:2.0,medianRevenue:4.53,revPerEmployee:1490,profitMargin:7.5,techFlag:false,score:63.5},
+  {sni:"22.210",name:"Industri f\u00f6r plasthalvfabrikat",sector:"Manufacturing",companies:214,medianEmployees:6.0,medianRevenue:15.61,revPerEmployee:2415,profitMargin:5.8,techFlag:false,score:63.1},
+  {sni:"46.330",name:"Partihandel med mejeriprodukter, \u00e4gg, matolja och matfett",sector:"Trade",companies:145,medianEmployees:1.0,medianRevenue:16.94,revPerEmployee:7157,profitMargin:3.2,techFlag:false,score:63.1},
+  {sni:"20.520",name:"Limindustri",sector:"Manufacturing",companies:10,medianEmployees:2.0,medianRevenue:3.48,revPerEmployee:808,profitMargin:8.9,techFlag:false,score:62.9},
+  {sni:"47.994",name:"Auktioner ej i butik eller p\u00e5 Internet",sector:"Trade",companies:39,medianEmployees:1.0,medianRevenue:0.61,revPerEmployee:412,profitMargin:17.2,techFlag:false,score:62.9},
+  {sni:"08.110",name:"Natur-, kalk- och gipsstensbrott samt krita- och skifferbrott",sector:"Mining",companies:92,medianEmployees:1.0,medianRevenue:1.23,revPerEmployee:1231,profitMargin:6.1,techFlag:false,score:62.7},
+  {sni:"46.620",name:"Partihandel med verktygsmaskiner",sector:"Trade",companies:511,medianEmployees:2.0,medianRevenue:6.51,revPerEmployee:3044,profitMargin:5.4,techFlag:false,score:62.7},
+  {sni:"47.740",name:"Sjukv\u00e5rdsbutiker",sector:"Trade",companies:80,medianEmployees:1.0,medianRevenue:1.42,revPerEmployee:1247,profitMargin:6.6,techFlag:false,score:62.7},
+  {sni:"46.433",name:"Partihandel med inspelade band och skivor f\u00f6r musik och bild",sector:"Trade",companies:88,medianEmployees:1.0,medianRevenue:1.35,revPerEmployee:1229,profitMargin:6.4,techFlag:false,score:62.3},
+  {sni:"24.320",name:"Kallvalsverk f\u00f6r st\u00e5lband",sector:"Manufacturing",companies:16,medianEmployees:8.0,medianRevenue:40.5,revPerEmployee:2999,profitMargin:3.6,techFlag:false,score:62.2},
+  {sni:"42.110",name:"Anl\u00e4ggningsentrepren\u00f6rer f\u00f6r v\u00e4gar och motorv\u00e4gar",sector:"Construction",companies:1444,medianEmployees:1.0,medianRevenue:3.47,revPerEmployee:1882,profitMargin:7.3,techFlag:false,score:62.2},
+  {sni:"46.772",name:"Partihandel med metallavfall och metallskrot",sector:"Trade",companies:358,medianEmployees:1.0,medianRevenue:4.71,revPerEmployee:2835,profitMargin:4.4,techFlag:false,score:62.2},
+  {sni:"50.301",name:"Rederier f\u00f6r sj\u00f6fart p\u00e5 inre vattenv\u00e4gar, regulj\u00e4r passagerartrafik",sector:"Transport",companies:138,medianEmployees:2.0,medianRevenue:1.65,revPerEmployee:878,profitMargin:14.6,techFlag:false,score:62.2},
+  {sni:"68.202",name:"Fastighetsbolag, industrilokaler",sector:"Real Estate",companies:20037,medianEmployees:0,medianRevenue:1.28,revPerEmployee:1265,profitMargin:20.3,techFlag:false,score:62.2},
+  {sni:"01.280",name:"Odlare av kryddv\u00e4xter, drog- och medicinalv\u00e4xter",sector:"Agriculture",companies:31,medianEmployees:0,medianRevenue:0.29,revPerEmployee:287,profitMargin:9.5,techFlag:false,score:62.1},
+  {sni:"18.110",name:"Dagstidningstryckerier",sector:"Manufacturing",companies:17,medianEmployees:19.0,medianRevenue:30.79,revPerEmployee:2006,profitMargin:4.7,techFlag:false,score:62.1},
+  {sni:"26.520",name:"Urindustri",sector:"Manufacturing",companies:47,medianEmployees:0,medianRevenue:1.06,revPerEmployee:1058,profitMargin:5.8,techFlag:false,score:62.1},
+  {sni:"27.510",name:"Industri f\u00f6r hush\u00e5llsmaskiner och hush\u00e5llsapparater",sector:"Manufacturing",companies:56,medianEmployees:1.0,medianRevenue:3.83,revPerEmployee:1954,profitMargin:3.7,techFlag:false,score:61.9},
+  {sni:"17.211",name:"Wellpappindustri",sector:"Manufacturing",companies:44,medianEmployees:15.0,medianRevenue:44.54,revPerEmployee:2785,profitMargin:4.1,techFlag:false,score:61.8},
+  {sni:"27.900",name:"Industri f\u00f6r annan elapparatur",sector:"Manufacturing",companies:187,medianEmployees:4.0,medianRevenue:4.83,revPerEmployee:1891,profitMargin:6.1,techFlag:false,score:61.8},
+  {sni:"27.520",name:"Industri f\u00f6r  icke-elektriska hush\u00e5llsmaskiner och hush\u00e5llsapparater",sector:"Manufacturing",companies:28,medianEmployees:1.0,medianRevenue:2.81,revPerEmployee:1471,profitMargin:4.4,techFlag:false,score:61.7},
+  {sni:"17.129",name:"\u00d6vrig pappers- och pappindustri",sector:"Manufacturing",companies:61,medianEmployees:18.0,medianRevenue:62.15,revPerEmployee:4070,profitMargin:3.7,techFlag:false,score:61.4},
+  {sni:"24.330",name:"Industri f\u00f6r kallformning av st\u00e5l",sector:"Manufacturing",companies:66,medianEmployees:8.0,medianRevenue:18.24,revPerEmployee:2210,profitMargin:4.7,techFlag:false,score:61.4},
+  {sni:"01.500",name:"Blandat jordbruk",sector:"Agriculture",companies:44599,medianEmployees:1.0,medianRevenue:2.72,revPerEmployee:1843,profitMargin:8.7,techFlag:false,score:61.3},
+  {sni:"28.410",name:"Industri f\u00f6r verktygsmaskiner f\u00f6r metallbearbetning",sector:"Manufacturing",companies:147,medianEmployees:3.0,medianRevenue:7.1,revPerEmployee:2030,profitMargin:5.2,techFlag:false,score:61.3},
+  {sni:"52.220",name:"Hamnf\u00f6retag och andra servicef\u00f6retag till sj\u00f6transport",sector:"Transport",companies:301,medianEmployees:1.0,medianRevenue:2.04,revPerEmployee:1058,profitMargin:9.7,techFlag:false,score:61.3},
+  {sni:"69.202",name:"Revisionsbyr\u00e5er",sector:"Professional",companies:1665,medianEmployees:1.0,medianRevenue:1.5,revPerEmployee:1154,profitMargin:28.2,techFlag:false,score:61.3},
+  {sni:"02.200",name:"Avverkningsf\u00f6retag",sector:"Agriculture",companies:4462,medianEmployees:2.0,medianRevenue:4.04,revPerEmployee:1872,profitMargin:9.4,techFlag:false,score:61.2},
+  {sni:"46.141",name:"Provisionshandel med maskiner, industriell utrustning, fartyg och luftfartyg utom kontorsutrustning och datorer",sector:"Trade",companies:731,medianEmployees:1.0,medianRevenue:2.5,revPerEmployee:1857,profitMargin:6.1,techFlag:false,score:61.1},
+  {sni:"60.100",name:"Radiobolag",sector:"Media",companies:152,medianEmployees:1.0,medianRevenue:0.79,revPerEmployee:736,profitMargin:13.9,techFlag:true,score:61.1},
+  {sni:"95.250",name:"Reparationsverkst\u00e4der f\u00f6r ur och guldsmedsvaror",sector:"Services",companies:154,medianEmployees:1.0,medianRevenue:0.97,revPerEmployee:909,profitMargin:10.1,techFlag:false,score:61.0},
+  {sni:"52.211",name:"B\u00e4rgningsf\u00f6retag f\u00f6r landtransport",sector:"Transport",companies:292,medianEmployees:3.0,medianRevenue:6.12,revPerEmployee:1664,profitMargin:7.0,techFlag:false,score:60.8},
+  {sni:"28.250",name:"Industri f\u00f6r maskiner och apparater f\u00f6r kyla och ventilation utom f\u00f6r hush\u00e5ll",sector:"Manufacturing",companies:203,medianEmployees:5.0,medianRevenue:16.17,revPerEmployee:2293,profitMargin:5.1,techFlag:false,score:60.7},
+  {sni:"30.110",name:"Skeppsvarv",sector:"Manufacturing",companies:185,medianEmployees:1.0,medianRevenue:2.43,revPerEmployee:1440,profitMargin:5.5,techFlag:false,score:60.6},
+  {sni:"46.699",name:"Partihandel med diverse \u00f6vriga maskiner och utrustning",sector:"Trade",companies:4025,medianEmployees:1.0,medianRevenue:5.46,revPerEmployee:2528,profitMargin:6.3,techFlag:false,score:60.6},
+  {sni:"01.420",name:"N\u00f6tk\u00f6ttsproducenter",sector:"Agriculture",companies:7089,medianEmployees:1.0,medianRevenue:2.0,revPerEmployee:1402,profitMargin:10.2,techFlag:false,score:60.5},
+  {sni:"03.119",name:"\u00d6vriga saltvattensfiskare",sector:"Agriculture",companies:416,medianEmployees:1.0,medianRevenue:1.08,revPerEmployee:898,profitMargin:10.4,techFlag:false,score:60.5},
+  {sni:"61.900",name:"Andra telekommunikationsbolag",sector:"Media",companies:371,medianEmployees:1.0,medianRevenue:2.36,revPerEmployee:1361,profitMargin:7.4,techFlag:true,score:60.5},
+  {sni:"23.190",name:"Annan glasvaruindustri",sector:"Manufacturing",companies:47,medianEmployees:6.0,medianRevenue:7.26,revPerEmployee:1572,profitMargin:5.6,techFlag:false,score:60.4},
+  {sni:"46.630",name:"Partihandel med gruv-, bygg- och anl\u00e4ggningsmaskiner",sector:"Trade",companies:743,medianEmployees:1.0,medianRevenue:4.92,revPerEmployee:2862,profitMargin:4.6,techFlag:false,score:60.4},
+  {sni:"02.101",name:"Skogs\u00e4gare",sector:"Agriculture",companies:127734,medianEmployees:0,medianRevenue:1.77,revPerEmployee:1214,profitMargin:14.6,techFlag:false,score:60.3},
+  {sni:"28.990",name:"Industri f\u00f6r \u00f6vriga specialmaskiner",sector:"Manufacturing",companies:651,medianEmployees:3.0,medianRevenue:6.25,revPerEmployee:1974,profitMargin:7.0,techFlag:false,score:60.3},
+  {sni:"38.110",name:"Anl\u00e4ggningar f\u00f6r insamling av icke-farligt avfall",sector:"Utilities",companies:726,medianEmployees:4.0,medianRevenue:12.81,revPerEmployee:2025,profitMargin:7.2,techFlag:false,score:60.3},
+  {sni:"60.200",name:"TV-bolag",sector:"Media",companies:292,medianEmployees:1.0,medianRevenue:0.95,revPerEmployee:903,profitMargin:11.2,techFlag:true,score:60.1},
+  {sni:"88.992",name:"Dagcentraler o.d. f\u00f6r vuxna missbrukare",sector:"Health",companies:205,medianEmployees:1.0,medianRevenue:1.35,revPerEmployee:842,profitMargin:11.7,techFlag:false,score:60.0},
+  {sni:"69.203",name:"Skatter\u00e5dgivningsbyr\u00e5er",sector:"Professional",companies:451,medianEmployees:0,medianRevenue:0.52,revPerEmployee:510,profitMargin:47.5,techFlag:false,score:59.8},
+  {sni:"86.230",name:"Tandl\u00e4karmottagningar",sector:"Health",companies:4346,medianEmployees:2.0,medianRevenue:3.33,revPerEmployee:1418,profitMargin:16.0,techFlag:false,score:59.8},
+  {sni:"10.410",name:"Industri f\u00f6r oljor och fetter",sector:"Manufacturing",companies:50,medianEmployees:0,medianRevenue:1.65,revPerEmployee:1308,profitMargin:4.3,techFlag:false,score:59.7},
+  {sni:"16.102",name:"Hyvlerier",sector:"Manufacturing",companies:281,medianEmployees:7.0,medianRevenue:16.68,revPerEmployee:2726,profitMargin:5.0,techFlag:false,score:59.7},
+  {sni:"42.220",name:"Anl\u00e4ggningsentrepren\u00f6rer f\u00f6r allm\u00e4nnyttiga projekt inom el och telekommunikation",sector:"Construction",companies:1427,medianEmployees:1.0,medianRevenue:1.94,revPerEmployee:1353,profitMargin:8.8,techFlag:false,score:59.7},
+  {sni:"46.742",name:"Partihandel med VVS-varor",sector:"Trade",companies:959,medianEmployees:2.0,medianRevenue:7.11,revPerEmployee:2726,profitMargin:5.7,techFlag:false,score:59.7},
+  {sni:"62.020",name:"Datakonsulter",sector:"IT/Tech",companies:19524,medianEmployees:1.0,medianRevenue:1.5,revPerEmployee:1290,profitMargin:21.6,techFlag:true,score:59.5},
+  {sni:"77.120",name:"Lastbilsuthyrare",sector:"Services",companies:126,medianEmployees:0,medianRevenue:1.82,revPerEmployee:1459,profitMargin:4.5,techFlag:false,score:59.4},
+  {sni:"88.991",name:"Byr\u00e5er f\u00f6r \u00f6ppna sociala insatser f\u00f6r barn och ungdomar",sector:"Health",companies:707,medianEmployees:1.0,medianRevenue:1.14,revPerEmployee:953,profitMargin:17.5,techFlag:false,score:59.4},
+  {sni:"10.120",name:"Fj\u00e4derf\u00e4slakterier",sector:"Manufacturing",companies:20,medianEmployees:26.0,medianRevenue:67.72,revPerEmployee:3767,profitMargin:2.8,techFlag:false,score:59.3},
+  {sni:"03.120",name:"S\u00f6tvattensfiskare",sector:"Agriculture",companies:208,medianEmployees:1.0,medianRevenue:1.49,revPerEmployee:894,profitMargin:8.0,techFlag:false,score:59.2},
+  {sni:"33.200",name:"Installationsf\u00f6retag f\u00f6r industrimaskiner och -utrustning",sector:"Manufacturing",companies:1858,medianEmployees:1.0,medianRevenue:2.3,revPerEmployee:1370,profitMargin:8.8,techFlag:false,score:59.2},
+  {sni:"26.300",name:"Industri f\u00f6r kommunikationsutrustning",sector:"Manufacturing",companies:197,medianEmployees:1.0,medianRevenue:2.61,revPerEmployee:1383,profitMargin:5.3,techFlag:false,score:59.0},
+  {sni:"77.320",name:"Uthyrare av bygg- och anl\u00e4ggningsmaskiner",sector:"Services",companies:2463,medianEmployees:0,medianRevenue:1.32,revPerEmployee:1205,profitMargin:9.8,techFlag:false,score:59.0},
+  {sni:"42.990",name:"\u00d6vriga anl\u00e4ggningsentrepren\u00f6rer",sector:"Construction",companies:1118,medianEmployees:1.0,medianRevenue:2.0,revPerEmployee:1580,profitMargin:7.0,techFlag:false,score:58.9},
+  {sni:"47.781",name:"Optiker",sector:"Trade",companies:1224,medianEmployees:3.0,medianRevenue:5.28,revPerEmployee:1787,profitMargin:8.0,techFlag:false,score:58.9},
+  {sni:"62.030",name:"F\u00f6retag f\u00f6r datordrifttj\u00e4nster",sector:"IT/Tech",companies:1442,medianEmployees:1.0,medianRevenue:1.4,revPerEmployee:1197,profitMargin:12.3,techFlag:true,score:58.9},
+  {sni:"25.300",name:"Industri f\u00f6r \u00e5nggeneratorer",sector:"Manufacturing",companies:108,medianEmployees:19.0,medianRevenue:52.09,revPerEmployee:2741,profitMargin:4.0,techFlag:false,score:58.6},
+  {sni:"47.820",name:"Torg- och marknadshandel med textilier, kl\u00e4der och skodon",sector:"Trade",companies:265,medianEmployees:0,medianRevenue:0.51,revPerEmployee:505,profitMargin:12.4,techFlag:false,score:58.6},
+  {sni:"71.123",name:"Tekniska konsultbyr\u00e5er inom elteknik",sector:"Professional",companies:4694,medianEmployees:1.0,medianRevenue:1.34,revPerEmployee:1141,profitMargin:20.7,techFlag:false,score:58.6},
+  {sni:"87.100",name:"V\u00e5rdhem",sector:"Health",companies:127,medianEmployees:1.0,medianRevenue:0.58,revPerEmployee:571,profitMargin:13.6,techFlag:false,score:58.5},
+  {sni:"16.240",name:"Tr\u00e4f\u00f6rpackningsindustri",sector:"Manufacturing",companies:263,medianEmployees:3.0,medianRevenue:6.37,revPerEmployee:1995,profitMargin:5.1,techFlag:false,score:58.4},
+  {sni:"26.510",name:"Industri f\u00f6r instrument och apparater f\u00f6r m\u00e4tning, provning och navigering",sector:"Manufacturing",companies:443,medianEmployees:3.0,medianRevenue:7.12,revPerEmployee:1932,profitMargin:5.9,techFlag:false,score:58.4},
+  {sni:"28.960",name:"Industri f\u00f6r maskiner f\u00f6r gummi och plast",sector:"Manufacturing",companies:36,medianEmployees:4.0,medianRevenue:8.78,revPerEmployee:1659,profitMargin:4.6,techFlag:false,score:58.4},
+  {sni:"86.903",name:"Distriktsk\u00f6terskemottagningar, barnav\u00e5rdscentraler o.d.",sector:"Health",companies:331,medianEmployees:1.0,medianRevenue:1.09,revPerEmployee:912,profitMargin:10.3,techFlag:false,score:58.4},
+  {sni:"28.110",name:"Industri f\u00f6r motorer och turbiner utom f\u00f6r luftfartyg och fordon",sector:"Manufacturing",companies:89,medianEmployees:7.0,medianRevenue:25.6,revPerEmployee:2163,profitMargin:4.3,techFlag:false,score:58.3},
+  {sni:"47.420",name:"Telebutiker",sector:"Trade",companies:561,medianEmployees:2.0,medianRevenue:4.51,revPerEmployee:2063,profitMargin:5.6,techFlag:false,score:58.3},
+  {sni:"75.000",name:"Veterin\u00e4rkliniker",sector:"Professional",companies:1871,medianEmployees:1.0,medianRevenue:2.0,revPerEmployee:1284,profitMargin:11.5,techFlag:false,score:58.3},
+  {sni:"25.290",name:"Industri f\u00f6r andra cisterner, tankar, kar och andra beh\u00e5llare av metall",sector:"Manufacturing",companies:88,medianEmployees:8.0,medianRevenue:18.9,revPerEmployee:2060,profitMargin:4.5,techFlag:false,score:58.2},
+  {sni:"23.610",name:"Industri f\u00f6r byggnadsbetongvaror",sector:"Manufacturing",companies:266,medianEmployees:6.0,medianRevenue:12.42,revPerEmployee:1977,profitMargin:5.4,techFlag:false,score:58.0},
+  {sni:"46.350",name:"Partihandel med tobak",sector:"Trade",companies:171,medianEmployees:1.0,medianRevenue:6.22,revPerEmployee:4190,profitMargin:2.3,techFlag:false,score:58.0},
+  {sni:"71.200",name:"Tekniska provnings- och analysf\u00f6retag",sector:"Professional",companies:2120,medianEmployees:1.0,medianRevenue:1.37,revPerEmployee:1121,profitMargin:14.7,techFlag:false,score:58.0},
+  {sni:"46.492",name:"Partihandel med kontorsf\u00f6rbrukningsvaror",sector:"Trade",companies:336,medianEmployees:1.0,medianRevenue:3.84,revPerEmployee:2011,profitMargin:4.3,techFlag:false,score:57.9},
+  {sni:"29.310",name:"Industri f\u00f6r elektrisk och elektronisk utrustning f\u00f6r motorfordon",sector:"Manufacturing",companies:109,medianEmployees:2.0,medianRevenue:2.39,revPerEmployee:1296,profitMargin:5.8,techFlag:false,score:57.8},
+  {sni:"85.312",name:"Kommunala vuxenskolor o.d.",sector:"Education",companies:307,medianEmployees:1.0,medianRevenue:0.73,revPerEmployee:686,profitMargin:15.6,techFlag:false,score:57.8},
+  {sni:"46.773",name:"Partihandel med avfall och skrot av icke-metall",sector:"Trade",companies:49,medianEmployees:2.0,medianRevenue:4.31,revPerEmployee:2129,profitMargin:3.4,techFlag:false,score:57.7},
+  {sni:"13.940",name:"T\u00e5gvirkes- och bindgarnsindustri",sector:"Manufacturing",companies:32,medianEmployees:3.0,medianRevenue:3.99,revPerEmployee:1329,profitMargin:5.1,techFlag:false,score:57.6},
+  {sni:"47.715",name:"P\u00e4lsaff\u00e4rer",sector:"Trade",companies:15,medianEmployees:1.0,medianRevenue:2.13,revPerEmployee:1761,profitMargin:2.8,techFlag:false,score:57.5},
+  {sni:"49.311",name:"Linjebussf\u00f6retag",sector:"Transport",companies:374,medianEmployees:6.0,medianRevenue:8.43,revPerEmployee:1212,profitMargin:9.4,techFlag:false,score:57.5},
+  {sni:"29.200",name:"Industri f\u00f6r karosserier f\u00f6r motorfordon, industri f\u00f6r sl\u00e4pfordon och p\u00e5h\u00e4ngsvagnar",sector:"Manufacturing",companies:277,medianEmployees:4.0,medianRevenue:10.76,revPerEmployee:2363,profitMargin:4.6,techFlag:false,score:57.4},
+  {sni:"45.191",name:"Handel med lastbilar, bussar och specialfordon",sector:"Trade",companies:638,medianEmployees:1.0,medianRevenue:5.4,revPerEmployee:3299,profitMargin:3.5,techFlag:false,score:57.3},
+  {sni:"46.720",name:"Partihandel med metaller och metallmalmer",sector:"Trade",companies:574,medianEmployees:2.0,medianRevenue:11.65,revPerEmployee:4767,profitMargin:3.9,techFlag:false,score:57.2},
+  {sni:"55.900",name:"Andra logier",sector:"Hospitality",companies:52,medianEmployees:0,medianRevenue:1.25,revPerEmployee:1249,profitMargin:4.1,techFlag:false,score:57.0},
+  {sni:"24.340",name:"Dragerier f\u00f6r st\u00e5ltr\u00e5d",sector:"Manufacturing",companies:12,medianEmployees:14.0,medianRevenue:67.03,revPerEmployee:2805,profitMargin:2.5,techFlag:false,score:56.9},
+  {sni:"01.610",name:"Servicef\u00f6retag till v\u00e4xtodling",sector:"Agriculture",companies:3247,medianEmployees:1.0,medianRevenue:1.27,revPerEmployee:1064,profitMargin:10.9,techFlag:false,score:56.8},
+  {sni:"71.122",name:"Tekniska konsultbyr\u00e5er inom industriteknik",sector:"Professional",companies:11707,medianEmployees:1.0,medianRevenue:1.26,revPerEmployee:1110,profitMargin:20.4,techFlag:false,score:56.8},
+  {sni:"71.129",name:"\u00d6vriga tekniska konsultbyr\u00e5er",sector:"Professional",companies:3206,medianEmployees:1.0,medianRevenue:1.12,revPerEmployee:1005,profitMargin:19.9,techFlag:false,score:56.8},
+  {sni:"29.320",name:"Industri f\u00f6r andra delar och tillbeh\u00f6r till motorfordon",sector:"Manufacturing",companies:499,medianEmployees:3.0,medianRevenue:8.14,revPerEmployee:2254,profitMargin:5.0,techFlag:false,score:56.6},
+  {sni:"71.121",name:"Tekniska konsultbyr\u00e5er inom bygg- och anl\u00e4ggningsteknik",sector:"Professional",companies:15265,medianEmployees:1.0,medianRevenue:1.37,revPerEmployee:1133,profitMargin:18.2,techFlag:false,score:56.6},
+  {sni:"45.310",name:"Parti- och provisionshandel med reservdelar och tillbeh\u00f6r till motorfordon utom motorcyklar",sector:"Trade",companies:1112,medianEmployees:1.0,medianRevenue:4.0,revPerEmployee:2272,profitMargin:4.6,techFlag:false,score:56.5},
+  {sni:"58.132",name:"Dagstidningsf\u00f6rlag",sector:"Media",companies:95,medianEmployees:1.0,medianRevenue:2.12,revPerEmployee:1288,profitMargin:4.9,techFlag:true,score:56.5},
+  {sni:"10.519",name:"Annan mejerivaruindustri",sector:"Manufacturing",companies:53,medianEmployees:1.0,medianRevenue:5.24,revPerEmployee:2294,profitMargin:1.8,techFlag:false,score:56.4},
+  {sni:"43.991",name:"Uthyrningsfirmor f\u00f6r bygg- och anl\u00e4ggningsmaskiner med f\u00f6rare",sector:"Construction",companies:2026,medianEmployees:1.0,medianRevenue:2.3,revPerEmployee:1598,profitMargin:6.7,techFlag:false,score:56.4},
+  {sni:"86.902",name:"F\u00f6retag f\u00f6r ambulanstransporter och ambulanssjukv\u00e5rd",sector:"Health",companies:221,medianEmployees:4.0,medianRevenue:2.56,revPerEmployee:760,profitMargin:14.3,techFlag:false,score:56.4},
+  {sni:"42.210",name:"Anl\u00e4ggningsentrepren\u00f6rer f\u00f6r allm\u00e4nnyttiga projekt inom v\u00e4rme, vatten och avlopp",sector:"Construction",companies:817,medianEmployees:1.0,medianRevenue:2.61,revPerEmployee:1773,profitMargin:5.1,techFlag:false,score:56.3},
+  {sni:"46.320",name:"Partihandel med k\u00f6tt- och k\u00f6ttvaror",sector:"Trade",companies:229,medianEmployees:1.0,medianRevenue:8.48,revPerEmployee:4009,profitMargin:2.2,techFlag:false,score:56.3},
+  {sni:"16.101",name:"S\u00e5gverk",sector:"Manufacturing",companies:836,medianEmployees:2.0,medianRevenue:4.62,revPerEmployee:2267,profitMargin:5.0,techFlag:false,score:56.2},
+  {sni:"71.124",name:"Tekniska konsultbyr\u00e5er inom energi-, milj\u00f6- och VVS-teknik",sector:"Professional",companies:5597,medianEmployees:1.0,medianRevenue:1.29,revPerEmployee:1088,profitMargin:14.9,techFlag:false,score:56.2},
+  {sni:"46.769",name:"Partihandel med \u00f6vriga insatsvaror",sector:"Trade",companies:650,medianEmployees:2.0,medianRevenue:10.03,revPerEmployee:3567,profitMargin:4.0,techFlag:false,score:56.1},
+  {sni:"50.101",name:"Havs- och kustsj\u00f6fartsrederier, regulj\u00e4r passagerartrafik",sector:"Transport",companies:109,medianEmployees:1.0,medianRevenue:2.35,revPerEmployee:1349,profitMargin:4.6,techFlag:false,score:56.1},
+  {sni:"68.310",name:"Fastighetsf\u00f6rmedlare",sector:"Real Estate",companies:5951,medianEmployees:1.0,medianRevenue:1.37,revPerEmployee:1251,profitMargin:11.1,techFlag:false,score:56.1},
+  {sni:"87.202",name:"Hem med s\u00e4rskild service f\u00f6r barn och ungdomar med missbruksproblem",sector:"Health",companies:97,medianEmployees:9.0,medianRevenue:7.19,revPerEmployee:939,profitMargin:8.2,techFlag:false,score:56.1},
+  {sni:"46.110",name:"Provisionshandel med jordbruksr\u00e5varor, levande djur, textilr\u00e5varor och textilhalvfabrikat",sector:"Trade",companies:70,medianEmployees:0,medianRevenue:1.14,revPerEmployee:960,profitMargin:4.9,techFlag:false,score:56.0},
+  {sni:"55.300",name:"Campingplatser m.m.",sector:"Hospitality",companies:772,medianEmployees:2.0,medianRevenue:2.51,revPerEmployee:1187,profitMargin:9.4,techFlag:false,score:56.0},
+  {sni:"62.010",name:"Programvaruproducenter",sector:"IT/Tech",companies:27946,medianEmployees:1.0,medianRevenue:1.31,revPerEmployee:1102,profitMargin:18.4,techFlag:true,score:56.0},
+  {sni:"01.-02",name:"Jordbruk, skogsbruk",sector:"Agriculture",companies:10217,medianEmployees:1.0,medianRevenue:2.16,revPerEmployee:1395,profitMargin:7.9,techFlag:false,score:55.9},
+  {sni:"23.701",name:"Byggnadsstenhuggerier, industri f\u00f6r byggnadsstenvaror",sector:"Manufacturing",companies:184,medianEmployees:3.0,medianRevenue:4.33,revPerEmployee:1527,profitMargin:5.3,techFlag:false,score:55.8},
+  {sni:"47.772",name:"Guldsmedsaff\u00e4rer",sector:"Trade",companies:922,medianEmployees:1.0,medianRevenue:2.93,revPerEmployee:1729,profitMargin:5.6,techFlag:false,score:55.8},
+  {sni:"69.102",name:"Juridiska byr\u00e5er m.m.",sector:"Professional",companies:3343,medianEmployees:0,medianRevenue:0.75,revPerEmployee:711,profitMargin:23.8,techFlag:false,score:55.6},
+  {sni:"93.111",name:"Skidsportanl\u00e4ggningar",sector:"Culture",companies:104,medianEmployees:2.0,medianRevenue:3.61,revPerEmployee:1192,profitMargin:5.8,techFlag:false,score:55.6},
+  {sni:"96.030",name:"Begravningsbyr\u00e5er m.m.",sector:"Services",companies:922,medianEmployees:2.0,medianRevenue:3.51,revPerEmployee:1420,profitMargin:7.6,techFlag:false,score:55.6},
+  {sni:"24.450",name:"Andra metallverk",sector:"Manufacturing",companies:12,medianEmployees:3.0,medianRevenue:2.05,revPerEmployee:595,profitMargin:8.0,techFlag:false,score:55.5},
+  {sni:"37.000",name:"Reningsverk",sector:"Utilities",companies:591,medianEmployees:1.0,medianRevenue:3.6,revPerEmployee:1785,profitMargin:4.6,techFlag:false,score:55.5},
+  {sni:"49.390",name:"Charterbussf\u00f6retag, bussf\u00f6retag f\u00f6r fj\u00e4rrtrafik",sector:"Transport",companies:650,medianEmployees:1.0,medianRevenue:2.6,revPerEmployee:1068,profitMargin:8.2,techFlag:false,score:55.5},
+  {sni:"91.012",name:"Arkiv",sector:"Culture",companies:118,medianEmployees:1.0,medianRevenue:4.67,revPerEmployee:1501,profitMargin:4.3,techFlag:false,score:55.4},
+  {sni:"25.940",name:"Industri f\u00f6r nitar och skruvar",sector:"Manufacturing",companies:27,medianEmployees:5.0,medianRevenue:11.98,revPerEmployee:2268,profitMargin:2.7,techFlag:false,score:55.3},
+  {sni:"30.990",name:"Industri f\u00f6r diverse \u00f6vriga transportmedel",sector:"Manufacturing",companies:35,medianEmployees:1.0,medianRevenue:2.4,revPerEmployee:1548,profitMargin:2.8,techFlag:false,score:55.2},
+  {sni:"33.120",name:"Reparationsverkst\u00e4der f\u00f6r maskiner",sector:"Manufacturing",companies:5412,medianEmployees:1.0,medianRevenue:1.78,revPerEmployee:1294,profitMargin:8.4,techFlag:false,score:55.2},
+  {sni:"46.660",name:"Partihandel med andra kontorsmaskiner och kontorsutrustning",sector:"Trade",companies:263,medianEmployees:2.0,medianRevenue:5.19,revPerEmployee:1898,profitMargin:4.5,techFlag:false,score:55.2},
+  {sni:"18.200",name:"F\u00f6retag f\u00f6r reproduktion av ljudinspelningar",sector:"Manufacturing",companies:76,medianEmployees:0,medianRevenue:1.04,revPerEmployee:774,profitMargin:5.6,techFlag:false,score:55.1},
+  {sni:"25.730",name:"Verktygs- och redskapsindustri",sector:"Manufacturing",companies:478,medianEmployees:3.0,medianRevenue:5.21,revPerEmployee:1517,profitMargin:6.3,techFlag:false,score:55.1},
+  {sni:"81.222",name:"Skorstensfejare",sector:"Services",companies:232,medianEmployees:4.0,medianRevenue:4.93,revPerEmployee:1081,profitMargin:7.8,techFlag:false,score:55.1},
+  {sni:"27.400",name:"Industri f\u00f6r belysningsarmatur",sector:"Manufacturing",companies:221,medianEmployees:2.0,medianRevenue:3.22,revPerEmployee:1530,profitMargin:4.9,techFlag:false,score:55.0},
+  {sni:"38.320",name:"Anl\u00e4ggningar f\u00f6r \u00e5tervinning av k\u00e4llsorterat material",sector:"Utilities",companies:506,medianEmployees:2.0,medianRevenue:9.05,revPerEmployee:2646,profitMargin:4.0,techFlag:false,score:55.0},
+  {sni:"46.741",name:"Partihandel med j\u00e4rnhandelsvaror",sector:"Trade",companies:853,medianEmployees:2.0,medianRevenue:6.88,revPerEmployee:3022,profitMargin:4.2,techFlag:false,score:54.9},
+  {sni:"80.200",name:"F\u00f6retag f\u00f6r s\u00e4kerhetssystemtj\u00e4nster",sector:"Services",companies:520,medianEmployees:2.0,medianRevenue:3.64,revPerEmployee:1380,profitMargin:6.8,techFlag:false,score:54.9},
+  {sni:"85.410",name:"Skolor f\u00f6r eftergymnasial utbildning vid annat \u00e4n universitet och h\u00f6gskola",sector:"Education",companies:459,medianEmployees:1.0,medianRevenue:0.55,revPerEmployee:512,profitMargin:20.8,techFlag:false,score:54.9},
+  {sni:"26.-27",name:"Industri f\u00f6r el- och optikprodukter",sector:"Manufacturing",companies:1413,medianEmployees:2.0,medianRevenue:4.65,revPerEmployee:1667,profitMargin:6.4,techFlag:false,score:54.7},
+  {sni:"23.630",name:"Industri f\u00f6r fabriksblandad betong",sector:"Manufacturing",companies:228,medianEmployees:3.0,medianRevenue:15.88,revPerEmployee:4289,profitMargin:2.7,techFlag:false,score:54.6},
+  {sni:"46.610",name:"Partihandel med jordbruksmaskiner och -utrustning",sector:"Trade",companies:786,medianEmployees:2.0,medianRevenue:9.38,revPerEmployee:3964,profitMargin:3.7,techFlag:false,score:54.6},
+  {sni:"58.-63",name:"Informations- och kommunikationsverksamhet",sector:"Media",companies:37748,medianEmployees:1.0,medianRevenue:1.27,revPerEmployee:1069,profitMargin:14.8,techFlag:true,score:54.5},
+  {sni:"72.200",name:"Samh\u00e4llsvetenskapliga och humanistiska FoU-institutioner",sector:"Professional",companies:875,medianEmployees:0,medianRevenue:0.36,revPerEmployee:350,profitMargin:20.0,techFlag:false,score:54.5},
+  {sni:"33.150",name:"Reparationsvarv f\u00f6r fartyg och b\u00e5tar",sector:"Manufacturing",companies:1076,medianEmployees:1.0,medianRevenue:1.46,revPerEmployee:1223,profitMargin:7.1,techFlag:false,score:54.4},
+  {sni:"86.221",name:"Specialistl\u00e4karmottagningar inom \u00f6ppenv\u00e5rd, ej p\u00e5 sjukhus",sector:"Health",companies:2017,medianEmployees:0,medianRevenue:0.57,revPerEmployee:565,profitMargin:45.8,techFlag:false,score:54.4},
+  {sni:"01.491",name:"Rensk\u00f6tare",sector:"Agriculture",companies:1447,medianEmployees:0,medianRevenue:1.05,revPerEmployee:1053,profitMargin:7.4,techFlag:false,score:54.3},
+  {sni:"02.409",name:"\u00d6vriga servicef\u00f6retag till skogsbruk",sector:"Agriculture",companies:1682,medianEmployees:1.0,medianRevenue:0.88,revPerEmployee:818,profitMargin:11.6,techFlag:false,score:54.3},
+  {sni:"10.722",name:"Industri f\u00f6r kex och konserverade bakverk",sector:"Manufacturing",companies:56,medianEmployees:4.0,medianRevenue:5.54,revPerEmployee:1736,profitMargin:3.7,techFlag:false,score:54.3},
+  {sni:"85.420",name:"Institutioner vid universitet och h\u00f6gskolor",sector:"Education",companies:973,medianEmployees:0,medianRevenue:0.29,revPerEmployee:276,profitMargin:33.9,techFlag:false,score:54.2},
+  {sni:"46.460",name:"Partihandel med medicinsk utrustning och apoteksvaror",sector:"Trade",companies:1735,medianEmployees:2.0,medianRevenue:7.24,revPerEmployee:2624,profitMargin:4.8,techFlag:false,score:54.0},
+  {sni:"47.592",name:"Kontorsm\u00f6belhandel",sector:"Trade",companies:47,medianEmployees:2.0,medianRevenue:9.49,revPerEmployee:2705,profitMargin:1.9,techFlag:false,score:54.0},
+  {sni:"68.320",name:"Fastighetsf\u00f6rvaltare p\u00e5 uppdrag",sector:"Real Estate",companies:4626,medianEmployees:0,medianRevenue:1.3,revPerEmployee:1082,profitMargin:8.5,techFlag:false,score:54.0},
+  {sni:"45.203",name:"Verkst\u00e4der f\u00f6r service av elsystem till motorfordon",sector:"Trade",companies:320,medianEmployees:1.0,medianRevenue:2.16,revPerEmployee:1331,profitMargin:4.9,techFlag:false,score:53.7},
+  {sni:"47.793",name:"Auktioner i butik",sector:"Trade",companies:66,medianEmployees:3.0,medianRevenue:4.01,revPerEmployee:1346,profitMargin:4.6,techFlag:false,score:53.7},
+  {sni:"77.350",name:"Flygplansuthyrare",sector:"Services",companies:165,medianEmployees:0,medianRevenue:4.15,revPerEmployee:4097,profitMargin:0.2,techFlag:false,score:53.7},
+  {sni:"86.212",name:"Andra allm\u00e4npraktiserande l\u00e4karmottagningar",sector:"Health",companies:3314,medianEmployees:0,medianRevenue:0.67,revPerEmployee:633,profitMargin:30.9,techFlag:false,score:53.7},
+  {sni:"86.222",name:"Specialistl\u00e4karmottagningar inom \u00f6ppenv\u00e5rd, p\u00e5 sjukhus",sector:"Health",companies:4128,medianEmployees:0,medianRevenue:0.68,revPerEmployee:640,profitMargin:34.3,techFlag:false,score:53.7},
+  {sni:"24.440",name:"Kopparverk",sector:"Manufacturing",companies:14,medianEmployees:56.0,medianRevenue:179.65,revPerEmployee:3733,profitMargin:1.5,techFlag:false,score:53.6},
+  {sni:"74.204",name:"Fotolaboratorier",sector:"Professional",companies:150,medianEmployees:1.0,medianRevenue:1.13,revPerEmployee:967,profitMargin:6.0,techFlag:false,score:53.6},
+  {sni:"46.431",name:"Partihandel med elektriska hush\u00e5llsmaskiner och -apparater",sector:"Trade",companies:557,medianEmployees:1.0,medianRevenue:3.93,revPerEmployee:1959,profitMargin:3.9,techFlag:false,score:53.5},
+  {sni:"81.290",name:"Andra reng\u00f6rings- och st\u00e4df\u00f6retag",sector:"Services",companies:1378,medianEmployees:1.0,medianRevenue:1.83,revPerEmployee:1051,profitMargin:9.2,techFlag:false,score:53.5},
+  {sni:"01.250",name:"Odlare av andra frukter och b\u00e4r samt n\u00f6tter",sector:"Agriculture",companies:331,medianEmployees:2.0,medianRevenue:1.9,revPerEmployee:893,profitMargin:7.9,techFlag:false,score:53.4},
+  {sni:"10.910",name:"Industri f\u00f6r beredda fodermedel",sector:"Manufacturing",companies:84,medianEmployees:3.0,medianRevenue:15.74,revPerEmployee:5800,profitMargin:1.5,techFlag:false,score:53.4},
+  {sni:"45.204",name:"D\u00e4ckserviceverkst\u00e4der",sector:"Trade",companies:1483,medianEmployees:3.0,medianRevenue:6.75,revPerEmployee:2186,profitMargin:5.4,techFlag:false,score:53.4},
+  {sni:"91.040",name:"Botaniska tr\u00e4dg\u00e5rdar, djurparker och naturreservat",sector:"Culture",companies:129,medianEmployees:4.0,medianRevenue:4.18,revPerEmployee:867,profitMargin:7.6,techFlag:false,score:53.4},
+  {sni:"19.-22",name:"Kemisk ind. Petroleum-, plast- och plastvaruindustri",sector:"Manufacturing",companies:1455,medianEmployees:4.0,medianRevenue:9.76,revPerEmployee:2071,profitMargin:5.7,techFlag:false,score:53.3},
+  {sni:"46.434",name:"Partihandel med elartiklar",sector:"Trade",companies:637,medianEmployees:2.0,medianRevenue:9.81,revPerEmployee:3501,profitMargin:3.4,techFlag:false,score:53.3},
+  {sni:"22.290",name:"Annan plastvaruindustri",sector:"Manufacturing",companies:689,medianEmployees:3.0,medianRevenue:6.9,revPerEmployee:1769,profitMargin:5.4,techFlag:false,score:53.2},
+  {sni:"25.500",name:"Industri f\u00f6r smidning, pressning, pr\u00e4gling och valsning av metall och f\u00f6r pulvermetallurgi",sector:"Manufacturing",companies:467,medianEmployees:2.0,medianRevenue:3.01,revPerEmployee:1345,profitMargin:5.9,techFlag:false,score:53.2},
+  {sni:"47.730",name:"Apotek",sector:"Trade",companies:1548,medianEmployees:2.0,medianRevenue:9.19,revPerEmployee:4140,profitMargin:4.0,techFlag:false,score:53.2},
+  {sni:"58.190",name:"Andra f\u00f6rlag",sector:"Media",companies:1883,medianEmployees:0,medianRevenue:0.63,revPerEmployee:626,profitMargin:14.8,techFlag:true,score:53.2},
+  {sni:"43.120",name:"Firmor f\u00f6r mark- och grundarbeten",sector:"Construction",companies:17522,medianEmployees:1.0,medianRevenue:2.31,revPerEmployee:1597,profitMargin:6.5,techFlag:false,score:53.1},
+  {sni:"21.200",name:"L\u00e4kemedelsindustri",sector:"Manufacturing",companies:154,medianEmployees:10.0,medianRevenue:23.53,revPerEmployee:1981,profitMargin:3.9,techFlag:false,score:53.0},
+  {sni:"01.700",name:"J\u00e4gare och viltv\u00e5rdare inkl. servicef\u00f6retag",sector:"Agriculture",companies:558,medianEmployees:0,medianRevenue:0.34,revPerEmployee:345,profitMargin:9.8,techFlag:false,score:52.9},
+  {sni:"95.210",name:"Reparationsverkst\u00e4der f\u00f6r hemelektronik",sector:"Services",companies:290,medianEmployees:1.0,medianRevenue:0.92,revPerEmployee:870,profitMargin:7.5,techFlag:false,score:52.9},
+  {sni:"10.111",name:"Kreatursslakterier",sector:"Manufacturing",companies:120,medianEmployees:3.0,medianRevenue:6.57,revPerEmployee:2129,profitMargin:2.9,techFlag:false,score:52.8},
+  {sni:"77.290",name:"Uthyrare av andra hush\u00e5llsartiklar och varor f\u00f6r personligt bruk",sector:"Services",companies:595,medianEmployees:0,medianRevenue:0.94,revPerEmployee:855,profitMargin:7.2,techFlag:false,score:52.8},
+  {sni:"22.230",name:"Byggplastvaruindustri",sector:"Manufacturing",companies:163,medianEmployees:3.0,medianRevenue:6.27,revPerEmployee:1765,profitMargin:3.9,techFlag:false,score:52.6},
+  {sni:"86.102",name:"Slutenv\u00e5rdskliniker f\u00f6r somatisk sjukv\u00e5rd",sector:"Health",companies:2605,medianEmployees:0,medianRevenue:0.45,revPerEmployee:445,profitMargin:40.8,techFlag:false,score:52.5},
+  {sni:"43.221",name:"R\u00f6rfirmor",sector:"Construction",companies:7051,medianEmployees:1.0,medianRevenue:3.18,revPerEmployee:1849,profitMargin:5.3,techFlag:false,score:52.4},
+  {sni:"46.190",name:"Provisionshandel med blandat sortiment",sector:"Trade",companies:575,medianEmployees:1.0,medianRevenue:1.09,revPerEmployee:1052,profitMargin:6.5,techFlag:false,score:52.4},
+  {sni:"01.302",name:"Odlare av plantskolev\u00e4xter m.m. p\u00e5 friland",sector:"Agriculture",companies:262,medianEmployees:3.0,medianRevenue:4.47,revPerEmployee:1333,profitMargin:5.4,techFlag:false,score:52.3},
+  {sni:"10.320",name:"Juice- och saftindustri",sector:"Manufacturing",companies:212,medianEmployees:1.0,medianRevenue:0.65,revPerEmployee:654,profitMargin:7.1,techFlag:false,score:52.3},
+  {sni:"13.960",name:"Industri f\u00f6r andra tekniska textilier och industritextilier",sector:"Manufacturing",companies:80,medianEmployees:4.0,medianRevenue:6.98,revPerEmployee:1457,profitMargin:4.2,techFlag:false,score:52.3},
+  {sni:"28.150",name:"Industri f\u00f6r lager, kugghjul och andra delar f\u00f6r kraft\u00f6verf\u00f6ring",sector:"Manufacturing",companies:58,medianEmployees:9.0,medianRevenue:18.17,revPerEmployee:2469,profitMargin:2.4,techFlag:false,score:52.3},
+  {sni:"70.220",name:"Konsultbyr\u00e5er avseende f\u00f6retags organisation",sector:"Professional",companies:75352,medianEmployees:0,medianRevenue:0.73,revPerEmployee:690,profitMargin:20.9,techFlag:false,score:52.3},
+  {sni:"86.211",name:"Prim\u00e4rv\u00e5rdsmottagningar med l\u00e4kare m.m.",sector:"Health",companies:5850,medianEmployees:0,medianRevenue:0.57,revPerEmployee:547,profitMargin:34.2,techFlag:false,score:52.2},
+  {sni:"62.090",name:"Andra IT- och datatj\u00e4nstf\u00f6retag",sector:"IT/Tech",companies:866,medianEmployees:1.0,medianRevenue:1.42,revPerEmployee:1120,profitMargin:7.1,techFlag:true,score:52.1},
+  {sni:"43.290",name:"Andra bygginstallationsfirmor",sector:"Construction",companies:2648,medianEmployees:2.0,medianRevenue:3.23,revPerEmployee:1581,profitMargin:6.6,techFlag:false,score:52.0},
+  {sni:"77.390",name:"Uthyrare av \u00f6vrig utrustning och \u00f6vriga maskiner och materiella tillg\u00e5ngar",sector:"Services",companies:2165,medianEmployees:0,medianRevenue:0.98,revPerEmployee:868,profitMargin:8.8,techFlag:false,score:52.0},
+  {sni:"46.435",name:"Partihandel med fotografiska och optiska produkter",sector:"Trade",companies:182,medianEmployees:1.0,medianRevenue:3.8,revPerEmployee:2459,profitMargin:1.8,techFlag:false,score:51.9},
+  {sni:"46.771",name:"Partihandel med uttj\u00e4nta fordon",sector:"Trade",companies:280,medianEmployees:2.0,medianRevenue:3.67,revPerEmployee:1460,profitMargin:4.7,techFlag:false,score:51.9},
+  {sni:"46.521",name:"Partihandel med elektronikkomponenter",sector:"Trade",companies:1071,medianEmployees:1.0,medianRevenue:4.3,revPerEmployee:2296,profitMargin:3.6,techFlag:false,score:51.7},
+  {sni:"10.310",name:"Potatisindustri",sector:"Manufacturing",companies:26,medianEmployees:5.0,medianRevenue:14.7,revPerEmployee:2896,profitMargin:1.1,techFlag:false,score:51.6},
+  {sni:"46.650",name:"Partihandel med kontorsm\u00f6bler",sector:"Trade",companies:490,medianEmployees:1.0,medianRevenue:4.96,revPerEmployee:2285,profitMargin:2.8,techFlag:false,score:51.6},
+  {sni:"45.202",name:"Bilpl\u00e5t- och billackeringsverkst\u00e4der, bilglasm\u00e4sterier",sector:"Trade",companies:1713,medianEmployees:2.0,medianRevenue:3.26,revPerEmployee:1468,profitMargin:6.5,techFlag:false,score:51.4},
+  {sni:"46.210",name:"Partihandel med spannm\u00e5l, r\u00e5tobak, uts\u00e4de och djurfoder",sector:"Trade",companies:558,medianEmployees:1.0,medianRevenue:5.94,revPerEmployee:3278,profitMargin:2.1,techFlag:false,score:51.4},
+  {sni:"59.200",name:"Ljudinspelningsstudior och fonogramutgivare",sector:"Media",companies:5362,medianEmployees:0,medianRevenue:0.69,revPerEmployee:672,profitMargin:13.4,techFlag:true,score:51.4},
+  {sni:"16.210",name:"Industri f\u00f6r fan\u00e9r och tr\u00e4baserade skivor",sector:"Manufacturing",companies:53,medianEmployees:4.0,medianRevenue:9.53,revPerEmployee:2425,profitMargin:1.9,techFlag:false,score:51.3},
+  {sni:"87.902",name:"Kvinnohus, \u00f6vernattningshem f\u00f6r heml\u00f6sa o.d.",sector:"Health",companies:228,medianEmployees:3.0,medianRevenue:3.42,revPerEmployee:964,profitMargin:6.9,techFlag:false,score:51.3},
+  {sni:"30.120",name:"Fritidsb\u00e5tbyggerier",sector:"Manufacturing",companies:468,medianEmployees:1.0,medianRevenue:1.56,revPerEmployee:1158,profitMargin:5.2,techFlag:false,score:51.1},
+  {sni:"43.912",name:"Andra entrepren\u00f6rer f\u00f6r takarbeten",sector:"Construction",companies:875,medianEmployees:2.0,medianRevenue:3.69,revPerEmployee:1601,profitMargin:5.3,techFlag:false,score:51.1},
+  {sni:"46.160",name:"Provisionshandel med textilier, kl\u00e4der, skodon och l\u00e4dervaror",sector:"Trade",companies:709,medianEmployees:1.0,medianRevenue:1.22,revPerEmployee:1001,profitMargin:6.7,techFlag:false,score:51.1},
+  {sni:"74.900",name:"\u00d6vriga f\u00f6retag inom juridik, ekonomi, vetenskap och teknik",sector:"Professional",companies:8625,medianEmployees:0,medianRevenue:0.78,revPerEmployee:698,profitMargin:13.4,techFlag:false,score:51.1},
+  {sni:"87.203",name:"Hem med s\u00e4rskild service f\u00f6r vuxna med missbruksproblem",sector:"Health",companies:339,medianEmployees:7.0,medianRevenue:8.76,revPerEmployee:994,profitMargin:7.6,techFlag:false,score:51.1},
+  {sni:"47.111",name:"Varuhus och stormarknader med brett sortiment, mest livsmedel, drycker och tobak",sector:"Trade",companies:223,medianEmployees:5.0,medianRevenue:108.94,revPerEmployee:4591,profitMargin:2.1,techFlag:false,score:51.0},
+  {sni:"47.191",name:"Andra varuhus och stormarknader",sector:"Trade",companies:216,medianEmployees:5.0,medianRevenue:18.67,revPerEmployee:2774,profitMargin:2.6,techFlag:false,score:51.0},
+  {sni:"51.101",name:"Flygbolag, regulj\u00e4r passagerartrafik",sector:"Transport",companies:103,medianEmployees:0,medianRevenue:1.94,revPerEmployee:1220,profitMargin:3.3,techFlag:false,score:51.0},
+  {sni:"68.100",name:"Handel med egna fastigheter",sector:"Real Estate",companies:1006,medianEmployees:0,medianRevenue:0.85,revPerEmployee:833,profitMargin:7.4,techFlag:false,score:51.0},
+  {sni:"77.310",name:"Uthyrare av jordbruksmaskiner och jordbruksredskap",sector:"Services",companies:227,medianEmployees:0,medianRevenue:0.55,revPerEmployee:545,profitMargin:6.9,techFlag:false,score:51.0},
+  {sni:"02.102",name:"Skogssk\u00f6tself\u00f6retag",sector:"Agriculture",companies:5691,medianEmployees:1.0,medianRevenue:1.64,revPerEmployee:987,profitMargin:8.3,techFlag:false,score:50.9},
+  {sni:"08.990",name:"Diverse \u00f6vrig industri f\u00f6r mineralutvinning",sector:"Mining",companies:23,medianEmployees:2.0,medianRevenue:2.63,revPerEmployee:1315,profitMargin:3.3,techFlag:false,score:50.9},
+  {sni:"35.140",name:"Handel med elektricitet",sector:"Utilities",companies:444,medianEmployees:0,medianRevenue:5.95,revPerEmployee:3166,profitMargin:1.1,techFlag:false,score:50.9},
+  {sni:"46.510",name:"Partihandel med datorer och kringutrustning samt programvara",sector:"Trade",companies:1343,medianEmployees:2.0,medianRevenue:4.56,revPerEmployee:2195,profitMargin:4.5,techFlag:false,score:50.8},
+  {sni:"47.771",name:"Uraff\u00e4rer",sector:"Trade",companies:404,medianEmployees:1.0,medianRevenue:2.99,revPerEmployee:1624,profitMargin:3.8,techFlag:false,score:50.8},
+  {sni:"17.122",name:"Annan tryckpappersindustri",sector:"Manufacturing",companies:11,medianEmployees:91.0,medianRevenue:722.78,revPerEmployee:3955,profitMargin:-0.1,techFlag:false,score:50.7},
+  {sni:"24.100",name:"J\u00e4rn- och st\u00e5lverk",sector:"Manufacturing",companies:81,medianEmployees:30.0,medianRevenue:285.57,revPerEmployee:3912,profitMargin:1.6,techFlag:false,score:50.7},
+  {sni:"10.611",name:"Kvarnar",sector:"Manufacturing",companies:47,medianEmployees:2.0,medianRevenue:7.94,revPerEmployee:2030,profitMargin:1.7,techFlag:false,score:50.6},
+  {sni:"10.840",name:"Industri f\u00f6r senap, ketchup, kryddor och andra smaks\u00e4ttningsmedel",sector:"Manufacturing",companies:123,medianEmployees:1.0,medianRevenue:2.34,revPerEmployee:1383,profitMargin:2.9,techFlag:false,score:50.6},
+  {sni:"46.360",name:"Partihandel med socker, choklad och sockerkonfektyrer",sector:"Trade",companies:399,medianEmployees:3.0,medianRevenue:11.17,revPerEmployee:3010,profitMargin:2.7,techFlag:false,score:50.6},
+  {sni:"01.301",name:"Odlare av plantskolev\u00e4xter i v\u00e4xthus",sector:"Agriculture",companies:131,medianEmployees:2.0,medianRevenue:4.7,revPerEmployee:1319,profitMargin:4.1,techFlag:false,score:50.5},
+  {sni:"29.-30",name:"Transportmedelsindustri",sector:"Manufacturing",companies:1016,medianEmployees:2.0,medianRevenue:3.54,revPerEmployee:1693,profitMargin:5.0,techFlag:false,score:50.5},
+  {sni:"38.311",name:"Anl\u00e4ggningar f\u00f6r demontering av uttj\u00e4nta fordon",sector:"Utilities",companies:56,medianEmployees:4.0,medianRevenue:8.97,revPerEmployee:1574,profitMargin:3.4,techFlag:false,score:50.5},
+  {sni:"47.522",name:"J\u00e4rn- och VVS-varuhandel",sector:"Trade",companies:886,medianEmployees:2.0,medianRevenue:6.71,revPerEmployee:2475,profitMargin:3.7,techFlag:false,score:50.5},
+  {sni:"10.112",name:"K\u00f6ttstyckerier",sector:"Manufacturing",companies:129,medianEmployees:9.0,medianRevenue:44.81,revPerEmployee:3784,profitMargin:1.8,techFlag:false,score:50.4},
+  {sni:"20.120",name:"Industri f\u00f6r f\u00e4rg\u00e4mnen",sector:"Manufacturing",companies:10,medianEmployees:20.0,medianRevenue:96.17,revPerEmployee:3668,profitMargin:-0.9,techFlag:false,score:50.4},
+  {sni:"43.210",name:"Elinstallationsfirmor",sector:"Construction",companies:12949,medianEmployees:1.0,medianRevenue:2.33,revPerEmployee:1405,profitMargin:6.3,techFlag:false,score:50.4},
+  {sni:"73.200",name:"Marknads- och opinionsunders\u00f6kningsf\u00f6retag",sector:"Professional",companies:465,medianEmployees:1.0,medianRevenue:1.9,revPerEmployee:991,profitMargin:6.4,techFlag:false,score:50.4},
+  {sni:"82.110",name:"Kontorsservicebyr\u00e5er",sector:"Services",companies:1400,medianEmployees:0,medianRevenue:0.47,revPerEmployee:447,profitMargin:11.9,techFlag:false,score:50.3},
+  {sni:"85.594",name:"Personalutbildningsinstitut",sector:"Education",companies:4971,medianEmployees:0,medianRevenue:0.54,revPerEmployee:519,profitMargin:14.9,techFlag:false,score:50.3},
+  {sni:"25.610",name:"Industri f\u00f6r bel\u00e4ggning och \u00f6verdragning av metall",sector:"Manufacturing",companies:823,medianEmployees:4.0,medianRevenue:5.9,revPerEmployee:1356,profitMargin:6.4,techFlag:false,score:50.2},
+  {sni:"61.200",name:"Telekommunikationsbolag, tr\u00e5dl\u00f6st",sector:"Media",companies:361,medianEmployees:2.0,medianRevenue:5.35,revPerEmployee:1947,profitMargin:3.6,techFlag:true,score:50.2},
+  {sni:"13.922",name:"Industri f\u00f6r presenningar, t\u00e4lt, segel o.d.",sector:"Manufacturing",companies:407,medianEmployees:1.0,medianRevenue:2.58,revPerEmployee:1418,profitMargin:3.9,techFlag:false,score:50.1},
+  {sni:"69.-74",name:"Verksamhet inom juridik, ekonomi, vetenskap och teknik",sector:"Professional",companies:102013,medianEmployees:1.0,medianRevenue:0.89,revPerEmployee:807,profitMargin:17.3,techFlag:false,score:50.1},
+  {sni:"88.993",name:"Socialkontor o.d.",sector:"Health",companies:1546,medianEmployees:1.0,medianRevenue:1.05,revPerEmployee:765,profitMargin:11.5,techFlag:false,score:50.1},
+  {sni:"59.120",name:"Bolag f\u00f6r efterproduktion av film, video och TV-program",sector:"Media",companies:1500,medianEmployees:1.0,medianRevenue:0.84,revPerEmployee:808,profitMargin:9.5,techFlag:true,score:50.0},
+  {sni:"70.210",name:"Konsultbyr\u00e5er avseende f\u00f6retags PR och kommunikation",sector:"Professional",companies:4713,medianEmployees:1.0,medianRevenue:0.79,revPerEmployee:769,profitMargin:14.0,techFlag:false,score:50.0},
+  {sni:"82.190",name:"Byr\u00e5er f\u00f6r kopiering, dokumentsammanst\u00e4llning och andra specialiserade kontorstj\u00e4nster",sector:"Services",companies:576,medianEmployees:1.0,medianRevenue:0.58,revPerEmployee:517,profitMargin:10.4,techFlag:false,score:50.0},
+  {sni:"26.110",name:"Industri f\u00f6r elektroniska komponenter",sector:"Manufacturing",companies:257,medianEmployees:2.0,medianRevenue:2.04,revPerEmployee:1075,profitMargin:5.5,techFlag:false,score:49.9},
+  {sni:"32.502",name:"Tandteknikerlaboratorier",sector:"Manufacturing",companies:421,medianEmployees:2.0,medianRevenue:2.21,revPerEmployee:1137,profitMargin:5.8,techFlag:false,score:49.9},
+  {sni:"10.860",name:"Industri f\u00f6r homogeniserade livsmedelspreparat inklusive dietmat",sector:"Manufacturing",companies:40,medianEmployees:3.0,medianRevenue:8.75,revPerEmployee:2634,profitMargin:0.8,techFlag:false,score:49.8},
+  {sni:"45.192",name:"Handel med husvagnar, husbilar, sl\u00e4pfordon och p\u00e5h\u00e4ngsvagnar",sector:"Trade",companies:497,medianEmployees:1.0,medianRevenue:5.96,revPerEmployee:3311,profitMargin:1.6,techFlag:false,score:49.8},
+  {sni:"50.302",name:"Rederier f\u00f6r sj\u00f6fart p\u00e5 inre vattenv\u00e4gar, icke regulj\u00e4r passagerartrafik",sector:"Transport",companies:294,medianEmployees:0,medianRevenue:0.66,revPerEmployee:607,profitMargin:6.5,techFlag:false,score:49.8},
+  {sni:"17.290",name:"Industri f\u00f6r andra pappers- och pappvaror",sector:"Manufacturing",companies:95,medianEmployees:4.0,medianRevenue:5.32,revPerEmployee:1647,profitMargin:3.2,techFlag:false,score:49.7},
+  {sni:"32.501",name:"Industri f\u00f6r medicinska och dentala instrument och tillbeh\u00f6r",sector:"Manufacturing",companies:400,medianEmployees:2.0,medianRevenue:3.22,revPerEmployee:1356,profitMargin:4.8,techFlag:false,score:49.6},
+  {sni:"58.210",name:"Utgivare av dataspel",sector:"Media",companies:1329,medianEmployees:1.0,medianRevenue:1.25,revPerEmployee:800,profitMargin:9.1,techFlag:true,score:49.6},
+  {sni:"58.290",name:"Utgivare av annan programvara",sector:"Media",companies:3214,medianEmployees:1.0,medianRevenue:1.56,revPerEmployee:1067,profitMargin:7.7,techFlag:true,score:49.6},
+  {sni:"38.220",name:"Anl\u00e4ggningar f\u00f6r behandling och bortskaffande av farligt avfall",sector:"Utilities",companies:26,medianEmployees:34.0,medianRevenue:128.3,revPerEmployee:3666,profitMargin:0.0,techFlag:false,score:49.5},
+  {sni:"47.220",name:"K\u00f6tt- och charkuteriaff\u00e4rer",sector:"Trade",companies:252,medianEmployees:1.0,medianRevenue:3.77,revPerEmployee:2032,profitMargin:2.2,techFlag:false,score:49.5},
+  {sni:"45.320",name:"Detaljhandel med reservdelar och tillbeh\u00f6r till motorfordon utom motorcyklar",sector:"Trade",companies:1651,medianEmployees:1.0,medianRevenue:4.13,revPerEmployee:2124,profitMargin:3.6,techFlag:false,score:49.3},
+  {sni:"46.710",name:"Partihandel med br\u00e4nslen",sector:"Trade",companies:810,medianEmployees:1.0,medianRevenue:3.93,revPerEmployee:2707,profitMargin:2.5,techFlag:false,score:49.3},
+  {sni:"01.210",name:"Druvodlare",sector:"Agriculture",companies:46,medianEmployees:0,medianRevenue:0.18,revPerEmployee:176,profitMargin:5.1,techFlag:false,score:49.1},
+  {sni:"02.109",name:"\u00d6vriga skogsbruksf\u00f6retag",sector:"Agriculture",companies:855,medianEmployees:2.0,medianRevenue:2.83,revPerEmployee:986,profitMargin:7.3,techFlag:false,score:49.1},
+  {sni:"36.002",name:"Vattenverk f\u00f6r ytvatten",sector:"Utilities",companies:101,medianEmployees:0,medianRevenue:1.84,revPerEmployee:1837,profitMargin:0.6,techFlag:false,score:49.0},
+  {sni:"46.310",name:"Partihandel med frukt och gr\u00f6nsaker",sector:"Trade",companies:614,medianEmployees:1.0,medianRevenue:6.4,revPerEmployee:3233,profitMargin:1.7,techFlag:false,score:48.9},
+  {sni:"69.201",name:"Redovisnings- och bokf\u00f6ringsbyr\u00e5er",sector:"Professional",companies:24225,medianEmployees:1.0,medianRevenue:0.76,revPerEmployee:694,profitMargin:18.5,techFlag:false,score:48.9},
+  {sni:"77.330",name:"Uthyrare av kontorsmaskiner och kontorsutrustning (inklusive datorer)",sector:"Services",companies:127,medianEmployees:0,medianRevenue:0.82,revPerEmployee:821,profitMargin:4.5,techFlag:false,score:48.9},
+  {sni:"85.324",name:"Skolor f\u00f6r yrkesf\u00f6rarutbildning",sector:"Education",companies:408,medianEmployees:1.0,medianRevenue:0.72,revPerEmployee:675,profitMargin:7.7,techFlag:false,score:48.9},
+  {sni:"52.100",name:"Centrallager och magasin",sector:"Transport",companies:638,medianEmployees:3.0,medianRevenue:5.85,revPerEmployee:1503,profitMargin:5.0,techFlag:false,score:48.8},
+  {sni:"79.110",name:"Resebyr\u00e5er",sector:"Services",companies:723,medianEmployees:1.0,medianRevenue:4.5,revPerEmployee:2692,profitMargin:2.5,techFlag:false,score:48.8},
+  {sni:"32.120",name:"Industri f\u00f6r smycken och andra guld- och silversmedsvaror",sector:"Manufacturing",companies:1110,medianEmployees:1.0,medianRevenue:1.13,revPerEmployee:1019,profitMargin:6.1,techFlag:false,score:48.7},
+  {sni:"17.230",name:"Industri f\u00f6r skrivpapper, kuvert o.d.",sector:"Manufacturing",companies:20,medianEmployees:2.0,medianRevenue:8.37,revPerEmployee:1961,profitMargin:0.7,techFlag:false,score:48.5},
+  {sni:"47.523",name:"F\u00e4rghandel",sector:"Trade",companies:515,medianEmployees:3.0,medianRevenue:7.87,revPerEmployee:2412,profitMargin:3.1,techFlag:false,score:48.5},
+  {sni:"47.630",name:"Skiv- och videobutiker",sector:"Trade",companies:154,medianEmployees:1.0,medianRevenue:1.26,revPerEmployee:1149,profitMargin:3.9,techFlag:false,score:48.5},
+  {sni:"85.600",name:"St\u00f6df\u00f6retag inom utbildningsv\u00e4sendet",sector:"Education",companies:2974,medianEmployees:0,medianRevenue:0.52,revPerEmployee:479,profitMargin:11.9,techFlag:false,score:48.5},
+  {sni:"47.917",name:"Auktioner p\u00e5 Internet",sector:"Trade",companies:237,medianEmployees:1.0,medianRevenue:3.41,revPerEmployee:1319,profitMargin:3.8,techFlag:false,score:48.4},
+  {sni:"86.905",name:"Enheter f\u00f6r fysioterapeutisk verksamhet  o.d.",sector:"Health",companies:7091,medianEmployees:1.0,medianRevenue:1.04,revPerEmployee:951,profitMargin:9.3,techFlag:false,score:48.4},
+  {sni:"96.012",name:"Konsumenttv\u00e4tterier",sector:"Services",companies:349,medianEmployees:2.0,medianRevenue:1.96,revPerEmployee:1038,profitMargin:5.8,techFlag:false,score:48.4},
+  {sni:"10.821",name:"Sockerkonfektyrindustri",sector:"Manufacturing",companies:127,medianEmployees:5.0,medianRevenue:6.39,revPerEmployee:1400,profitMargin:3.9,techFlag:false,score:48.3},
+  {sni:"49.100",name:"J\u00e4rnv\u00e4gsbolag, passagerartrafik",sector:"Transport",companies:80,medianEmployees:13.0,medianRevenue:102.82,revPerEmployee:2965,profitMargin:1.1,techFlag:false,score:48.3},
+  {sni:"39.000",name:"Anl\u00e4ggningar f\u00f6r sanering, efterbehandling av jord och vatten samt annan verksamhet f\u00f6r f\u00f6roreningsbek\u00e4mpning",sector:"Utilities",companies:182,medianEmployees:2.0,medianRevenue:2.33,revPerEmployee:1083,profitMargin:4.7,techFlag:false,score:48.2},
+  {sni:"25.110",name:"Industri f\u00f6r metallstommar och delar d\u00e4rav",sector:"Manufacturing",companies:788,medianEmployees:7.0,medianRevenue:13.68,revPerEmployee:1844,profitMargin:4.6,techFlag:false,score:48.1},
+  {sni:"29.101",name:"Personbilsindustri",sector:"Manufacturing",companies:149,medianEmployees:0,medianRevenue:1.28,revPerEmployee:649,profitMargin:5.0,techFlag:false,score:48.0},
+  {sni:"46.390",name:"Icke specialiserad partihandel med livsmedel, drycker och tobak",sector:"Trade",companies:1200,medianEmployees:1.0,medianRevenue:4.56,revPerEmployee:2779,profitMargin:2.4,techFlag:false,score:48.0},
+  {sni:"33.190",name:"Reparationsverkst\u00e4der f\u00f6r annan utrustning",sector:"Manufacturing",companies:350,medianEmployees:2.0,medianRevenue:1.85,revPerEmployee:1228,profitMargin:4.8,techFlag:false,score:47.9},
+  {sni:"86.909",name:"Andra \u00f6ppna enheter f\u00f6r h\u00e4lso- och sjukv\u00e5rd, utan l\u00e4kare",sector:"Health",companies:8657,medianEmployees:0,medianRevenue:0.6,revPerEmployee:578,profitMargin:11.8,techFlag:false,score:47.9},
+  {sni:"01.191",name:"Odlare av prydnadsv\u00e4xter i v\u00e4xthus",sector:"Agriculture",companies:435,medianEmployees:3.0,medianRevenue:4.16,revPerEmployee:1345,profitMargin:4.8,techFlag:false,score:47.8},
+  {sni:"23.130",name:"Industri f\u00f6r buteljer, glasf\u00f6rpackningar och husger\u00e5d av glas",sector:"Manufacturing",companies:178,medianEmployees:1.0,medianRevenue:1.16,revPerEmployee:837,profitMargin:4.7,techFlag:false,score:47.8},
+  {sni:"72.190",name:"Andra naturvetenskapliga och tekniska FoU-institutioner",sector:"Professional",companies:3461,medianEmployees:1.0,medianRevenue:0.85,revPerEmployee:669,profitMargin:12.8,techFlag:false,score:47.8},
+  {sni:"43.911",name:"Byggnadspl\u00e5tslagerier",sector:"Construction",companies:2511,medianEmployees:2.0,medianRevenue:3.02,revPerEmployee:1509,profitMargin:5.5,techFlag:false,score:47.7},
+  {sni:"43.222",name:"Ventilationsfirmor",sector:"Construction",companies:2082,medianEmployees:2.0,medianRevenue:3.25,revPerEmployee:1500,profitMargin:5.4,techFlag:false,score:47.6},
+  {sni:"92.000",name:"Spel- och vadh\u00e5llningsf\u00f6retag",sector:"Culture",companies:304,medianEmployees:1.0,medianRevenue:2.52,revPerEmployee:1626,profitMargin:3.2,techFlag:false,score:47.6},
+  {sni:"46.480",name:"Partihandel med ur och guldsmedsvaror",sector:"Trade",companies:312,medianEmployees:1.0,medianRevenue:2.31,revPerEmployee:1660,profitMargin:2.6,techFlag:false,score:47.5},
+  {sni:"91.030",name:"Kulturminnesinstitutioner",sector:"Culture",companies:236,medianEmployees:1.0,medianRevenue:1.77,revPerEmployee:908,profitMargin:5.3,techFlag:false,score:47.5},
+  {sni:"10.390",name:"Annan frukt-, b\u00e4r- och gr\u00f6nsaksindustri",sector:"Manufacturing",companies:231,medianEmployees:3.0,medianRevenue:4.63,revPerEmployee:1928,profitMargin:2.7,techFlag:false,score:47.3},
+  {sni:"47.430",name:"Radio- och TV-aff\u00e4rer",sector:"Trade",companies:622,medianEmployees:1.0,medianRevenue:3.52,revPerEmployee:2087,profitMargin:2.5,techFlag:false,score:47.3},
+  {sni:"90.030",name:"Enskilda artister, f\u00f6rfattare, journalister m.fl.",sector:"Culture",companies:23851,medianEmployees:0,medianRevenue:0.5,revPerEmployee:489,profitMargin:14.1,techFlag:false,score:47.3},
+  {sni:"25.620",name:"Verkst\u00e4der f\u00f6r metallegoarbeten",sector:"Manufacturing",companies:6044,medianEmployees:2.0,medianRevenue:3.84,revPerEmployee:1382,profitMargin:6.1,techFlag:false,score:47.2},
+  {sni:"73.112",name:"Direktreklamf\u00f6retag",sector:"Professional",companies:208,medianEmployees:1.0,medianRevenue:1.46,revPerEmployee:897,profitMargin:5.0,techFlag:false,score:47.2},
+  {sni:"87.301",name:"Servicehus, servicel\u00e4genheter f\u00f6r \u00e4ldre samt \u00e5lderdomshem",sector:"Health",companies:2650,medianEmployees:1.0,medianRevenue:1.49,revPerEmployee:747,profitMargin:10.1,techFlag:false,score:47.2},
+  {sni:"43.342",name:"Glasm\u00e4sterier",sector:"Construction",companies:820,medianEmployees:2.0,medianRevenue:3.43,revPerEmployee:1499,profitMargin:4.6,techFlag:false,score:47.1},
+  {sni:"35.300",name:"V\u00e4rmeverk m.m.",sector:"Utilities",companies:436,medianEmployees:2.0,medianRevenue:27.9,revPerEmployee:5044,profitMargin:1.2,techFlag:false,score:47.0},
+  {sni:"23.120",name:"Industri f\u00f6r bearbetat planglas",sector:"Manufacturing",companies:30,medianEmployees:14.0,medianRevenue:32.96,revPerEmployee:2217,profitMargin:1.0,techFlag:false,score:46.9},
+  {sni:"24.-30",name:"Verkstadsindustri inkl. st\u00e5l- och metallframst\u00e4llning",sector:"Manufacturing",companies:9766,medianEmployees:3.0,medianRevenue:5.47,revPerEmployee:1616,profitMargin:5.8,techFlag:false,score:46.9},
+  {sni:"46.732",name:"Partihandel med sanitetsgods",sector:"Trade",companies:97,medianEmployees:1.0,medianRevenue:1.73,revPerEmployee:1492,profitMargin:2.0,techFlag:false,score:46.9},
+  {sni:"18.130",name:"Prepress- och premediaf\u00f6retag",sector:"Manufacturing",companies:474,medianEmployees:1.0,medianRevenue:1.03,revPerEmployee:922,profitMargin:5.1,techFlag:false,score:46.8},
+  {sni:"47.230",name:"Fiskaff\u00e4rer",sector:"Trade",companies:274,medianEmployees:3.0,medianRevenue:5.16,revPerEmployee:1796,profitMargin:3.1,techFlag:false,score:46.8},
+  {sni:"16.233",name:"Industri f\u00f6r tr\u00e4f\u00f6nster",sector:"Manufacturing",companies:154,medianEmployees:4.0,medianRevenue:4.16,revPerEmployee:1166,profitMargin:4.5,techFlag:false,score:46.7},
+  {sni:"25.-30",name:"Verkstadsindustri",sector:"Manufacturing",companies:9513,medianEmployees:3.0,medianRevenue:5.27,revPerEmployee:1604,profitMargin:5.8,techFlag:false,score:46.7},
+  {sni:"01.133",name:"Odlare av gr\u00f6nsaker p\u00e5 friland",sector:"Agriculture",companies:939,medianEmployees:1.0,medianRevenue:1.7,revPerEmployee:1059,profitMargin:5.1,techFlag:false,score:46.6},
+  {sni:"90.010",name:"Producenter av konstn\u00e4rliga, litter\u00e4ra och artistiska verk",sector:"Culture",companies:24024,medianEmployees:0,medianRevenue:0.51,revPerEmployee:481,profitMargin:12.8,techFlag:false,score:46.6},
+  {sni:"63.120",name:"Webbportaler",sector:"IT/Tech",companies:1247,medianEmployees:0,medianRevenue:0.82,revPerEmployee:694,profitMargin:7.0,techFlag:true,score:46.5},
+  {sni:"46.432",name:"Partihandel med ljud- och bildanl\u00e4ggningar samt videoutrustning",sector:"Trade",companies:427,medianEmployees:1.0,medianRevenue:2.26,revPerEmployee:1670,profitMargin:2.6,techFlag:false,score:46.3},
+  {sni:"49.200",name:"J\u00e4rnv\u00e4gsbolag, godstrafik",sector:"Transport",companies:105,medianEmployees:5.0,medianRevenue:42.02,revPerEmployee:2715,profitMargin:0.7,techFlag:false,score:46.2},
+  {sni:"74.300",name:"\u00d6vers\u00e4ttnings- och tolkningsbyr\u00e5er",sector:"Professional",companies:3846,medianEmployees:1.0,medianRevenue:0.73,revPerEmployee:641,profitMargin:11.5,techFlag:false,score:46.2},
+  {sni:"85.599",name:"Diverse \u00f6vriga utbildningsinstitut",sector:"Education",companies:5488,medianEmployees:0,medianRevenue:0.39,revPerEmployee:368,profitMargin:10.4,techFlag:false,score:46.1},
+  {sni:"47.210",name:"Frukt- och gr\u00f6nsaksaff\u00e4rer",sector:"Trade",companies:217,medianEmployees:1.0,medianRevenue:4.19,revPerEmployee:1971,profitMargin:1.4,techFlag:false,score:46.0},
+  {sni:"52.290",name:"\u00d6vriga servicef\u00f6retag till transport",sector:"Transport",companies:2208,medianEmployees:2.0,medianRevenue:6.73,revPerEmployee:2083,profitMargin:3.9,techFlag:false,score:46.0},
+  {sni:"59.130",name:"Distributionsbolag f\u00f6r film-, video- och TV-program",sector:"Media",companies:205,medianEmployees:0,medianRevenue:0.81,revPerEmployee:757,profitMargin:4.5,techFlag:true,score:46.0},
+  {sni:"47.722",name:"V\u00e4skaff\u00e4rer",sector:"Trade",companies:160,medianEmployees:1.0,medianRevenue:3.07,revPerEmployee:1534,profitMargin:2.1,techFlag:false,score:45.9},
+  {sni:"73.119",name:"\u00d6vriga reklamf\u00f6retag",sector:"Professional",companies:1742,medianEmployees:1.0,medianRevenue:1.0,revPerEmployee:849,profitMargin:7.5,techFlag:false,score:45.9},
+  {sni:"87.901",name:"Hem f\u00f6r barn och ungdomar med sociala problem",sector:"Health",companies:976,medianEmployees:8.0,medianRevenue:8.52,revPerEmployee:864,profitMargin:8.7,techFlag:false,score:45.9},
+  {sni:"26.400",name:"Industri f\u00f6r hemelektronik",sector:"Manufacturing",companies:172,medianEmployees:0,medianRevenue:0.51,revPerEmployee:397,profitMargin:5.2,techFlag:false,score:45.8},
+  {sni:"25.999",name:"Diverse \u00f6vrig metallvaruindustri",sector:"Manufacturing",companies:994,medianEmployees:3.0,medianRevenue:5.69,revPerEmployee:1558,profitMargin:4.6,techFlag:false,score:45.7},
+  {sni:"46.380",name:"Partihandel med andra livsmedel, bl.a. fisk, skal- och bl\u00f6tdjur",sector:"Trade",companies:1280,medianEmployees:1.0,medianRevenue:3.38,revPerEmployee:2358,profitMargin:2.3,techFlag:false,score:45.6},
+  {sni:"25.710",name:"Industri f\u00f6r bestick",sector:"Manufacturing",companies:42,medianEmployees:2.0,medianRevenue:2.54,revPerEmployee:1096,profitMargin:3.1,techFlag:false,score:45.5},
+  {sni:"77.110",name:"Personbilsuthyrare",sector:"Services",companies:944,medianEmployees:0,medianRevenue:2.12,revPerEmployee:1659,profitMargin:2.7,techFlag:false,score:45.5},
+  {sni:"85.-88",name:"Utbildning, sjukv\u00e5rd och andra tj\u00e4nster",sector:"Education",companies:31382,medianEmployees:1.0,medianRevenue:0.88,revPerEmployee:671,profitMargin:13.6,techFlag:false,score:45.5},
+  {sni:"13.300",name:"Blekerier, f\u00e4rgerier, textiltryckerier och andra textilberedningsverk",sector:"Manufacturing",companies:120,medianEmployees:2.0,medianRevenue:3.33,revPerEmployee:1320,profitMargin:2.8,techFlag:false,score:45.4},
+  {sni:"31.012",name:"Industri f\u00f6r kontors- och butiksinredningar",sector:"Manufacturing",companies:250,medianEmployees:2.0,medianRevenue:4.24,revPerEmployee:1610,profitMargin:2.7,techFlag:false,score:45.4},
+  {sni:"46.470",name:"Partihandel med m\u00f6bler, mattor och belysningsartiklar",sector:"Trade",companies:782,medianEmployees:1.0,medianRevenue:2.15,revPerEmployee:1835,profitMargin:2.7,techFlag:false,score:45.4},
+  {sni:"23.690",name:"Annan betong-, cement- och gipsvaruindustri",sector:"Manufacturing",companies:129,medianEmployees:2.0,medianRevenue:2.33,revPerEmployee:1726,profitMargin:1.8,techFlag:false,score:45.3},
+  {sni:"73.120",name:"Mediebyr\u00e5er o.d.",sector:"Professional",companies:1811,medianEmployees:1.0,medianRevenue:1.23,revPerEmployee:1038,profitMargin:6.1,techFlag:false,score:45.3},
+  {sni:"45.201",name:"Bilserviceverkst\u00e4der, ej specialiserade",sector:"Trade",companies:11673,medianEmployees:1.0,medianRevenue:2.61,revPerEmployee:1457,profitMargin:4.7,techFlag:false,score:45.1},
+  {sni:"47.540",name:"Butiker f\u00f6r vitvaror och andra elektriska hush\u00e5llsmaskiner och -apparater",sector:"Trade",companies:467,medianEmployees:3.0,medianRevenue:9.41,revPerEmployee:3075,profitMargin:1.7,techFlag:false,score:45.1},
+  {sni:"47.595",name:"Musikhandel",sector:"Trade",companies:240,medianEmployees:1.0,medianRevenue:1.8,revPerEmployee:1580,profitMargin:2.2,techFlag:false,score:45.1},
+  {sni:"16.220",name:"Industri f\u00f6r sammansatta parkettgolv",sector:"Manufacturing",companies:16,medianEmployees:6.0,medianRevenue:7.02,revPerEmployee:1999,profitMargin:-0.3,techFlag:false,score:45.0},
+  {sni:"28.910",name:"Industri f\u00f6r maskiner f\u00f6r metallurgi",sector:"Manufacturing",companies:12,medianEmployees:7.0,medianRevenue:9.92,revPerEmployee:1958,profitMargin:0.2,techFlag:false,score:45.0},
+  {sni:"47.410",name:"Datorbutiker, data- och tv-spelsbutiker",sector:"Trade",companies:694,medianEmployees:1.0,medianRevenue:2.55,revPerEmployee:1547,profitMargin:3.3,techFlag:false,score:45.0},
+  {sni:"79.120",name:"Researrang\u00f6rer",sector:"Services",companies:1234,medianEmployees:1.0,medianRevenue:2.16,revPerEmployee:1613,profitMargin:3.8,techFlag:false,score:45.0},
+  {sni:"25.120",name:"Industri f\u00f6r d\u00f6rrar och f\u00f6nster av metall",sector:"Manufacturing",companies:319,medianEmployees:4.0,medianRevenue:6.78,revPerEmployee:1730,profitMargin:3.0,techFlag:false,score:44.9},
+  {sni:"46.150",name:"Provisionshandel med m\u00f6bler, hush\u00e5lls- och j\u00e4rnhandelsvaror",sector:"Trade",companies:294,medianEmployees:1.0,medianRevenue:1.24,revPerEmployee:1181,profitMargin:3.5,techFlag:false,score:44.9},
+  {sni:"46.170",name:"Provisionshandel med livsmedel, drycker och tobak",sector:"Trade",companies:558,medianEmployees:1.0,medianRevenue:2.4,revPerEmployee:1623,profitMargin:2.6,techFlag:false,score:44.9},
+  {sni:"46.410",name:"Partihandel med textilier",sector:"Trade",companies:644,medianEmployees:1.0,medianRevenue:2.5,revPerEmployee:1496,profitMargin:3.3,techFlag:false,score:44.9},
+  {sni:"47.531",name:"Tapet-, matt- och golvbel\u00e4ggningshandel",sector:"Trade",companies:121,medianEmployees:2.0,medianRevenue:4.7,revPerEmployee:1881,profitMargin:1.5,techFlag:false,score:44.9},
+  {sni:"24.530",name:"L\u00e4ttmetallgjuterier",sector:"Manufacturing",companies:31,medianEmployees:9.0,medianRevenue:22.51,revPerEmployee:1826,profitMargin:1.3,techFlag:false,score:44.8},
+  {sni:"47.643",name:"B\u00e5t- och b\u00e5ttillbeh\u00f6rshandel",sector:"Trade",companies:582,medianEmployees:1.0,medianRevenue:2.74,revPerEmployee:2140,profitMargin:1.8,techFlag:false,score:44.8},
+  {sni:"14.310",name:"Strumpindustri",sector:"Manufacturing",companies:8,medianEmployees:3.0,medianRevenue:9.18,revPerEmployee:1587,profitMargin:0.8,techFlag:false,score:44.7},
+  {sni:"32.990",name:"Diverse \u00f6vrig tillverkningsindustri",sector:"Manufacturing",companies:1413,medianEmployees:1.0,medianRevenue:1.22,revPerEmployee:943,profitMargin:5.6,techFlag:false,score:44.6},
+  {sni:"47.622",name:"Pappershandel",sector:"Trade",companies:136,medianEmployees:1.0,medianRevenue:2.88,revPerEmployee:1848,profitMargin:0.5,techFlag:false,score:44.6},
+  {sni:"74.202",name:"Reklamfotoatelj\u00e9er",sector:"Professional",companies:1992,medianEmployees:1.0,medianRevenue:0.84,revPerEmployee:825,profitMargin:7.3,techFlag:false,score:44.6},
+  {sni:"23.310",name:"Industri f\u00f6r keramiska golv- och v\u00e4ggplattor",sector:"Manufacturing",companies:12,medianEmployees:1.0,medianRevenue:0.94,revPerEmployee:685,profitMargin:3.3,techFlag:false,score:44.5},
+  {sni:"47.521",name:"Byggvaruhandel",sector:"Trade",companies:988,medianEmployees:1.0,medianRevenue:6.02,revPerEmployee:2824,profitMargin:1.5,techFlag:false,score:44.5},
+  {sni:"96.011",name:"Industri- och institutionstv\u00e4tterier",sector:"Services",companies:167,medianEmployees:3.0,medianRevenue:3.1,revPerEmployee:1007,profitMargin:4.5,techFlag:false,score:44.5},
+  {sni:"31.022",name:"K\u00f6ksinredningsindustri",sector:"Manufacturing",companies:298,medianEmployees:2.0,medianRevenue:3.19,revPerEmployee:1503,profitMargin:2.9,techFlag:false,score:44.4},
+  {sni:"49.410",name:"\u00c5kerier",sector:"Transport",companies:15222,medianEmployees:2.0,medianRevenue:3.27,revPerEmployee:1590,profitMargin:5.1,techFlag:false,score:44.4},
+  {sni:"85.321",name:"Gymnasieskolans yrkesinriktade linjer",sector:"Education",companies:438,medianEmployees:9.0,medianRevenue:10.84,revPerEmployee:1039,profitMargin:5.6,techFlag:false,score:44.4},
+  {sni:"10.200",name:"Fiskberedningsindustri",sector:"Manufacturing",companies:234,medianEmployees:4.0,medianRevenue:8.06,revPerEmployee:1890,profitMargin:2.3,techFlag:false,score:44.3},
+  {sni:"74.101",name:"Industri- och produktdesignf\u00f6retag",sector:"Professional",companies:4452,medianEmployees:0,medianRevenue:0.69,revPerEmployee:638,profitMargin:7.6,techFlag:false,score:44.3},
+  {sni:"10.890",name:"Annan livsmedelsindustri",sector:"Manufacturing",companies:218,medianEmployees:1.0,medianRevenue:3.26,revPerEmployee:1636,profitMargin:1.2,techFlag:false,score:44.2},
+  {sni:"95.220",name:"Reparationsverkst\u00e4der f\u00f6r hush\u00e5llsapparater samt utrustning f\u00f6r hem och tr\u00e4dg\u00e5rd",sector:"Services",companies:486,medianEmployees:2.0,medianRevenue:2.9,revPerEmployee:1278,profitMargin:4.3,techFlag:false,score:44.0},
+  {sni:"10.830",name:"Kaffe- och teindustri",sector:"Manufacturing",companies:141,medianEmployees:0,medianRevenue:1.45,revPerEmployee:919,profitMargin:2.8,techFlag:false,score:43.9},
+  {sni:"50.401",name:"Rederier f\u00f6r sj\u00f6fart p\u00e5 inre vattenv\u00e4gar, regulj\u00e4r godstrafik",sector:"Transport",companies:16,medianEmployees:0,medianRevenue:0.53,revPerEmployee:531,profitMargin:3.3,techFlag:false,score:43.8},
+  {sni:"01.240",name:"Odlare av k\u00e4rn- och stenfrukter",sector:"Agriculture",companies:220,medianEmployees:0,medianRevenue:1.95,revPerEmployee:995,profitMargin:2.8,techFlag:false,score:43.6},
+  {sni:"10.920",name:"Industri f\u00f6r mat till s\u00e4llskapsdjur",sector:"Manufacturing",companies:41,medianEmployees:3.0,medianRevenue:3.08,revPerEmployee:1813,profitMargin:0.2,techFlag:false,score:43.6},
+  {sni:"10.130",name:"Charkuterier och annan industri f\u00f6r k\u00f6ttvaror",sector:"Manufacturing",companies:272,medianEmployees:5.0,medianRevenue:12.13,revPerEmployee:2690,profitMargin:1.2,techFlag:false,score:43.5},
+  {sni:"43.999",name:"Diverse \u00f6vriga specialiserade bygg- och anl\u00e4ggningsentrepren\u00f6rer",sector:"Construction",companies:8293,medianEmployees:1.0,medianRevenue:2.39,revPerEmployee:1264,profitMargin:5.0,techFlag:false,score:43.5},
+  {sni:"46.499",name:"Partihandel med \u00f6vriga hush\u00e5llsvaror",sector:"Trade",companies:2378,medianEmployees:1.0,medianRevenue:2.06,revPerEmployee:1603,profitMargin:3.6,techFlag:false,score:43.5},
+  {sni:"90.020",name:"St\u00f6df\u00f6retag till artistisk verksamhet",sector:"Culture",companies:5796,medianEmployees:1.0,medianRevenue:0.95,revPerEmployee:825,profitMargin:7.6,techFlag:false,score:43.3},
+  {sni:"10.822",name:"Choklad- och chokladkonfektyrindustri",sector:"Manufacturing",companies:161,medianEmployees:2.0,medianRevenue:1.83,revPerEmployee:1069,profitMargin:3.5,techFlag:false,score:43.1},
+  {sni:"47.641",name:"Sportaff\u00e4rer",sector:"Trade",companies:1801,medianEmployees:1.0,medianRevenue:3.03,revPerEmployee:1866,profitMargin:2.8,techFlag:false,score:43.1},
+  {sni:"74.102",name:"Grafiska designf\u00f6retag",sector:"Professional",companies:6165,medianEmployees:1.0,medianRevenue:0.68,revPerEmployee:658,profitMargin:8.9,techFlag:false,score:43.1},
+  {sni:"16.292",name:"\u00d6vrig tr\u00e4varuindustri",sector:"Manufacturing",companies:864,medianEmployees:1.0,medianRevenue:1.17,revPerEmployee:956,profitMargin:4.7,techFlag:false,score:43.0},
+  {sni:"82.990",name:"\u00d6vriga f\u00f6retagstj\u00e4nstf\u00f6retag",sector:"Services",companies:1242,medianEmployees:1.0,medianRevenue:1.08,revPerEmployee:705,profitMargin:7.0,techFlag:false,score:42.9},
+  {sni:"46.731",name:"Partihandel med virke och andra byggmaterial",sector:"Trade",companies:3694,medianEmployees:1.0,medianRevenue:4.06,revPerEmployee:2207,profitMargin:2.5,techFlag:false,score:42.8},
+  {sni:"46.220",name:"Partihandel med blommor och v\u00e4xter",sector:"Trade",companies:418,medianEmployees:1.0,medianRevenue:3.01,revPerEmployee:1518,profitMargin:2.2,techFlag:false,score:42.7},
+  {sni:"87.201",name:"Hem med s\u00e4rskild service f\u00f6r personer med utvecklingsst\u00f6rning eller psykiska funktionshinder",sector:"Health",companies:4788,medianEmployees:18.0,medianRevenue:15.32,revPerEmployee:857,profitMargin:9.0,techFlag:false,score:42.7},
+  {sni:"24.310",name:"Kalldragerier f\u00f6r st\u00e5lst\u00e5ng",sector:"Manufacturing",companies:7,medianEmployees:2.0,medianRevenue:3.07,revPerEmployee:1535,profitMargin:-5.3,techFlag:false,score:42.6},
+  {sni:"46.900",name:"\u00d6vrig partihandel",sector:"Trade",companies:1039,medianEmployees:1.0,medianRevenue:1.68,revPerEmployee:1451,profitMargin:3.4,techFlag:false,score:42.6},
+  {sni:"25.991",name:"Industri f\u00f6r diskb\u00e4nkar, sanitetsgods m.m. av metall f\u00f6r bygg\u00e4ndam\u00e5l",sector:"Manufacturing",companies:49,medianEmployees:4.0,medianRevenue:5.67,revPerEmployee:1418,profitMargin:1.8,techFlag:false,score:42.3},
+  {sni:"63.110",name:"Dataservicebyr\u00e5er, hostingf\u00f6retag o.d.",sector:"IT/Tech",companies:2107,medianEmployees:1.0,medianRevenue:1.29,revPerEmployee:961,profitMargin:5.7,techFlag:true,score:42.3},
+  {sni:"77.340",name:"Fartygsuthyrare",sector:"Services",companies:79,medianEmployees:0,medianRevenue:1.17,revPerEmployee:986,profitMargin:2.0,techFlag:false,score:42.3},
+  {sni:"01.199",name:"Odlare av \u00f6vriga ett- och tv\u00e5\u00e5riga v\u00e4xter",sector:"Agriculture",companies:7121,medianEmployees:0,medianRevenue:0.69,revPerEmployee:653,profitMargin:6.8,techFlag:false,score:42.2},
+  {sni:"10.-33",name:"Tillverkningsindustri",sector:"Manufacturing",companies:24375,medianEmployees:2.0,medianRevenue:3.37,revPerEmployee:1436,profitMargin:4.9,techFlag:false,score:42.2},
+  {sni:"10.511",name:"Ostindustri",sector:"Manufacturing",companies:133,medianEmployees:1.0,medianRevenue:1.62,revPerEmployee:896,profitMargin:2.9,techFlag:false,score:42.2},
+  {sni:"47.712",name:"Herrkl\u00e4desaff\u00e4rer",sector:"Trade",companies:640,medianEmployees:2.0,medianRevenue:4.51,revPerEmployee:2175,profitMargin:2.0,techFlag:false,score:42.2},
+  {sni:"16.-17",name:"Tillverkning av tr\u00e4,  papper samt tr\u00e4varu- och pappersvarutillverkning",sector:"Manufacturing",companies:2062,medianEmployees:2.0,medianRevenue:4.51,revPerEmployee:1613,profitMargin:3.7,techFlag:false,score:42.1},
+  {sni:"73.111",name:"Reklambyr\u00e5er",sector:"Professional",companies:9817,medianEmployees:1.0,medianRevenue:0.87,revPerEmployee:809,profitMargin:7.4,techFlag:false,score:42.0},
+  {sni:"47.260",name:"Tobaksaff\u00e4rer",sector:"Trade",companies:822,medianEmployees:2.0,medianRevenue:5.23,revPerEmployee:2581,profitMargin:1.7,techFlag:false,score:41.9},
+  {sni:"17.240",name:"Tapetindustri",sector:"Manufacturing",companies:10,medianEmployees:4.0,medianRevenue:6.54,revPerEmployee:1635,profitMargin:-5.1,techFlag:false,score:41.8},
+  {sni:"45.110",name:"Handel med personbilar och l\u00e4tta motorfordon",sector:"Trade",companies:7163,medianEmployees:1.0,medianRevenue:5.09,revPerEmployee:3507,profitMargin:1.3,techFlag:false,score:41.8},
+  {sni:"63.910",name:"Nyhets- och bildbyr\u00e5er",sector:"IT/Tech",companies:162,medianEmployees:1.0,medianRevenue:1.45,revPerEmployee:899,profitMargin:3.5,techFlag:true,score:41.7},
+  {sni:"71.110",name:"Arkitektkontor",sector:"Professional",companies:4513,medianEmployees:1.0,medianRevenue:0.77,revPerEmployee:700,profitMargin:7.5,techFlag:false,score:41.7},
+  {sni:"81.300",name:"F\u00f6retag f\u00f6r sk\u00f6tsel och underh\u00e5ll av gr\u00f6nytor",sector:"Services",companies:5969,medianEmployees:1.0,medianRevenue:1.1,revPerEmployee:801,profitMargin:7.2,techFlag:false,score:41.7},
+  {sni:"47.721",name:"Skoaff\u00e4rer",sector:"Trade",companies:622,medianEmployees:2.0,medianRevenue:4.32,revPerEmployee:1909,profitMargin:2.2,techFlag:false,score:41.5},
+  {sni:"16.239",name:"Industri f\u00f6r \u00f6vriga byggnads- och inredningssnickerier",sector:"Manufacturing",companies:1231,medianEmployees:1.0,medianRevenue:2.16,revPerEmployee:1297,profitMargin:3.5,techFlag:false,score:41.4},
+  {sni:"46.130",name:"Provisionshandel med virke och byggmaterial",sector:"Trade",companies:369,medianEmployees:1.0,medianRevenue:1.65,revPerEmployee:1184,profitMargin:2.8,techFlag:false,score:41.4},
+  {sni:"95.230",name:"Skomakerier, klackbarer m.m.",sector:"Services",companies:360,medianEmployees:1.0,medianRevenue:1.43,revPerEmployee:869,profitMargin:4.5,techFlag:false,score:41.4},
+  {sni:"82.920",name:"F\u00f6rpackningsfirmor",sector:"Services",companies:118,medianEmployees:8.0,medianRevenue:6.23,revPerEmployee:1418,profitMargin:2.3,techFlag:false,score:41.3},
+  {sni:"10.721",name:"Kn\u00e4ckebr\u00f6dsindustri",sector:"Manufacturing",companies:34,medianEmployees:6.0,medianRevenue:5.79,revPerEmployee:1459,profitMargin:1.3,techFlag:false,score:41.2},
+  {sni:"10.850",name:"Industri f\u00f6r lagad mat och f\u00e4rdigr\u00e4tter",sector:"Manufacturing",companies:225,medianEmployees:2.0,medianRevenue:3.17,revPerEmployee:1324,profitMargin:2.5,techFlag:false,score:41.2},
+  {sni:"03.220",name:"Fiskodlare, i s\u00f6tvatten",sector:"Agriculture",companies:167,medianEmployees:1.0,medianRevenue:2.58,revPerEmployee:1434,profitMargin:0.4,techFlag:false,score:41.0},
+  {sni:"52.230",name:"Flygplatser och andra servicef\u00f6retag till lufttransport",sector:"Transport",companies:227,medianEmployees:2.0,medianRevenue:5.26,revPerEmployee:869,profitMargin:4.3,techFlag:false,score:41.0},
+  {sni:"56.299",name:"\u00d6vriga cateringf\u00f6retag",sector:"Hospitality",companies:208,medianEmployees:1.0,medianRevenue:1.27,revPerEmployee:697,profitMargin:4.3,techFlag:false,score:41.0},
+  {sni:"81.221",name:"F\u00f6retag f\u00f6r reng\u00f6ring av byggnader",sector:"Services",companies:1115,medianEmployees:2.0,medianRevenue:1.92,revPerEmployee:866,profitMargin:6.0,techFlag:false,score:41.0},
+  {sni:"10.612",name:"Industri f\u00f6r frukostflingor, mixer och andra livsmedelsberedningar av kvarnprodukter",sector:"Manufacturing",companies:55,medianEmployees:1.0,medianRevenue:1.53,revPerEmployee:1190,profitMargin:0.7,techFlag:false,score:40.9},
+  {sni:"81.100",name:"Fastighetsservicef\u00f6retag",sector:"Services",companies:4866,medianEmployees:1.0,medianRevenue:1.29,revPerEmployee:821,profitMargin:6.7,techFlag:false,score:40.9},
+  {sni:"47.621",name:"Tidningshandel",sector:"Trade",companies:352,medianEmployees:3.0,medianRevenue:7.04,revPerEmployee:2264,profitMargin:0.8,techFlag:false,score:40.5},
+  {sni:"59.110",name:"Produktionsbolag f\u00f6r film, video och TV-program",sector:"Media",companies:8826,medianEmployees:1.0,medianRevenue:0.82,revPerEmployee:782,profitMargin:6.9,techFlag:true,score:40.5},
+  {sni:"18.121",name:"Tidskriftstryckerier",sector:"Manufacturing",companies:44,medianEmployees:3.0,medianRevenue:4.32,revPerEmployee:1370,profitMargin:1.2,techFlag:false,score:40.3},
+  {sni:"43.341",name:"M\u00e5lerier",sector:"Construction",companies:6908,medianEmployees:1.0,medianRevenue:1.75,revPerEmployee:1070,profitMargin:4.8,techFlag:false,score:40.3},
+  {sni:"23.440",name:"Industri f\u00f6r andra tekniska keramiska produkter",sector:"Manufacturing",companies:10,medianEmployees:2.0,medianRevenue:4.02,revPerEmployee:1332,profitMargin:-2.5,techFlag:false,score:40.2},
+  {sni:"09.900",name:"Servicef\u00f6retag till annan utvinning",sector:"Mining",companies:133,medianEmployees:1.0,medianRevenue:1.95,revPerEmployee:1136,profitMargin:1.6,techFlag:false,score:40.1},
+  {sni:"47.594",name:"Butiker f\u00f6r belysningsartiklar",sector:"Trade",companies:190,medianEmployees:2.0,medianRevenue:4.33,revPerEmployee:1772,profitMargin:0.8,techFlag:false,score:40.1},
+  {sni:"14.200",name:"P\u00e4lsindustri",sector:"Manufacturing",companies:28,medianEmployees:0,medianRevenue:0.55,revPerEmployee:551,profitMargin:2.4,techFlag:false,score:40.0},
+  {sni:"41.100",name:"Utvecklare av byggprojekt",sector:"Construction",companies:1131,medianEmployees:0,medianRevenue:1.12,revPerEmployee:932,profitMargin:4.0,techFlag:false,score:40.0},
+  {sni:"93.199",name:"Professionella idrottsut\u00f6vare,  sportarrang\u00f6rer, sportadministrat\u00f6rer",sector:"Culture",companies:4723,medianEmployees:0,medianRevenue:0.61,revPerEmployee:579,profitMargin:6.5,techFlag:false,score:40.0},
+  {sni:"74.203",name:"Press- och \u00f6vriga fotografer",sector:"Professional",companies:3877,medianEmployees:0,medianRevenue:0.52,revPerEmployee:491,profitMargin:6.7,techFlag:false,score:39.9},
+  {sni:"78.300",name:"F\u00f6retag f\u00f6r \u00f6vrigt tillhandah\u00e5llande av personalfunktioner",sector:"Services",companies:140,medianEmployees:1.0,medianRevenue:2.23,revPerEmployee:763,profitMargin:3.6,techFlag:false,score:39.9},
+  {sni:"01.134",name:"Odlare av gr\u00f6nsaker i v\u00e4xthus",sector:"Agriculture",companies:392,medianEmployees:3.0,medianRevenue:3.35,revPerEmployee:1286,profitMargin:3.3,techFlag:false,score:39.8},
+  {sni:"47.642",name:"Cykelaff\u00e4rer",sector:"Trade",companies:471,medianEmployees:2.0,medianRevenue:4.26,revPerEmployee:2163,profitMargin:1.0,techFlag:false,score:39.8},
+  {sni:"47.610",name:"Bokhandel",sector:"Trade",companies:409,medianEmployees:2.0,medianRevenue:3.78,revPerEmployee:1581,profitMargin:2.1,techFlag:false,score:39.6},
+  {sni:"56.291",name:"Personalmatsalar",sector:"Hospitality",companies:261,medianEmployees:10.0,medianRevenue:22.85,revPerEmployee:1259,profitMargin:3.3,techFlag:false,score:39.5},
+  {sni:"95.290",name:"Reparationsverkst\u00e4der f\u00f6r andra hush\u00e5llsartiklar och personliga artiklar",sector:"Services",companies:1007,medianEmployees:1.0,medianRevenue:1.01,revPerEmployee:777,profitMargin:5.5,techFlag:false,score:39.4},
+  {sni:"31.011",name:"Industri f\u00f6r kontors- och butiksm\u00f6bler",sector:"Manufacturing",companies:329,medianEmployees:2.0,medianRevenue:4.0,revPerEmployee:1407,profitMargin:2.2,techFlag:false,score:39.3},
+  {sni:"43.310",name:"Firmor f\u00f6r puts-, fasad- och stuckat\u00f6rsarbeten",sector:"Construction",companies:635,medianEmployees:2.0,medianRevenue:3.16,revPerEmployee:1221,profitMargin:3.6,techFlag:false,score:39.3},
+  {sni:"47.300",name:"Bensinstationer",sector:"Trade",companies:1335,medianEmployees:3.0,medianRevenue:8.29,revPerEmployee:2079,profitMargin:2.3,techFlag:false,score:39.3},
+  {sni:"47.810",name:"Torg- och marknadshandel med livsmedel, drycker och tobak",sector:"Trade",companies:782,medianEmployees:1.0,medianRevenue:2.49,revPerEmployee:1413,profitMargin:2.5,techFlag:false,score:39.3},
+  {sni:"23.410",name:"Industri f\u00f6r keramiska hush\u00e5lls- och prydnadsartiklar",sector:"Manufacturing",companies:1093,medianEmployees:0,medianRevenue:0.34,revPerEmployee:328,profitMargin:5.6,techFlag:false,score:39.1},
+  {sni:"47.591",name:"M\u00f6belaff\u00e4rer",sector:"Trade",companies:1063,medianEmployees:1.0,medianRevenue:4.41,revPerEmployee:2232,profitMargin:0.7,techFlag:false,score:39.1},
+  {sni:"47.762",name:"Zooaff\u00e4rer",sector:"Trade",companies:779,medianEmployees:1.0,medianRevenue:3.04,revPerEmployee:1701,profitMargin:1.7,techFlag:false,score:39.1},
+  {sni:"95.110",name:"Reparationsverkst\u00e4der f\u00f6r datorer och kringutrustning",sector:"Services",companies:342,medianEmployees:1.0,medianRevenue:1.06,revPerEmployee:982,profitMargin:3.5,techFlag:false,score:39.1},
+  {sni:"16.232",name:"Industri f\u00f6r tr\u00e4d\u00f6rrar",sector:"Manufacturing",companies:169,medianEmployees:4.0,medianRevenue:5.54,revPerEmployee:1372,profitMargin:2.1,techFlag:false,score:39.0},
+  {sni:"47.112",name:"Livsmedelsbutiker med brett sortiment",sector:"Trade",companies:6641,medianEmployees:4.0,medianRevenue:13.58,revPerEmployee:3319,profitMargin:2.0,techFlag:false,score:39.0},
+  {sni:"46.180",name:"Provisionshandel med annat specialsortiment",sector:"Trade",companies:756,medianEmployees:1.0,medianRevenue:1.12,revPerEmployee:1015,profitMargin:3.6,techFlag:false,score:38.8},
+  {sni:"14.140",name:"Industri f\u00f6r underkl\u00e4der, skjortor och blusar",sector:"Manufacturing",companies:72,medianEmployees:1.0,medianRevenue:2.79,revPerEmployee:1227,profitMargin:-1.6,techFlag:false,score:38.7},
+  {sni:"90.-93",name:"Kultur, n\u00f6je och fritid",sector:"Culture",companies:13480,medianEmployees:0,medianRevenue:0.73,revPerEmployee:647,profitMargin:6.3,techFlag:false,score:38.7},
+  {sni:"93.210",name:"N\u00f6jes- och temaparker",sector:"Culture",companies:126,medianEmployees:3.0,medianRevenue:3.06,revPerEmployee:978,profitMargin:3.1,techFlag:false,score:38.7},
+  {sni:"30.910",name:"Motorcykelindustri",sector:"Manufacturing",companies:35,medianEmployees:1.0,medianRevenue:1.71,revPerEmployee:1109,profitMargin:-1.2,techFlag:false,score:38.6},
+  {sni:"43.330",name:"Golv- och v\u00e4ggbel\u00e4ggningsfirmor",sector:"Construction",companies:3871,medianEmployees:1.0,medianRevenue:2.19,revPerEmployee:1379,profitMargin:3.3,techFlag:false,score:38.6},
+  {sni:"56.210",name:"Cateringf\u00f6retag f\u00f6r enskilda evenemang",sector:"Hospitality",companies:1788,medianEmployees:1.0,medianRevenue:1.03,revPerEmployee:748,profitMargin:5.6,techFlag:false,score:38.6},
+  {sni:"46.440",name:"Partihandel med glas och porslin, reng\u00f6ringsmedel",sector:"Trade",companies:440,medianEmployees:1.0,medianRevenue:1.89,revPerEmployee:1237,profitMargin:2.3,techFlag:false,score:38.5},
+  {sni:"78.100",name:"Arbetsf\u00f6rmedlingar och rekryteringsf\u00f6retag",sector:"Services",companies:3566,medianEmployees:1.0,medianRevenue:1.44,revPerEmployee:805,profitMargin:5.8,techFlag:false,score:38.5},
+  {sni:"49.-53",name:"Transport- och magasineringsf\u00f6retag",sector:"Transport",companies:15913,medianEmployees:2.0,medianRevenue:2.79,revPerEmployee:1271,profitMargin:4.7,techFlag:false,score:38.0},
+  {sni:"31.-32",name:"Instrumentindustri och annan tillverkningsindustri",sector:"Manufacturing",companies:2393,medianEmployees:1.0,medianRevenue:1.75,revPerEmployee:1112,profitMargin:3.7,techFlag:false,score:37.9},
+  {sni:"46.491",name:"Partihandel med sport- och fritidsartiklar",sector:"Trade",companies:1227,medianEmployees:1.0,medianRevenue:1.95,revPerEmployee:1632,profitMargin:1.8,techFlag:false,score:37.9},
+  {sni:"49.319",name:"\u00d6vriga kollektivtrafikf\u00f6retag",sector:"Transport",companies:115,medianEmployees:61.0,medianRevenue:324.66,revPerEmployee:1280,profitMargin:2.2,techFlag:false,score:37.9},
+  {sni:"82.300",name:"Arrang\u00f6rer av kongresser och m\u00e4ssor",sector:"Services",companies:1655,medianEmployees:1.0,medianRevenue:1.32,revPerEmployee:938,profitMargin:4.6,techFlag:false,score:37.7},
+  {sni:"43.110",name:"Rivningsfirmor",sector:"Construction",companies:810,medianEmployees:2.0,medianRevenue:2.67,revPerEmployee:1003,profitMargin:4.1,techFlag:false,score:37.4},
+  {sni:"47.532",name:"Hemtextilbutiker",sector:"Trade",companies:470,medianEmployees:1.0,medianRevenue:2.29,revPerEmployee:1376,profitMargin:1.7,techFlag:false,score:37.3},
+  {sni:"82.200",name:"Telefonservicef\u00f6retag (callcenterf\u00f6retag)",sector:"Services",companies:652,medianEmployees:2.0,medianRevenue:2.17,revPerEmployee:697,profitMargin:5.2,techFlag:false,score:37.3},
+  {sni:"11.040",name:"Industri f\u00f6r andra icke-destillerade j\u00e4sta drycker",sector:"Manufacturing",companies:16,medianEmployees:0,medianRevenue:0.37,revPerEmployee:368,profitMargin:2.0,techFlag:false,score:37.1},
+  {sni:"41.200",name:"Entrepren\u00f6rer f\u00f6r bostadshus och andra byggnader",sector:"Construction",companies:27283,medianEmployees:1.0,medianRevenue:2.06,revPerEmployee:1332,profitMargin:3.5,techFlag:false,score:37.1},
+  {sni:"46.370",name:"Partihandel med kaffe, te, kakao och kryddor",sector:"Trade",companies:250,medianEmployees:1.0,medianRevenue:1.35,revPerEmployee:1081,profitMargin:2.0,techFlag:false,score:37.1},
+  {sni:"85.510",name:"Sport- och fritidsskolor",sector:"Education",companies:10676,medianEmployees:0,medianRevenue:0.43,revPerEmployee:406,profitMargin:6.4,techFlag:false,score:37.1},
+  {sni:"32.400",name:"Industri f\u00f6r spel och leksaker",sector:"Manufacturing",companies:325,medianEmployees:0,medianRevenue:0.3,revPerEmployee:303,profitMargin:3.9,techFlag:false,score:36.9},
+  {sni:"02.300",name:"Insamlare av annat vilt v\u00e4xande skogsmaterial \u00e4n tr\u00e4",sector:"Agriculture",companies:69,medianEmployees:0,medianRevenue:0.96,revPerEmployee:957,profitMargin:-1.2,techFlag:false,score:36.8},
+  {sni:"50.102",name:"Havs- och kustsj\u00f6fartsrederier, icke regulj\u00e4r passagerartrafik",sector:"Transport",companies:385,medianEmployees:0,medianRevenue:0.76,revPerEmployee:638,profitMargin:3.5,techFlag:false,score:36.8},
+  {sni:"15.200",name:"Skoindustri",sector:"Manufacturing",companies:68,medianEmployees:2.0,medianRevenue:2.61,revPerEmployee:1304,profitMargin:-2.0,techFlag:false,score:36.6},
+  {sni:"18.122",name:"Boktryckerier, \u00f6vriga tryckerier",sector:"Manufacturing",companies:1829,medianEmployees:1.0,medianRevenue:1.91,revPerEmployee:1203,profitMargin:3.0,techFlag:false,score:36.6},
+  {sni:"47.299",name:"\u00d6vriga specialbutiker med livsmedel",sector:"Trade",companies:596,medianEmployees:2.0,medianRevenue:2.72,revPerEmployee:1290,profitMargin:2.7,techFlag:false,score:36.6},
+  {sni:"47.650",name:"Leksaksaff\u00e4rer",sector:"Trade",companies:414,medianEmployees:3.0,medianRevenue:5.23,revPerEmployee:1972,profitMargin:0.2,techFlag:false,score:36.6},
+  {sni:"31.021",name:"K\u00f6ksm\u00f6belindustri",sector:"Manufacturing",companies:342,medianEmployees:1.0,medianRevenue:0.83,revPerEmployee:833,profitMargin:2.8,techFlag:false,score:36.5},
+  {sni:"47.242",name:"Konfektyrbutiker",sector:"Trade",companies:1027,medianEmployees:2.0,medianRevenue:3.41,revPerEmployee:1536,profitMargin:2.4,techFlag:false,score:36.5},
+  {sni:"47.291",name:"H\u00e4lsokostbutiker",sector:"Trade",companies:618,medianEmployees:1.0,medianRevenue:1.94,revPerEmployee:1475,profitMargin:1.4,techFlag:false,score:36.5},
+  {sni:"32.200",name:"Musikinstrumentindustri",sector:"Manufacturing",companies:299,medianEmployees:1.0,medianRevenue:0.74,revPerEmployee:716,profitMargin:3.3,techFlag:false,score:36.3},
+  {sni:"68.201",name:"Fastighetsbolag, bost\u00e4der",sector:"Real Estate",companies:25953,medianEmployees:0,medianRevenue:1.33,revPerEmployee:1298,profitMargin:3.0,techFlag:false,score:36.2},
+  {sni:"46.420",name:"Partihandel med kl\u00e4der och skodon",sector:"Trade",companies:2333,medianEmployees:1.0,medianRevenue:1.87,revPerEmployee:1426,profitMargin:2.4,techFlag:false,score:36.1},
+  {sni:"78.200",name:"Personaluthyrningsf\u00f6retag",sector:"Services",companies:6474,medianEmployees:1.0,medianRevenue:1.13,revPerEmployee:659,profitMargin:6.1,techFlag:false,score:36.1},
+  {sni:"43.320",name:"Firmor f\u00f6r byggnadssnickeriarbeten",sector:"Construction",companies:22134,medianEmployees:1.0,medianRevenue:1.62,revPerEmployee:1159,profitMargin:3.8,techFlag:false,score:35.8},
+  {sni:"85.311",name:"Gymnasieskolans studief\u00f6rberedande linjer",sector:"Education",companies:666,medianEmployees:19.0,medianRevenue:19.02,revPerEmployee:1024,profitMargin:4.2,techFlag:false,score:35.8},
+  {sni:"20.420",name:"Parfym- och toalettartikelsindustri",sector:"Manufacturing",companies:277,medianEmployees:1.0,medianRevenue:1.65,revPerEmployee:983,profitMargin:1.8,techFlag:false,score:35.3},
+  {sni:"47.789",name:"Butiker med \u00f6vrigt specialsortiment",sector:"Trade",companies:1629,medianEmployees:1.0,medianRevenue:1.91,revPerEmployee:1328,profitMargin:2.5,techFlag:false,score:35.2},
+  {sni:"85.592",name:"Folkh\u00f6gskolor",sector:"Education",companies:290,medianEmployees:1.0,medianRevenue:1.39,revPerEmployee:751,profitMargin:3.4,techFlag:false,score:35.2},
+  {sni:"80.100",name:"F\u00f6retag f\u00f6r bevakning och s\u00e4kerhetstj\u00e4nst",sector:"Services",companies:932,medianEmployees:4.0,medianRevenue:2.06,revPerEmployee:498,profitMargin:6.2,techFlag:false,score:35.1},
+  {sni:"47.782",name:"Fotoaff\u00e4rer",sector:"Trade",companies:166,medianEmployees:1.0,medianRevenue:2.05,revPerEmployee:1132,profitMargin:0.9,techFlag:false,score:35.0},
+  {sni:"52.219",name:"\u00d6vriga servicef\u00f6retag till landtransport",sector:"Transport",companies:1149,medianEmployees:0,medianRevenue:1.54,revPerEmployee:959,profitMargin:2.7,techFlag:false,score:34.7},
+  {sni:"13.-15",name:"Textil-, bekl\u00e4dnads- och l\u00e4dervaruindustri",sector:"Manufacturing",companies:908,medianEmployees:1.0,medianRevenue:1.55,revPerEmployee:1019,profitMargin:2.6,techFlag:false,score:34.5},
+  {sni:"47.714",name:"Barnkl\u00e4desaff\u00e4rer",sector:"Trade",companies:207,medianEmployees:1.0,medianRevenue:1.66,revPerEmployee:1279,profitMargin:-0.5,techFlag:false,score:34.5},
+  {sni:"59.140",name:"Biografer",sector:"Media",companies:255,medianEmployees:3.0,medianRevenue:2.33,revPerEmployee:905,profitMargin:3.1,techFlag:true,score:34.5},
+  {sni:"95.120",name:"Reparationsverkst\u00e4der f\u00f6r kommunikationsutrustning",sector:"Services",companies:328,medianEmployees:1.0,medianRevenue:1.13,revPerEmployee:1037,profitMargin:2.2,techFlag:false,score:34.5},
+  {sni:"47.713",name:"Damkl\u00e4desaff\u00e4rer",sector:"Trade",companies:1472,medianEmployees:1.0,medianRevenue:2.64,revPerEmployee:1553,profitMargin:1.5,techFlag:false,score:34.4},
+  {sni:"56.293",name:"Centralk\u00f6k f\u00f6r skolor, omsorgs- och andra institutioner",sector:"Hospitality",companies:352,medianEmployees:6.0,medianRevenue:7.2,revPerEmployee:1228,profitMargin:2.4,techFlag:false,score:34.3},
+  {sni:"79.900",name:"Turistbyr\u00e5er o.d.",sector:"Services",companies:1705,medianEmployees:0,medianRevenue:0.97,revPerEmployee:705,profitMargin:4.0,techFlag:false,score:34.3},
+  {sni:"87.302",name:"Gruppbost\u00e4der o.d. f\u00f6r funktionshindrade personer",sector:"Health",companies:371,medianEmployees:9.0,medianRevenue:6.85,revPerEmployee:742,profitMargin:4.4,techFlag:false,score:34.3},
+  {sni:"38.312",name:"Anl\u00e4ggningar f\u00f6r demontering av elektrisk och elektronisk utrustning",sector:"Utilities",companies:13,medianEmployees:1.0,medianRevenue:1.97,revPerEmployee:833,profitMargin:-9.4,techFlag:false,score:34.0},
+  {sni:"74.201",name:"Portr\u00e4ttfotoatelj\u00e9er",sector:"Professional",companies:2246,medianEmployees:0,medianRevenue:0.46,revPerEmployee:446,profitMargin:4.8,techFlag:false,score:34.0},
+  {sni:"14.120",name:"Industri f\u00f6r arbets-, skydds- och \u00f6verdragskl\u00e4der",sector:"Manufacturing",companies:52,medianEmployees:1.0,medianRevenue:1.17,revPerEmployee:715,profitMargin:1.1,techFlag:false,score:33.9},
+  {sni:"31.090",name:"Annan m\u00f6belindustri",sector:"Manufacturing",companies:1175,medianEmployees:1.0,medianRevenue:1.77,revPerEmployee:1084,profitMargin:2.5,techFlag:false,score:33.9},
+  {sni:"55.103",name:"Hotell utan restaurang",sector:"Hospitality",companies:924,medianEmployees:1.0,medianRevenue:2.67,revPerEmployee:1110,profitMargin:2.5,techFlag:false,score:33.6},
+  {sni:"63.990",name:"\u00d6vriga informationstj\u00e4nstf\u00f6retag",sector:"IT/Tech",companies:654,medianEmployees:1.0,medianRevenue:0.72,revPerEmployee:670,profitMargin:4.0,techFlag:true,score:33.6},
+  {sni:"30.300",name:"Flygplansindustri",sector:"Manufacturing",companies:106,medianEmployees:2.0,medianRevenue:1.75,revPerEmployee:944,profitMargin:1.5,techFlag:false,score:33.3},
+  {sni:"16.231",name:"Industri f\u00f6r monteringsf\u00e4rdiga tr\u00e4hus",sector:"Manufacturing",companies:587,medianEmployees:2.0,medianRevenue:3.81,revPerEmployee:1511,profitMargin:0.5,techFlag:false,score:33.0},
+  {sni:"13.200",name:"V\u00e4verier",sector:"Manufacturing",companies:66,medianEmployees:1.0,medianRevenue:1.37,revPerEmployee:875,profitMargin:-3.0,techFlag:false,score:32.9},
+  {sni:"01.499",name:"\u00d6vriga djuruppf\u00f6dare",sector:"Agriculture",companies:1130,medianEmployees:0,medianRevenue:0.28,revPerEmployee:257,profitMargin:4.2,techFlag:false,score:32.6},
+  {sni:"45.400",name:"Handel med och service av motorcyklar inklusive reservdelar och tillbeh\u00f6r",sector:"Trade",companies:1266,medianEmployees:1.0,medianRevenue:1.61,revPerEmployee:1371,profitMargin:1.4,techFlag:false,score:32.6},
+  {sni:"53.201",name:"Andra postf\u00f6retag",sector:"Transport",companies:161,medianEmployees:1.0,medianRevenue:1.58,revPerEmployee:912,profitMargin:1.2,techFlag:false,score:32.5},
+  {sni:"88.910",name:"Familjedaghem, fritidshem o.d.",sector:"Health",companies:1025,medianEmployees:5.0,medianRevenue:2.59,revPerEmployee:630,profitMargin:5.3,techFlag:false,score:32.5},
+  {sni:"09.100",name:"Servicef\u00f6retag till r\u00e5petroleum- och  naturgasutvinning",sector:"Mining",companies:44,medianEmployees:1.0,medianRevenue:1.96,revPerEmployee:825,profitMargin:-29.4,techFlag:false,score:32.4},
+  {sni:"43.390",name:"Andra firmor f\u00f6r slutbehandling av byggnader",sector:"Construction",companies:846,medianEmployees:2.0,medianRevenue:1.81,revPerEmployee:723,profitMargin:4.2,techFlag:false,score:32.4},
+  {sni:"13.100",name:"Garnindustri",sector:"Manufacturing",companies:41,medianEmployees:1.0,medianRevenue:1.25,revPerEmployee:710,profitMargin:0.0,techFlag:false,score:32.3},
+  {sni:"13.921",name:"Industri f\u00f6r gardiner, s\u00e4ngkl\u00e4der och linnevaror",sector:"Manufacturing",companies:263,medianEmployees:1.0,medianRevenue:1.56,revPerEmployee:779,profitMargin:1.9,techFlag:false,score:32.3},
+  {sni:"47.510",name:"Garn-, tyg- och sybeh\u00f6rsaff\u00e4rer",sector:"Trade",companies:728,medianEmployees:1.0,medianRevenue:1.64,revPerEmployee:1208,profitMargin:1.6,techFlag:false,score:32.3},
+  {sni:"53.202",name:"Budbils- och kurirf\u00f6retag",sector:"Transport",companies:1186,medianEmployees:1.0,medianRevenue:1.32,revPerEmployee:762,profitMargin:3.8,techFlag:false,score:32.3},
+  {sni:"23.650",name:"Industri f\u00f6r fibercementvaror",sector:"Manufacturing",companies:11,medianEmployees:3.0,medianRevenue:2.11,revPerEmployee:948,profitMargin:-3.8,techFlag:false,score:31.9},
+  {sni:"35.110",name:"Elverk",sector:"Utilities",companies:2889,medianEmployees:0,medianRevenue:1.7,revPerEmployee:1484,profitMargin:0.0,techFlag:false,score:31.9},
+  {sni:"74.103",name:"Inredningsarkitektf\u00f6retag",sector:"Professional",companies:2933,medianEmployees:1.0,medianRevenue:0.77,revPerEmployee:735,profitMargin:4.5,techFlag:false,score:31.8},
+  {sni:"11.030",name:"Cider- och annan fruktvinindustri",sector:"Manufacturing",companies:47,medianEmployees:0,medianRevenue:0.62,revPerEmployee:620,profitMargin:-1.2,techFlag:false,score:31.6},
+  {sni:"47.711",name:"Aff\u00e4rer f\u00f6r herr-, dam- och barnkl\u00e4der, blandat",sector:"Trade",companies:2822,medianEmployees:2.0,medianRevenue:3.5,revPerEmployee:1763,profitMargin:1.4,techFlag:false,score:31.6},
+  {sni:"01.620",name:"Servicef\u00f6retag till husdjursk\u00f6tsel",sector:"Agriculture",companies:5141,medianEmployees:1.0,medianRevenue:0.73,revPerEmployee:675,profitMargin:4.2,techFlag:false,score:31.4},
+  {sni:"47.791",name:"Antikvitetsaff\u00e4rer och antikvariat",sector:"Trade",companies:767,medianEmployees:0,medianRevenue:0.7,revPerEmployee:677,profitMargin:2.6,techFlag:false,score:31.1},
+  {sni:"47.999",name:"\u00d6vrig detaljhandel ej i butik",sector:"Trade",companies:1619,medianEmployees:0,medianRevenue:0.89,revPerEmployee:810,profitMargin:2.7,techFlag:false,score:31.1},
+  {sni:"58.110",name:"Bokf\u00f6rlag",sector:"Media",companies:2379,medianEmployees:0,medianRevenue:0.45,revPerEmployee:439,profitMargin:4.2,techFlag:true,score:31.1},
+  {sni:"85.530",name:"Trafikskolor",sector:"Education",companies:1479,medianEmployees:2.0,medianRevenue:1.85,revPerEmployee:924,profitMargin:3.6,techFlag:false,score:31.1},
+  {sni:"15.120",name:"Industri f\u00f6r reseffekter, handv\u00e4skor, sadel- och seldon m.m.",sector:"Manufacturing",companies:443,medianEmployees:0,medianRevenue:0.88,revPerEmployee:702,profitMargin:2.0,techFlag:false,score:31.0},
+  {sni:"26.600",name:"Industri f\u00f6r str\u00e5lningsutrustning samt elektromedicinsk och elektroterapeutisk utrustning",sector:"Manufacturing",companies:67,medianEmployees:2.0,medianRevenue:2.46,revPerEmployee:1026,profitMargin:-10.4,techFlag:false,score:31.0},
+  {sni:"72.110",name:"Biotekniska FoU-institutioner",sector:"Professional",companies:752,medianEmployees:1.0,medianRevenue:0.56,revPerEmployee:410,profitMargin:4.2,techFlag:false,score:31.0},
+  {sni:"93.112",name:"Golfbanor, golfklubbar",sector:"Culture",companies:753,medianEmployees:4.0,medianRevenue:6.67,revPerEmployee:1301,profitMargin:2.0,techFlag:false,score:31.0},
+  {sni:"14.-15",name:"Bekl\u00e4dnads- och l\u00e4dervaruindustri",sector:"Manufacturing",companies:391,medianEmployees:1.0,medianRevenue:1.03,revPerEmployee:776,profitMargin:2.0,techFlag:false,score:30.9},
+  {sni:"58.140",name:"Tidskriftsf\u00f6rlag",sector:"Media",companies:672,medianEmployees:1.0,medianRevenue:1.68,revPerEmployee:1098,profitMargin:1.5,techFlag:true,score:30.3},
+  {sni:"58.131",name:"Annonstidningsf\u00f6rlag",sector:"Media",companies:348,medianEmployees:4.0,medianRevenue:4.84,revPerEmployee:1286,profitMargin:0.9,techFlag:true,score:30.1},
+  {sni:"61.100",name:"Telekommunikationsbolag, tr\u00e5dbundet",sector:"Media",companies:897,medianEmployees:0,medianRevenue:1.05,revPerEmployee:846,profitMargin:2.0,techFlag:true,score:30.1},
+  {sni:"49.420",name:"Flyttfirmor",sector:"Transport",companies:789,medianEmployees:3.0,medianRevenue:2.65,revPerEmployee:795,profitMargin:3.6,techFlag:false,score:30.0},
+  {sni:"93.130",name:"Gymanl\u00e4ggningar",sector:"Culture",companies:1958,medianEmployees:1.0,medianRevenue:1.61,revPerEmployee:879,profitMargin:3.4,techFlag:false,score:30.0},
+  {sni:"10.730",name:"Industri f\u00f6r pastaprodukter",sector:"Manufacturing",companies:13,medianEmployees:1.0,medianRevenue:0.45,revPerEmployee:449,profitMargin:-2.1,techFlag:false,score:29.9},
+  {sni:"47.914",name:"Postorderhandel och detaljhandel p\u00e5 Internet med datorer och annan elektronisk utrustning",sector:"Trade",companies:850,medianEmployees:0,medianRevenue:1.11,revPerEmployee:936,profitMargin:1.4,techFlag:false,score:29.7},
+  {sni:"32.300",name:"Sportvaruindustri",sector:"Manufacturing",companies:393,medianEmployees:0,medianRevenue:0.89,revPerEmployee:693,profitMargin:1.6,techFlag:false,score:29.6},
+  {sni:"88.101",name:"Hemtj\u00e4nst, dagcentraler o.d. f\u00f6r \u00e4ldre",sector:"Health",companies:2145,medianEmployees:21.0,medianRevenue:12.58,revPerEmployee:579,profitMargin:5.4,techFlag:false,score:29.5},
+  {sni:"14.110",name:"L\u00e4derbekl\u00e4dnadsindustri",sector:"Manufacturing",companies:62,medianEmployees:1.0,medianRevenue:0.61,revPerEmployee:609,profitMargin:-0.3,techFlag:false,score:29.2},
+  {sni:"47.783",name:"Konsthandel och gallerier",sector:"Trade",companies:740,medianEmployees:0,medianRevenue:0.73,revPerEmployee:690,profitMargin:2.1,techFlag:false,score:29.1},
+  {sni:"96.021",name:"Fris\u00f6rsalonger",sector:"Services",companies:17140,medianEmployees:1.0,medianRevenue:0.96,revPerEmployee:799,profitMargin:4.2,techFlag:false,score:29.1},
+  {sni:"10.520",name:"Glassindustri",sector:"Manufacturing",companies:128,medianEmployees:3.0,medianRevenue:2.44,revPerEmployee:820,profitMargin:1.5,techFlag:false,score:29.0},
+  {sni:"46.450",name:"Partihandel med parfym och kosmetika",sector:"Trade",companies:903,medianEmployees:1.0,medianRevenue:1.44,revPerEmployee:1147,profitMargin:1.0,techFlag:false,score:29.0},
+  {sni:"55.201",name:"Vandrarhem m.m.",sector:"Hospitality",companies:568,medianEmployees:1.0,medianRevenue:1.38,revPerEmployee:902,profitMargin:1.7,techFlag:false,score:28.7},
+  {sni:"47.992",name:"Ambulerande och tillf\u00e4llig handel med livsmedel",sector:"Trade",companies:365,medianEmployees:1.0,medianRevenue:1.31,revPerEmployee:1001,profitMargin:0.2,techFlag:false,score:28.6},
+  {sni:"11.010",name:"Spritdrycksindustri",sector:"Manufacturing",companies:142,medianEmployees:0,medianRevenue:0.67,revPerEmployee:667,profitMargin:-3.3,techFlag:false,score:28.3},
+  {sni:"11.020",name:"Vinindustri",sector:"Manufacturing",companies:28,medianEmployees:0,medianRevenue:0.14,revPerEmployee:141,profitMargin:-103.3,techFlag:false,score:28.3},
+  {sni:"85.591",name:"Utbildningsf\u00f6retag m.m. f\u00f6r yrkesinriktad utbildning av arbetsmarknadssk\u00e4l",sector:"Education",companies:576,medianEmployees:1.0,medianRevenue:1.25,revPerEmployee:788,profitMargin:2.3,techFlag:false,score:28.3},
+  {sni:"13.990",name:"\u00d6vrig textilieindustri",sector:"Manufacturing",companies:752,medianEmployees:0,medianRevenue:0.53,revPerEmployee:404,profitMargin:2.6,techFlag:false,score:28.2},
+  {sni:"01.492",name:"Uppf\u00f6dare av s\u00e4llskapsdjur",sector:"Agriculture",companies:892,medianEmployees:0,medianRevenue:0.37,revPerEmployee:362,profitMargin:2.8,techFlag:false,score:28.1},
+  {sni:"85.522",name:"\u00d6vriga musik-, dans- och kulturskolor",sector:"Education",companies:2483,medianEmployees:1.0,medianRevenue:0.62,revPerEmployee:425,profitMargin:4.5,techFlag:false,score:28.1},
+  {sni:"01.450",name:"F\u00e5r- och getuppf\u00f6dare",sector:"Agriculture",companies:2580,medianEmployees:0,medianRevenue:0.38,revPerEmployee:377,profitMargin:3.5,techFlag:false,score:27.9},
+  {sni:"14.190",name:"Industri f\u00f6r andra bekl\u00e4dnadsvaror och tillbeh\u00f6r",sector:"Manufacturing",companies:507,medianEmployees:1.0,medianRevenue:0.77,revPerEmployee:683,profitMargin:2.0,techFlag:false,score:27.8},
+  {sni:"47.593",name:"Bos\u00e4ttningsaff\u00e4rer",sector:"Trade",companies:1633,medianEmployees:1.0,medianRevenue:1.66,revPerEmployee:1188,profitMargin:1.2,techFlag:false,score:27.8},
+  {sni:"47.199",name:"\u00d6vriga butiker med brett sortiment",sector:"Trade",companies:1377,medianEmployees:1.0,medianRevenue:1.41,revPerEmployee:1129,profitMargin:1.2,techFlag:false,score:27.7},
+  {sni:"47.890",name:"Torg- och marknadshandel med \u00f6vriga varor",sector:"Trade",companies:612,medianEmployees:1.0,medianRevenue:0.83,revPerEmployee:754,profitMargin:2.1,techFlag:false,score:27.6},
+  {sni:"95.240",name:"M\u00f6beltapetserare m.m.",sector:"Services",companies:916,medianEmployees:1.0,medianRevenue:0.71,revPerEmployee:649,profitMargin:3.3,techFlag:false,score:27.6},
+  {sni:"49.320",name:"Taxif\u00f6retag",sector:"Transport",companies:11618,medianEmployees:1.0,medianRevenue:1.46,revPerEmployee:826,profitMargin:3.4,techFlag:false,score:27.5},
+  {sni:"68.209",name:"\u00d6vriga fastighetsbolag",sector:"Real Estate",companies:14636,medianEmployees:0,medianRevenue:0.74,revPerEmployee:740,profitMargin:3.1,techFlag:false,score:27.4},
+  {sni:"93.114",name:"Trav- och galoppbanor",sector:"Culture",companies:47,medianEmployees:15.0,medianRevenue:14.89,revPerEmployee:792,profitMargin:0.8,techFlag:false,score:27.4},
+  {sni:"03.210",name:"Fiskodlare, i saltvatten",sector:"Agriculture",companies:59,medianEmployees:1.0,medianRevenue:0.71,revPerEmployee:467,profitMargin:-2.5,techFlag:false,score:27.2},
+  {sni:"81.210",name:"St\u00e4df\u00f6retag",sector:"Services",companies:11425,medianEmployees:3.0,medianRevenue:1.75,revPerEmployee:558,profitMargin:5.0,techFlag:false,score:26.9},
+  {sni:"93.290",name:"\u00d6vriga fritids- och n\u00f6jesanl\u00e4ggningar",sector:"Culture",companies:5824,medianEmployees:0,medianRevenue:0.71,revPerEmployee:594,profitMargin:3.4,techFlag:false,score:26.9},
+  {sni:"46.230",name:"Partihandel med levande djur",sector:"Trade",companies:230,medianEmployees:0,medianRevenue:0.68,revPerEmployee:671,profitMargin:-2.4,techFlag:false,score:26.4},
+  {sni:"11.070",name:"Mineralvatten- och l\u00e4skedrycksindustri",sector:"Manufacturing",companies:120,medianEmployees:0,medianRevenue:0.58,revPerEmployee:494,profitMargin:-10.9,techFlag:false,score:26.3},
+  {sni:"88.995",name:"Flyktingf\u00f6rl\u00e4ggningar",sector:"Health",companies:40,medianEmployees:0,medianRevenue:0.24,revPerEmployee:243,profitMargin:-104.6,techFlag:false,score:26.2},
+  {sni:"14.130",name:"Industri f\u00f6r andra g\u00e5ng- och ytterkl\u00e4der",sector:"Manufacturing",companies:889,medianEmployees:1.0,medianRevenue:0.87,revPerEmployee:655,profitMargin:2.2,techFlag:false,score:26.0},
+  {sni:"47.991",name:"Provisionsdetaljhandel (ej auktioner)",sector:"Trade",companies:1046,medianEmployees:0,medianRevenue:0.71,revPerEmployee:649,profitMargin:2.0,techFlag:false,score:25.9},
+  {sni:"10.-12",name:"Livsmedels-, dryckesvaru- och tobaksindustri",sector:"Manufacturing",companies:2599,medianEmployees:2.0,medianRevenue:3.63,revPerEmployee:1118,profitMargin:1.8,techFlag:false,score:25.8},
+  {sni:"47.761",name:"Blomster- och tr\u00e4dg\u00e5rdsvaruhandel",sector:"Trade",companies:1864,medianEmployees:2.0,medianRevenue:2.96,revPerEmployee:1390,profitMargin:0.3,techFlag:false,score:25.8},
+  {sni:"47.750",name:"Parfymaff\u00e4rer",sector:"Trade",companies:1040,medianEmployees:1.0,medianRevenue:1.33,revPerEmployee:994,profitMargin:1.1,techFlag:false,score:25.6},
+  {sni:"18.140",name:"Bokbinderier m.m.",sector:"Manufacturing",companies:110,medianEmployees:2.0,medianRevenue:1.8,revPerEmployee:753,profitMargin:-2.9,techFlag:false,score:25.4},
+  {sni:"27.200",name:"Batteri- och ackumulatorindustri",sector:"Manufacturing",companies:106,medianEmployees:1.0,medianRevenue:1.0,revPerEmployee:525,profitMargin:-17.5,techFlag:false,score:25.0},
+  {sni:"77.210",name:"Uthyrare av fritids- och sportutrustning",sector:"Services",companies:584,medianEmployees:0,medianRevenue:0.29,revPerEmployee:287,profitMargin:2.0,techFlag:false,score:25.0},
+  {sni:"11.050",name:"\u00d6lbryggerier",sector:"Manufacturing",companies:488,medianEmployees:0,medianRevenue:0.96,revPerEmployee:759,profitMargin:-5.1,techFlag:false,score:24.6},
+  {sni:"47.241",name:"Br\u00f6dbutiker",sector:"Trade",companies:677,medianEmployees:3.0,medianRevenue:3.21,revPerEmployee:934,profitMargin:1.7,techFlag:false,score:24.4},
+  {sni:"53.203",name:"Tidningsdistributionsf\u00f6retag",sector:"Transport",companies:98,medianEmployees:292.0,medianRevenue:230.34,revPerEmployee:848,profitMargin:-0.6,techFlag:false,score:24.4},
+  {sni:"90.040",name:"Teater- och konserthusf\u00f6retag o.d.",sector:"Culture",companies:138,medianEmployees:5.0,medianRevenue:6.01,revPerEmployee:851,profitMargin:-0.7,techFlag:false,score:24.3},
+  {sni:"96.022",name:"Sk\u00f6nhetssalonger",sector:"Services",companies:9680,medianEmployees:1.0,medianRevenue:0.77,revPerEmployee:667,profitMargin:3.5,techFlag:false,score:23.9},
+  {sni:"47.913",name:"Postorderhandel och detaljhandel p\u00e5 Internet med b\u00f6cker och andra mediavaror",sector:"Trade",companies:753,medianEmployees:0,medianRevenue:0.38,revPerEmployee:377,profitMargin:1.7,techFlag:false,score:23.7},
+  {sni:"96.040",name:"Inr\u00e4ttningar f\u00f6r kroppsv\u00e5rd",sector:"Services",companies:11839,medianEmployees:1.0,medianRevenue:0.54,revPerEmployee:509,profitMargin:3.9,techFlag:false,score:23.6},
+  {sni:"56.100",name:"Restauranger",sector:"Hospitality",companies:28851,medianEmployees:3.0,medianRevenue:3.81,revPerEmployee:1065,profitMargin:2.5,techFlag:false,score:23.5},
+  {sni:"10.710",name:"Bagerier",sector:"Manufacturing",companies:1604,medianEmployees:5.0,medianRevenue:5.11,revPerEmployee:896,profitMargin:2.5,techFlag:false,score:23.4},
+  {sni:"55.102",name:"Konferensanl\u00e4ggningar",sector:"Hospitality",companies:418,medianEmployees:2.0,medianRevenue:3.33,revPerEmployee:974,profitMargin:-1.5,techFlag:false,score:23.2},
+  {sni:"85.202",name:"Grunds\u00e4rskolor",sector:"Education",companies:103,medianEmployees:22.0,medianRevenue:19.86,revPerEmployee:753,profitMargin:0.0,techFlag:false,score:23.1},
+  {sni:"32.130",name:"Bijouteriindustri",sector:"Manufacturing",companies:193,medianEmployees:0,medianRevenue:0.2,revPerEmployee:202,profitMargin:-5.4,techFlag:false,score:23.0},
+  {sni:"55.101",name:"Hotell med restaurang",sector:"Hospitality",companies:2044,medianEmployees:6.0,medianRevenue:6.61,revPerEmployee:1124,profitMargin:1.6,techFlag:false,score:22.5},
+  {sni:"46.340",name:"Partihandel med drycker",sector:"Trade",companies:1425,medianEmployees:0,medianRevenue:0.86,revPerEmployee:750,profitMargin:0.6,techFlag:false,score:22.4},
+  {sni:"47.792",name:"Second hand-butiker m.m.",sector:"Trade",companies:1384,medianEmployees:0,medianRevenue:0.64,revPerEmployee:510,profitMargin:1.7,techFlag:false,score:22.4},
+  {sni:"85.201",name:"Grundskolor och f\u00f6rskoleklasser",sector:"Education",companies:4576,medianEmployees:28.0,medianRevenue:23.29,revPerEmployee:835,profitMargin:3.0,techFlag:false,score:21.8},
+  {sni:"93.119",name:"Sporthallar, idrottsplatser och andra sportanl\u00e4ggningar",sector:"Culture",companies:1779,medianEmployees:0,medianRevenue:1.42,revPerEmployee:922,profitMargin:-3.0,techFlag:false,score:21.8},
+  {sni:"88.994",name:"Humanit\u00e4ra hj\u00e4lporganisationer",sector:"Health",companies:432,medianEmployees:0,medianRevenue:0.4,revPerEmployee:400,profitMargin:0.3,techFlag:false,score:21.5},
+  {sni:"47.993",name:"Ambulerande och tillf\u00e4llig handel med \u00f6vriga varor",sector:"Trade",companies:654,medianEmployees:0,medianRevenue:0.38,revPerEmployee:344,profitMargin:0.9,techFlag:false,score:21.1},
+  {sni:"36.001",name:"Vattenverk f\u00f6r grundvatten",sector:"Utilities",companies:455,medianEmployees:0,medianRevenue:0.21,revPerEmployee:189,profitMargin:0.1,techFlag:false,score:20.9},
+  {sni:"47.915",name:"Postorderhandel och detaljhandel p\u00e5 Internet med sport- och fritidsutrustning",sector:"Trade",companies:1059,medianEmployees:0,medianRevenue:0.55,revPerEmployee:551,profitMargin:0.2,techFlag:false,score:19.8},
+  {sni:"96.090",name:"\u00d6vriga konsumenttj\u00e4nstf\u00f6retag",sector:"Services",companies:9694,medianEmployees:1.0,medianRevenue:0.64,revPerEmployee:500,profitMargin:2.9,techFlag:false,score:19.3},
+  {sni:"91.020",name:"Museer",sector:"Culture",companies:561,medianEmployees:2.0,medianRevenue:1.83,revPerEmployee:770,profitMargin:0.1,techFlag:false,score:19.2},
+  {sni:"88.102",name:"Hemtj\u00e4nst, dagcentraler, personlig assistans o.d. f\u00f6r funktionshindrade personer",sector:"Health",companies:2943,medianEmployees:12.0,medianRevenue:7.36,revPerEmployee:543,profitMargin:3.3,techFlag:false,score:19.1},
+  {sni:"55.202",name:"Stugbyar m.m.",sector:"Hospitality",companies:2559,medianEmployees:0,medianRevenue:0.58,revPerEmployee:547,profitMargin:0.9,techFlag:false,score:18.3},
+  {sni:"47.916",name:"Postorderhandel och detaljhandel p\u00e5 Internet med bos\u00e4ttningsvaror",sector:"Trade",companies:839,medianEmployees:0,medianRevenue:0.51,revPerEmployee:490,profitMargin:-4.0,techFlag:false,score:18.0},
+  {sni:"47.911",name:"Postorderhandel och detaljhandel p\u00e5 Internet med brett sortiment",sector:"Trade",companies:7462,medianEmployees:0,medianRevenue:0.56,revPerEmployee:559,profitMargin:0.9,techFlag:false,score:17.0},
+  {sni:"01.430",name:"Stuterier och andra h\u00e4stuppf\u00f6dare m.fl.",sector:"Agriculture",companies:2016,medianEmployees:0,medianRevenue:0.57,revPerEmployee:523,profitMargin:-8.3,techFlag:false,score:16.0},
+  {sni:"47.919",name:"Postorderhandel och detaljhandel p\u00e5 Internet med \u00f6vriga varor",sector:"Trade",companies:9311,medianEmployees:0,medianRevenue:0.52,revPerEmployee:517,profitMargin:0.4,techFlag:false,score:15.3},
+  {sni:"93.120",name:"Sportklubbar och idrottsf\u00f6reningar",sector:"Culture",companies:5694,medianEmployees:1.0,medianRevenue:2.23,revPerEmployee:803,profitMargin:-0.3,techFlag:false,score:14.6},
+  {sni:"93.191",name:"T\u00e4vlingsstall",sector:"Culture",companies:3150,medianEmployees:0,medianRevenue:0.67,revPerEmployee:635,profitMargin:-5.6,techFlag:false,score:14.6},
+  {sni:"85.100",name:"F\u00f6rskolor",sector:"Education",companies:8081,medianEmployees:7.0,medianRevenue:5.11,revPerEmployee:693,profitMargin:2.0,techFlag:false,score:14.5},
+  {sni:"47.912",name:"Postorderhandel och detaljhandel p\u00e5 Internet med bekl\u00e4dnadsvaror",sector:"Trade",companies:3438,medianEmployees:0,medianRevenue:0.35,revPerEmployee:343,profitMargin:-1.0,techFlag:false,score:14.0}
+];
+
+const sectors = [...new Set(DATA.map(d => d.sector))].sort();
+const sectorFilter = document.getElementById('sectorFilter');
+sectors.forEach(s => {
+  const o = document.createElement('option');
+  o.value = s; o.textContent = s;
+  sectorFilter.appendChild(o);
+});
+
+document.getElementById('heroCount').textContent = DATA.length.toLocaleString();
+
+let sortCol = 'score', sortDir = -1;
+let chart;
+
+function getFiltered() {
+  const sec       = sectorFilter.value;
+  const minMargin = +document.getElementById('marginFilter').value;
+  const maxEmp    = +document.getElementById('empFilter').value;
+  const minRevEmp = +document.getElementById('revEmpFilter').value;
+  const exclTech  = document.getElementById('techFilter').value === 'yes';
+  return DATA.filter(d => {
+    if (sec !== 'all' && d.sector !== sec) return false;
+    if (d.profitMargin < minMargin) return false;
+    if (d.medianEmployees > maxEmp) return false;
+    if (d.revPerEmployee < minRevEmp) return false;
+    if (exclTech && d.techFlag) return false;
+    return true;
+  }).sort((a, b) => sortDir * (a[sortCol] - b[sortCol] || a.name.localeCompare(b.name)));
+}
+
+function marginTag(v) {
+  if (v >= 15) return `<span class="mg mg-hi">${v.toFixed(1)}%</span>`;
+  if (v >= 10) return `<span class="mg mg-mid">${v.toFixed(1)}%</span>`;
+  if (v >= 0)  return `<span class="mg mg-ok">${v.toFixed(1)}%</span>`;
+  return `<span class="mg mg-neg">${v.toFixed(1)}%</span>`;
+}
+
+function scoreTag(v) {
+  const r = Math.round(v);
+  if (r >= 70) return `<span class="sc sc-top">${r}</span>`;
+  if (r >= 50) return `<span class="sc sc-hi">${r}</span>`;
+  if (r >= 30) return `<span class="sc sc-mid">${r}</span>`;
+  return `<span class="sc sc-lo">${r}</span>`;
+}
+
+/* Teal-anchored sector palette */
+const SECTOR_COLOR = {
+  'Agriculture':   { bg:'#ECFDF5', text:'#065F46', border:'#A7F3D0' },
+  'Mining':        { bg:'#FEF3C7', text:'#78350F', border:'#FDE68A' },
+  'Manufacturing': { bg:'#EFF6FF', text:'#1E40AF', border:'#BFDBFE' },
+  'Utilities':     { bg:'#FFF7ED', text:'#9A3412', border:'#FED7AA' },
+  'Construction':  { bg:'#FEF2F2', text:'#991B1B', border:'#FECACA' },
+  'Trade':         { bg:'#F0FDF4', text:'#14532D', border:'#BBF7D0' },
+  'Transport':     { bg:'#F5F3FF', text:'#4C1D95', border:'#DDD6FE' },
+  'Hospitality':   { bg:'#FFF1F2', text:'#881337', border:'#FECDD3' },
+  'Media':         { bg:'#ECFEFF', text:'#164E63', border:'#A5F3FC' },
+  'IT/Tech':       { bg:'#EEF2FF', text:'#312E81', border:'#C7D2FE' },
+  'Finance':       { bg:'#FDF2F8', text:'#701A75', border:'#F5D0FE' },
+  'Real Estate':   { bg:'#F0FDF4', text:'#166534', border:'#86EFAC' },
+  'Professional':  { bg:'#EDFAFA', text:'#065F4B', border:'#99F6E4' },
+  'Services':      { bg:'#FFFBEB', text:'#92400E', border:'#FDE68A' },
+  'Public':        { bg:'#F8FAFC', text:'#334155', border:'#CBD5E1' },
+  'Education':     { bg:'#FAF5FF', text:'#581C87', border:'#E9D5FF' },
+  'Health':        { bg:'#FFF1F2', text:'#9F1239', border:'#FECDD3' },
+  'Culture':       { bg:'#FEFCE8', text:'#713F12', border:'#FEF08A' },
+  'Other':         { bg:'#F8FAFC', text:'#64748B', border:'#E2E8F0' },
+};
+
+const CHART_COLORS = {
+  'Agriculture':'#16A34A','Mining':'#D97706','Manufacturing':'#2563EB',
+  'Utilities':'#EA580C','Construction':'#DC2626','Trade':'#059669',
+  'Transport':'#7C3AED','Hospitality':'#DB2777','Media':'#0891B2',
+  'IT/Tech':'#4F46E5','Finance':'#9333EA','Real Estate':'#16A34A',
+  'Professional':'#0D9488','Services':'#B45309','Public':'#475569',
+  'Education':'#7C3AED','Health':'#E11D48','Culture':'#CA8A04','Other':'#94A3B8',
+};
+
+function render() {
+  const filtered = getFiltered();
+
+  document.getElementById('marginVal').textContent  = document.getElementById('marginFilter').value + '%';
+  document.getElementById('empVal').textContent     = document.getElementById('empFilter').value;
+  document.getElementById('revEmpVal').textContent  = Number(document.getElementById('revEmpFilter').value).toLocaleString();
+
+  const avgMargin = filtered.length ? filtered.reduce((s, d) => s + d.profitMargin, 0) / filtered.length : 0;
+  const avgRevEmp = filtered.length ? filtered.reduce((s, d) => s + d.revPerEmployee, 0) / filtered.length : 0;
+  const totalComp = filtered.reduce((s, d) => s + (d.companies || 0), 0);
+  const topScore  = filtered.length ? Math.max(...filtered.map(d => d.score || 0)) : 0;
+
+  document.getElementById('metrics').innerHTML = `
+    <div class="metric" style="animation-delay:.05s">
+      <div class="metric-label">Industries shown</div>
+      <div class="metric-value">${filtered.length}</div>
+      <div class="metric-detail">of ${DATA.length} total</div>
+    </div>
+    <div class="metric amber-card" style="animation-delay:.1s">
+      <div class="metric-label">Avg. profit margin</div>
+      <div class="metric-value">${avgMargin.toFixed(1)}%</div>
+      <div class="metric-detail">filtered set</div>
+    </div>
+    <div class="metric" style="animation-delay:.15s">
+      <div class="metric-label">Avg. rev / employee</div>
+      <div class="metric-value">${Math.round(avgRevEmp).toLocaleString()}</div>
+      <div class="metric-detail">KSEK</div>
+    </div>
+    <div class="metric" style="animation-delay:.2s">
+      <div class="metric-label">Total companies</div>
+      <div class="metric-value">${totalComp.toLocaleString()}</div>
+      <div class="metric-detail">in filtered set</div>
+    </div>
+    <div class="metric teal-card" style="animation-delay:.25s">
+      <div class="metric-label">Top niche score</div>
+      <div class="metric-value">${Math.round(topScore)}</div>
+      <div class="metric-detail">out of 100</div>
+    </div>
+  `;
+
+  document.getElementById('tableCount').textContent = `${filtered.length} industries`;
+
+  const tbody = document.getElementById('tableBody');
+  tbody.innerHTML = filtered.map(d => {
+    const sc = SECTOR_COLOR[d.sector] || SECTOR_COLOR['Other'];
+    return `<tr>
+      <td class="sni">${d.sni}</td>
+      <td class="ind">${d.name}</td>
+      <td><span class="sec-pill" style="background:${sc.bg};color:${sc.text};border-color:${sc.border}">${d.sector}</span></td>
+      <td class="dv">${(d.companies || 0).toLocaleString()}</td>
+      <td class="dv">${d.medianEmployees}</td>
+      <td class="dv">${(d.medianRevenue || 0).toFixed(1)}</td>
+      <td class="dvb">${(d.revPerEmployee || 0).toLocaleString()}</td>
+      <td class="num">${marginTag(d.profitMargin)}</td>
+      <td class="num">${scoreTag(d.score || 0)}</td>
+    </tr>`;
+  }).join('');
+
+  document.querySelectorAll('thead th').forEach(th => {
+    th.classList.toggle('sorted', th.dataset.col === sortCol);
+    const arr = th.querySelector('.sort-arrow');
+    if (arr) arr.remove();
+    if (th.dataset.col === sortCol)
+      th.insertAdjacentHTML('beforeend', `<span class="sort-arrow">${sortDir === 1 ? '&#9650;' : '&#9660;'}</span>`);
+  });
+
+  renderChart(filtered);
+}
+
+function renderChart(filtered) {
+  const ctx = document.getElementById('scatterChart');
+  if (chart) chart.destroy();
+  chart = new Chart(ctx, {
+    type: 'bubble',
+    data: {
+      datasets: filtered.map(d => ({
+        label: d.name,
+        data: [{ x: d.revPerEmployee, y: d.profitMargin,
+                 r: Math.max(4, Math.min(24, Math.sqrt(d.companies || 1) * 0.65)) }],
+        backgroundColor: (CHART_COLORS[d.sector] || '#94A3B8') + '40',
+        borderColor:     (CHART_COLORS[d.sector] || '#94A3B8') + 'BB',
+        borderWidth: 1.5,
+        sni: d.sni, sector: d.sector, companies: d.companies, score: d.score,
+      }))
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      layout: { padding: 16 },
+      scales: {
+        x: {
+          title: { display: true, text: 'Revenue per employee (KSEK)',
+                   font: { size: 13, family: "'DM Mono', monospace", weight: '400' },
+                   color: '#8E9AAB' },
+          min: 0,
+          grid: { color: '#E2E6EC88' },
+          ticks: { font: { size: 12, family: "'DM Mono', monospace" }, color: '#8E9AAB' }
+        },
+        y: {
+          title: { display: true, text: 'Profit margin (%)',
+                   font: { size: 13, family: "'DM Mono', monospace", weight: '400' },
+                   color: '#8E9AAB' },
+          grid: { color: '#E2E6EC88' },
+          ticks: { font: { size: 12, family: "'DM Mono', monospace" }, color: '#8E9AAB' }
+        }
+      },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: ctx => {
+              const ds = ctx.dataset;
+              return [
+                ds.label,
+                `${ds.sni}  ·  ${ds.sector}`,
+                `Rev / emp: ${ctx.parsed.x.toLocaleString()} KSEK`,
+                `Margin: ${ctx.parsed.y.toFixed(1)}%`,
+                `Companies: ${(ds.companies || 0).toLocaleString()}`,
+                `Score: ${Math.round(ds.score || 0)}`,
+              ];
+            }
+          },
+          backgroundColor: '#0C1117',
+          titleColor: '#FFFFFF',
+          bodyColor: '#94A3B8',
+          titleFont: { size: 14, family: "'Bricolage Grotesque', sans-serif", weight: '600' },
+          bodyFont:  { size: 12, family: "'DM Mono', monospace" },
+          padding: 16,
+          cornerRadius: 10,
+          borderColor: '#1E293B',
+          borderWidth: 1,
+          displayColors: false,
+        }
+      }
+    }
+  });
+}
+
+document.querySelectorAll('thead th').forEach(th => {
+  th.addEventListener('click', () => {
+    const col = th.dataset.col;
+    if (!col) return;
+    if (sortCol === col) sortDir *= -1;
+    else { sortCol = col; sortDir = (col === 'name' || col === 'sni' || col === 'sector') ? 1 : -1; }
+    render();
+  });
+});
+
+document.querySelectorAll('select, input[type=range]').forEach(el => {
+  el.addEventListener('input', render);
+  el.addEventListener('change', render);
+});
+
+render();
+</script>
+</body>
+</html>
