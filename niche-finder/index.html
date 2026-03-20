@@ -484,24 +484,102 @@ tbody td {
 .mg-neg { color: var(--text-3); }
 
 /* Score badge */
-.sc {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--mono);
-  font-size: var(--sz-xs);
-  font-weight: 600;
-  min-width: 2.75rem;
-  padding: .3rem .5rem;
-  border-radius: var(--radius-sm);
-  letter-spacing: .02em;
-}
-.sc-top { background: var(--teal); color: #fff; }
-.sc-hi  { background: var(--teal-light); color: var(--teal); border: 1.5px solid var(--teal-mid); }
-.sc-mid { background: var(--amber-light); color: var(--amber); }
-.sc-lo  { background: var(--surface-2); color: var(--text-3); border: 1px solid var(--border); }
 
 .sort-arrow { font-size: .6rem; margin-left: 3px; }
+
+tbody tr { cursor: pointer; }
+
+/* ── Detail panel ── */
+#detail-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(12,17,23,.35);
+  backdrop-filter: blur(2px);
+  z-index: 100;
+}
+#detail-overlay.open { display: block; }
+#detail-panel {
+  position: fixed;
+  top: 0; right: 0; bottom: 0;
+  width: min(480px, 100vw);
+  background: var(--surface);
+  border-left: 1px solid var(--border);
+  box-shadow: -8px 0 40px rgba(12,17,23,.12);
+  z-index: 101;
+  overflow-y: auto;
+  transform: translateX(100%);
+  transition: transform .28s cubic-bezier(.4,0,.2,1);
+  display: flex;
+  flex-direction: column;
+}
+#detail-panel.open { transform: translateX(0); }
+.dp-header {
+  padding: 1.5rem 1.75rem 1.25rem;
+  border-bottom: 1px solid var(--border-soft);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.dp-sni {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--teal);
+  font-weight: 500;
+  letter-spacing: .08em;
+  margin-bottom: .4rem;
+}
+.dp-name {
+  font-family: var(--display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.3;
+  letter-spacing: -.02em;
+}
+.dp-close {
+  flex-shrink: 0;
+  width: 2rem; height: 2rem;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: var(--surface-2);
+  cursor: pointer;
+  font-size: 1rem;
+  color: var(--text-3);
+  display: flex; align-items: center; justify-content: center;
+  transition: background .12s, color .12s;
+}
+.dp-close:hover { background: var(--border); color: var(--text); }
+.dp-body { padding: 1.5rem 1.75rem; flex: 1; }
+.dp-sector {
+  margin-bottom: 1.5rem;
+}
+.dp-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+.dp-stat {
+  background: var(--surface-2);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-sm);
+  padding: .9rem 1rem;
+}
+.dp-stat-label {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-bottom: .35rem;
+}
+.dp-stat-value {
+  font-family: var(--mono);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text);
+}
 
 /* ── Footer ── */
 .footer {
@@ -628,7 +706,6 @@ tbody td {
             <th data-col="medianRevenue" class="num">Med. rev (MSEK)</th>
             <th data-col="revPerEmployee" class="num">Rev / emp (KSEK)</th>
             <th data-col="profitMargin" class="num">Margin</th>
-            <th data-col="score" class="num">Score</th>
           </tr>
         </thead>
         <tbody id="tableBody"></tbody>
@@ -636,13 +713,25 @@ tbody td {
     </div>
   </div>
 
+  <div id="detail-overlay"></div>
+  <div id="detail-panel">
+    <div class="dp-header">
+      <div>
+        <div class="dp-sni" id="dp-sni"></div>
+        <div class="dp-name" id="dp-name"></div>
+      </div>
+      <button class="dp-close" id="dp-close">&#x2715;</button>
+    </div>
+    <div class="dp-body">
+      <div class="dp-sector" id="dp-sector"></div>
+      <div class="dp-grid" id="dp-grid"></div>
+    </div>
+  </div>
+
   <div class="footer">
     <strong>Source:</strong> SCB Branschnyckeltal 2024 (46 financial ratios, 716 SNI 2007 industries, November 2025)
     merged with SCB F&ouml;retagsregistret 2025 (company counts).
     All figures are medians across Swedish aktiebolag &amp; economic associations.
-    &nbsp;&middot;&nbsp;
-    <strong>Niche score</strong> = 40&percnt; profit margin rank + 30&percnt; rev/emp rank +
-    20&percnt; inverse company count + 10&percnt; inverse team size.
   </div>
 
 </div>
@@ -1377,7 +1466,7 @@ sectors.forEach(s => {
 
 document.getElementById('heroCount').textContent = DATA.length.toLocaleString();
 
-let sortCol = 'score', sortDir = -1;
+let sortCol = 'profitMargin', sortDir = -1;
 let chart;
 
 function getFiltered() {
@@ -1401,13 +1490,6 @@ function marginTag(v) {
   return `<span class="mg mg-neg">${v.toFixed(1)}%</span>`;
 }
 
-function scoreTag(v) {
-  const r = Math.round(v);
-  if (r >= 70) return `<span class="sc sc-top">${r}</span>`;
-  if (r >= 50) return `<span class="sc sc-hi">${r}</span>`;
-  if (r >= 30) return `<span class="sc sc-mid">${r}</span>`;
-  return `<span class="sc sc-lo">${r}</span>`;
-}
 
 /* Teal-anchored sector palette */
 const SECTOR_COLOR = {
@@ -1451,8 +1533,6 @@ function render() {
   const avgMargin = filtered.length ? filtered.reduce((s, d) => s + d.profitMargin, 0) / filtered.length : 0;
   const avgRevEmp = filtered.length ? filtered.reduce((s, d) => s + d.revPerEmployee, 0) / filtered.length : 0;
   const totalComp = filtered.reduce((s, d) => s + (d.companies || 0), 0);
-  const topScore  = filtered.length ? Math.max(...filtered.map(d => d.score || 0)) : 0;
-
   document.getElementById('metrics').innerHTML = `
     <div class="metric" style="animation-delay:.05s">
       <div class="metric-label">Industries shown</div>
@@ -1474,11 +1554,6 @@ function render() {
       <div class="metric-value">${totalComp.toLocaleString()}</div>
       <div class="metric-detail">in filtered set</div>
     </div>
-    <div class="metric teal-card" style="animation-delay:.25s">
-      <div class="metric-label">Top niche score</div>
-      <div class="metric-value">${Math.round(topScore)}</div>
-      <div class="metric-detail">out of 100</div>
-    </div>
   `;
 
   document.getElementById('tableCount').textContent = `${filtered.length} industries`;
@@ -1486,7 +1561,7 @@ function render() {
   const tbody = document.getElementById('tableBody');
   tbody.innerHTML = filtered.map(d => {
     const sc = SECTOR_COLOR[d.sector] || SECTOR_COLOR['Other'];
-    return `<tr>
+    return `<tr data-sni="${d.sni}">
       <td class="sni">${d.sni}</td>
       <td class="ind">${d.name}</td>
       <td><span class="sec-pill" style="background:${sc.bg};color:${sc.text};border-color:${sc.border}">${d.sector}</span></td>
@@ -1495,7 +1570,6 @@ function render() {
       <td class="dv">${(d.medianRevenue || 0).toFixed(1)}</td>
       <td class="dvb">${(d.revPerEmployee || 0).toLocaleString()}</td>
       <td class="num">${marginTag(d.profitMargin)}</td>
-      <td class="num">${scoreTag(d.score || 0)}</td>
     </tr>`;
   }).join('');
 
@@ -1593,6 +1667,47 @@ document.querySelectorAll('thead th').forEach(th => {
 document.querySelectorAll('select, input[type=range]').forEach(el => {
   el.addEventListener('input', render);
   el.addEventListener('change', render);
+});
+
+/* ── Detail panel ── */
+const overlay = document.getElementById('detail-overlay');
+const panel   = document.getElementById('detail-panel');
+
+function openPanel(d) {
+  const sc = SECTOR_COLOR[d.sector] || SECTOR_COLOR['Other'];
+  document.getElementById('dp-sni').textContent  = d.sni;
+  document.getElementById('dp-name').textContent = d.name;
+  document.getElementById('dp-sector').innerHTML =
+    `<span class="sec-pill" style="background:${sc.bg};color:${sc.text};border-color:${sc.border}">${d.sector}</span>`;
+  document.getElementById('dp-grid').innerHTML = [
+    ['Companies',         (d.companies || 0).toLocaleString(),       ''],
+    ['Median employees',  d.medianEmployees || '—',                   ''],
+    ['Median revenue',    (d.medianRevenue || 0).toFixed(1) + ' MSEK',''],
+    ['Rev / employee',    (d.revPerEmployee || 0).toLocaleString() + ' KSEK', ''],
+    ['Profit margin',     d.profitMargin.toFixed(1) + '%',            ''],
+  ].map(([label, val]) => `
+    <div class="dp-stat">
+      <div class="dp-stat-label">${label}</div>
+      <div class="dp-stat-value">${val}</div>
+    </div>`).join('');
+  overlay.classList.add('open');
+  panel.classList.add('open');
+}
+
+function closePanel() {
+  overlay.classList.remove('open');
+  panel.classList.remove('open');
+}
+
+document.getElementById('dp-close').addEventListener('click', closePanel);
+overlay.addEventListener('click', closePanel);
+
+document.getElementById('tableBody').addEventListener('click', e => {
+  const row = e.target.closest('tr');
+  if (!row) return;
+  const sni = row.dataset.sni;
+  const d = DATA.find(x => x.sni === sni);
+  if (d) openPanel(d);
 });
 
 render();
