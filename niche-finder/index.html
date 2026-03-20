@@ -574,30 +574,23 @@ tbody td {
     <div class="fg">
       <label class="fg-label">Min. profit margin</label>
       <div class="rw">
-        <input type="range" id="marginFilter" min="0" max="50" value="5" step="1">
-        <span class="rv" id="marginVal">5%</span>
+        <input type="range" id="marginFilter" min="0" max="50" value="0" step="1">
+        <span class="rv" id="marginVal">0%</span>
       </div>
     </div>
     <div class="fg">
       <label class="fg-label">Max. median employees</label>
       <div class="rw">
-        <input type="range" id="empFilter" min="1" max="100" value="50" step="1">
-        <span class="rv" id="empVal">50</span>
+        <input type="range" id="empFilter" min="1" max="100" value="100" step="1">
+        <span class="rv" id="empVal">100</span>
       </div>
     </div>
     <div class="fg">
       <label class="fg-label">Min. rev / employee (KSEK)</label>
       <div class="rw">
-        <input type="range" id="revEmpFilter" min="0" max="10000" value="500" step="100">
-        <span class="rv" id="revEmpVal">500</span>
+        <input type="range" id="revEmpFilter" min="0" max="10000" value="0" step="100">
+        <span class="rv" id="revEmpVal">0</span>
       </div>
-    </div>
-    <div class="fg">
-      <label class="fg-label">Sector type</label>
-      <select id="techFilter">
-        <option value="no">All industries</option>
-        <option value="yes" selected>Exclude IT / Finance / Media</option>
-      </select>
     </div>
   </div>
 
@@ -1391,13 +1384,11 @@ function getFiltered() {
   const minMargin = +document.getElementById('marginFilter').value;
   const maxEmp    = +document.getElementById('empFilter').value;
   const minRevEmp = +document.getElementById('revEmpFilter').value;
-  const exclTech  = document.getElementById('techFilter').value === 'yes';
   return DATA.filter(d => {
     if (sec !== 'all' && d.sector !== sec) return false;
     if (d.profitMargin < minMargin) return false;
     if (d.medianEmployees > maxEmp) return false;
     if (d.revPerEmployee < minRevEmp) return false;
-    if (exclTech && d.techFlag) return false;
     return true;
   }).sort((a, b) => sortDir * (a[sortCol] - b[sortCol] || a.name.localeCompare(b.name)));
 }
