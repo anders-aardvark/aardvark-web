@@ -605,6 +605,7 @@ tbody td {
     </div>
     <div class="chart-container"><canvas id="scatterChart"></canvas></div>
   </div>
+  <p style="font-size:0.7rem;color:var(--text-3);margin-top:0.5rem;padding:0 0.25rem;">* SNI 35.220 (Distribution av gasformiga bränslen via rörnät) excluded from chart — utility monopoly with rev/employee of 51,072 KSEK skews the scale. Included in the table.</p>
 
   <div class="section-head" style="animation:fadeUp .35s .2s ease both">
     <span class="section-head-label">Industries</span>
@@ -1512,10 +1513,11 @@ function render() {
 function renderChart(filtered) {
   const ctx = document.getElementById('scatterChart');
   if (chart) chart.destroy();
+  const chartData = filtered.filter(d => d.sni !== '35.220');
   chart = new Chart(ctx, {
     type: 'bubble',
     data: {
-      datasets: filtered.map(d => ({
+      datasets: chartData.map(d => ({
         label: d.name,
         data: [{ x: d.revPerEmployee, y: d.profitMargin,
                  r: Math.max(4, Math.min(24, Math.sqrt(d.companies || 1) * 0.65)) }],
