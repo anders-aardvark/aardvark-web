@@ -442,3 +442,51 @@ footer .footer-tagline {
     margin-top: 0.5rem;
     font-style: italic;
 }
+
+/* === RESPONSIVE === */
+@media (max-width: 900px) {
+    .container { padding: 0 0.75rem; }
+    .box { padding: 2.5rem 1.5rem 3rem; }
+    .white-area { padding: 2.5rem 1.5rem; }
+
+    .nav-bar { padding: 0.85rem 1rem; }
+    .nav-links { gap: 1.25rem; font-size: 0.8125rem; }
+
+    .hero h1 { font-size: 2.75rem; }
+    .hero h1 em { box-shadow: 3px 3px 0 #0A0A0A; }
+    .hero p.sub { font-size: 1rem; }
+
+    .about-area { grid-template-columns: 1fr; gap: 1.5rem; padding: 2.5rem 1.5rem; }
+    .about-area h2 { font-size: 2.25rem; }
+
+    .ai-box h2 { font-size: 2.25rem; }
+    .ai-box p { font-size: 1rem; }
+
+    .track-area { padding: 2.5rem 1.5rem; }
+    .track-area .head { flex-direction: column; align-items: flex-start; }
+    .track-area h2 { font-size: 2.25rem; }
+    .track-area .cards { grid-template-columns: 1fr; }
+
+    .contact-box h2 { font-size: 2.75rem; }
+    .contact-box p { font-size: 1rem; }
+}
+
+@media (max-width: 480px) {
+    /* Hide stars on smallest screens — they overlap text */
+    .star { display: none; }
+
+    .hero h1 { font-size: 2.25rem; }
+    .contact-box h2 { font-size: 2.25rem; }
+}
+
+/* === REDUCED MOTION === */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+    }
+    .pill:hover,
+    .track-area .card:hover {
+        transform: none;
+    }
+}
