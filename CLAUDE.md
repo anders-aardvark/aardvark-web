@@ -8,6 +8,10 @@ Personal consultancy website for Aardvark Product Management AB - a product mana
 
 **Live site:** https://aardvark.pm (also accessible at https://anders-aardvark.github.io/aardvark-web/)
 
+## Scope
+
+"The webpage" / "this project" refers to the landing page (`index.html`, `styles.css`, `images/`, `CNAME`) and any other pages that may be added at the repo root. The `niche-finder/` subdirectory is a separate tool managed in another project — do not modify it as part of landing-page work, and exclude it when reasoning about the site (architecture, design system, deployment behavior, etc.).
+
 ## Tech Stack
 
 - Pure HTML/CSS - no build tools, frameworks, or JavaScript
@@ -22,7 +26,7 @@ Personal consultancy website for Aardvark Product Management AB - a product mana
 open index.html
 
 # Or navigate to the directory
-cd /Users/anders/projects/aardvark-web
+cd /Users/anders/Projects/aardvark-web
 open index.html
 ```
 
@@ -48,26 +52,11 @@ gh run list --limit 5
 - Mac: `Cmd + Shift + R`
 - Or open in incognito/private window
 
-## Project Structure
+## Companion docs
 
-```
-aardvark-web/
-├── index.html               # Main landing page
-├── styles.css               # All styling
-├── CLAUDE.md                # Project documentation for Claude Code
-├── DESIGN-PRINCIPLES.md     # Comprehensive design guidelines
-├── images/                  # Logos and images
-│   ├── logo-nav.svg         # Navigation logo (icon only)
-│   ├── logo-hero.svg        # Hero logo (full with text)
-│   ├── spotify.png          # Company logos
-│   ├── electrolux.png
-│   ├── kry.svg
-│   ├── truecaller.png
-│   ├── fyndiq.png
-│   └── rebtel.png
-├── CNAME                    # Custom domain configuration (aardvark.pm)
-└── README.md                # Project documentation
-```
+- `DESIGN-PRINCIPLES.md` — full design system reference (read before non-trivial visual changes).
+- `DESIGN-UPDATE-PLAN.md` — in-flight redesign plan; consult if asked about pending visual direction.
+- `QA-AUDIT-2025.md` — accessibility/QA audit findings; check before claiming a fix is complete in audited areas.
 
 ## Design System
 
@@ -112,91 +101,27 @@ Company names are rendered as **mono-styled text chips** in the About section (n
 
 ## Content Strategy
 
-All copy is backed by real achievements and metrics:
-- Spotify: Scaled wearables from 100K to 10M+ users
-- Electrolux: Multi-year digital strategy, global platform launches
-- Fyndiq: ML solutions increasing sales by 80%
-- Specific product launches: Apple Watch, WearOS, Garmin, etc.
+Headline positioning: *"Senior product leadership. AI-native by practice."* Anders operates as Fractional CPO and Principal PM through Aardvark Product Management.
 
-**USP:** "From 100K to 10M+ Users" - highlighting scale achievement
+Track record proof points used on the page:
+- Aardvark (2025–): Fractional CPO advisory, AI transformation, operating-model audits
+- Rebtel (2025–): Lead PM, payments
+- Electrolux (2022–2025): Group PM + AI Lead PM, Care vertical 300K+ users, Red Dot 2025, App Store rating 2.0 → 4.3
+- Spotify (2017–2021): Wearables vertical scaled 100K → 10M+
+- Kry (2021–2022): Senior PM, growth, regulated digital health
+- Fyndiq (2016–2017): ML categorisation 95% accuracy, 80% sales lift
 
 **Avoid:** Generic consulting speak. Always use concrete examples and measurable outcomes.
 
-## Custom Domain Setup
+## Custom Domain
 
-**Domain:** aardvark.pm (managed at Gandi)
+`aardvark.pm` is registered at Gandi. DNS A records and the `www` CNAME point at GitHub Pages; HTTPS is enforced in the Pages settings. The `CNAME` file in the repo root must continue to contain `aardvark.pm` — removing it will break the custom domain on next deploy.
 
-**DNS Configuration:**
-- 4 A records pointing to GitHub Pages:
-  - 185.199.108.153
-  - 185.199.109.153
-  - 185.199.110.153
-  - 185.199.111.153
-- CNAME: www → anders-aardvark.github.io
-
-**GitHub Pages Settings:**
-- Source: Deploy from branch `main` / (root)
-- Custom domain: aardvark.pm
-- Enforce HTTPS: ✓ (enabled)
-
-## Common Tasks
-
-**Update content:**
-Edit `index.html` directly. Main sections:
-- Hero: Headline and tagline
-- About: Career summary
-- Services: 4 service cards
-- Experience: 5 company highlights + metrics
-- Contact: Email and CTA
-
-**Update styling:**
-Edit `styles.css`. All styles are in one file, organized by section.
-
-**Add a new company logo:**
-1. Add image to `images/` directory
-2. Update HTML in About section's `.companies` div
-3. Follow exact naming convention
-
-**Check if site is live:**
+Sanity-check the domain is still live:
 ```bash
-dig aardvark.pm +short  # Should show GitHub Pages IPs
+dig aardvark.pm +short  # Should return GitHub Pages IPs (185.199.108–111.153)
 ```
 
-## Git Workflow
+## Responsive breakpoints
 
-**Current setup:**
-- Remote: https://github.com/anders-aardvark/aardvark-web.git
-- Branch: main
-- Authentication: GitHub CLI (gh)
-
-**Standard workflow:**
-```bash
-# Make changes
-git add .
-git commit -m "Descriptive commit message"
-git push
-
-# Check deployment
-gh run list --limit 5
-```
-
-**Note:** Git config shows committer as "Anders <anders@mac.lan>". This is fine for personal projects.
-
-## Responsive Breakpoints
-
-- Desktop: Default (1280px max-width)
-- Tablet: 1024px and below
-- Mobile: 768px and below
-- Small mobile: 480px and below
-
-All sections are fully responsive with appropriate font size adjustments.
-
-## Browser Compatibility
-
-Works in all modern browsers:
-- Chrome/Edge
-- Safari
-- Firefox
-- Mobile browsers (iOS Safari, Chrome Mobile)
-
-No JavaScript means excellent compatibility and performance.
+Defined in `styles.css`: `@media (max-width: 900px)` for tablet/mobile (single-column grids, smaller headlines), `@media (max-width: 480px)` for small mobile (hides decorative stars, further headline reduction). Max content width is 1240px. A `prefers-reduced-motion: reduce` block disables card and pill hover transforms.
