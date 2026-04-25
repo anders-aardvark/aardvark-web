@@ -71,50 +71,44 @@ aardvark-web/
 
 ## Design System
 
-**📖 See [DESIGN-PRINCIPLES.md](DESIGN-PRINCIPLES.md) for comprehensive design guidelines.**
+**📖 See [DESIGN-PRINCIPLES.md](DESIGN-PRINCIPLES.md) for general principles. The visual system below is the active implementation; principles in that doc are the broader policy.**
+
+**Locked design spec:** `docs/superpowers/specs/2026-04-25-aardvark-redesign-design.md`
 
 **Color Palette:**
-- Background: `#F8FAF9` (warm light gray)
-- Main text: `#1D1E18` (almost black)
-- Accent: `#FDA10D` (vibrant orange/gold)
-- Secondary text: `#6b7280` (gray)
+- Page chrome: `#FAF7F0` (cream)
+- Cream card / pill: `#FFFCF0`
+- Ink (primary text): `#0A0A0A`
+- Secondary ink (body, role): `#2A2A2A`
+- Hero / brand yellow: `#F4D43B`
+- AI box / Electrolux cyan: `#8BD0EC`
+- Contact / magenta accent: `#DD5DB8` (ground only, never as text on light surfaces)
+- Brand cards: Rebtel `#F0857A`, Spotify `#9CD653`, Kry `#80D9B5`, Fyndiq `#F4A04A`
 
 **Typography:**
-- Headings: `Jomhuria` (Google Fonts) - distinctive display font
-- Body: `Oxygen` (Google Fonts) - clean, readable
-- Hero headline: 5rem (80px), weight 400 (Jomhuria is naturally bold)
-- Section headings: 3rem (48px), weight 400
-- Body text: 1.25rem (20px)
-- Tight letter-spacing (-0.02em to -0.03em) for headlines
+- Display & body: `Geist` (Google Fonts) — weights 300–800
+- Mono accents: `Geist Mono` — weights 400–500
+- Headlines: Geist 800, uppercase, line-height 0.94, letter-spacing -0.045em to -0.05em
+- Hero H1: 5.5rem; section H2s: 3.5–5rem
+- Body: 1.125rem; sub/lead: 1.1875rem
+- Eyebrow / meta: 0.7–0.8125rem mono uppercase
 
-**Layout Rule: 60-30-10**
-- 60% Whitespace (breathing room, margins, padding)
-- 30% Text Content (body copy, descriptions)
-- 10% Accent Elements (CTAs, highlights)
+**Layout:**
+- Cream chrome with sticky translucent nav
+- Sections sit as **rounded boxes** (`border-radius: 18px`) when colored; white-area sections use the cream chrome directly
+- 1.25rem vertical gap between sections
+- Max content width 1240px
 
-**Key Design Principles:**
-- Generous white space (6rem padding between sections)
-- White content areas on warm gray background
-- Orange/gold accents for CTAs and interactive elements
-- Subtle borders: `1px solid rgba(0, 0, 0, 0.06)`
-- Smooth transitions: 0.2s for interactive elements
-- Mobile-first responsive design
+**Key gestures:**
+- Tilted black-outlined inline callout (the cyan "AI-native" block in the H1) — used once
+- Cartoon stars scattered in colored boxes — never in white-area sections
+- Pill CTA: cream background, 2px black border, yellow arrow icon
+- Black-outlined cards with offset shadow (3px border, 4px 4px 0 shadow)
+- Hover: cards and pill lift up-left + bigger shadow (disabled under prefers-reduced-motion)
 
-## Company Logos
+## Company logos
 
-Located in `images/` directory. Logos display at:
-- Desktop: 40px height
-- Mobile: 32px height
-- Default: Grayscale with 60% opacity
-- Hover: Full color with 100% opacity
-
-**Adding/updating logos:**
-1. Place PNG or SVG in `images/` directory
-2. Name exactly as referenced in HTML (e.g., `spotify.png`)
-3. Prefer transparent backgrounds
-4. High resolution (200px+ height recommended)
-
-**Note:** Rebtel logo is intentionally upside down (their brand design choice)
+Company names are rendered as **mono-styled text chips** in the About section (not as PNGs). The PNG files in `images/` are no longer referenced from `index.html` and can be cleaned up in a separate housekeeping pass. The hero/nav SVG logos (`logo-hero.svg`, `logo-nav.svg`) are also unused; a real logo design is a separate later project.
 
 ## Content Strategy
 
