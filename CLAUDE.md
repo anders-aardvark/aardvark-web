@@ -10,7 +10,7 @@ Personal consultancy website for Aardvark Product Management AB - a product mana
 
 ## Scope
 
-"The webpage" / "this project" refers to the landing page (`index.html`, `styles.css`, `images/`, `CNAME`) and any other pages that may be added at the repo root. The `niche-finder/` subdirectory is a separate tool managed in another project — do not modify it as part of landing-page work, and exclude it when reasoning about the site (architecture, design system, deployment behavior, etc.).
+"The webpage" / "this project" refers to the landing page (`index.html`, `styles.css`, `CNAME`) and any other pages that may be added at the repo root. The `niche-finder/` subdirectory is a separate tool managed in another project — do not modify it as part of landing-page work, and exclude it when reasoning about the site (architecture, design system, deployment behavior, etc.).
 
 ## Tech Stack
 
@@ -51,6 +51,8 @@ gh run list --limit 5
 **Force browser cache refresh after deployment:**
 - Mac: `Cmd + Shift + R`
 - Or open in incognito/private window
+
+**Excluding files from the published site:** The site is built by Jekyll (GitHub Pages default). Anything at the repo root is served at `aardvark.pm/<filename>` unless listed in `_config.yml`'s `exclude:` block. When adding a new internal-only doc (spec, audit, plan, scratch note) at the repo root, add it to that exclude list in the same commit — otherwise it leaks publicly on next deploy.
 
 ## Companion docs
 
@@ -97,7 +99,7 @@ gh run list --limit 5
 
 ## Company logos
 
-Company names are rendered as **mono-styled text chips** in the About section (not as PNGs). The PNG files in `images/` are no longer referenced from `index.html` and can be cleaned up in a separate housekeeping pass. The hero/nav SVG logos (`logo-hero.svg`, `logo-nav.svg`) are also unused; a real logo design is a separate later project.
+Company names are rendered as **mono-styled text chips** in the About section — there are no logo image assets in the repo. A real logo design (including a wordmark/icon for Aardvark itself) is a separate later project.
 
 ## Content Strategy
 

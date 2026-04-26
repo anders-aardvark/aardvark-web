@@ -255,23 +255,6 @@ a { color: inherit; text-decoration: none; }
     margin-bottom: 1.25rem;
 }
 
-.about-area .logos {
-    display: flex;
-    gap: 0.6rem;
-    flex-wrap: wrap;
-    margin-top: 1.5rem;
-}
-
-.about-area .chip {
-    font-family: 'Geist Mono', ui-monospace, monospace;
-    font-size: 0.75rem;
-    padding: 0.4rem 0.8rem;
-    border: 2px solid #0A0A0A;
-    border-radius: 999px;
-    background: #FFFCF0;
-    color: #0A0A0A;
-}
-
 /* === AI BOX === */
 .ai-box {
     background: #8BD0EC;
@@ -398,10 +381,45 @@ a { color: inherit; text-decoration: none; }
 .card.brand-spotify    { background: #9CD653; }
 .card.brand-kry        { background: #80D9B5; }
 .card.brand-fyndiq     { background: #F4A04A; }
+.card.brand-truecaller { background: #7FB3E8; }
+.card.brand-svenska    { background: #E8746A; }
+
+/* === PULL QUOTE === */
+.pull-quote {
+    max-width: 760px;
+    margin: 0 auto;
+    padding-left: 1.5rem;
+    border-left: 4px solid #0A0A0A;
+}
+
+.about-area .pull-quote {
+    grid-column: 1 / -1;
+    margin-top: 2.5rem;
+}
+
+.track-area .pull-quote {
+    margin-top: 3rem;
+}
+
+.pull-quote p {
+    font-family: 'Geist', sans-serif;
+    font-size: 1.1875rem;
+    line-height: 1.55;
+    font-style: italic;
+    color: #2A2A2A;
+    margin-bottom: 0.85rem;
+}
+
+.pull-quote cite {
+    font-family: 'Geist Mono', ui-monospace, monospace;
+    font-size: 0.8125rem;
+    font-style: normal;
+    color: #2A2A2A;
+}
 
 /* === CONTACT === */
 .contact-box {
-    background: #DD5DB8;
+    background: #EDB085;
     color: #0A0A0A;
     text-align: center;
     padding: 5rem 4rem 5.5rem;
@@ -422,16 +440,20 @@ a { color: inherit; text-decoration: none; }
     font-family: 'Geist', sans-serif;
     font-size: 1.125rem;
     max-width: 580px;
-    margin: 0 auto 2rem;
+    margin: 0 auto 1rem;
     line-height: 1.5;
     color: #0A0A0A;
+}
+
+.contact-box p.contact-aside {
+    margin-bottom: 2rem;
 }
 
 .contact-box .pill {
     background: #FFFCF0;
 }
 .contact-box .pill .arrow {
-    background: #DD5DB8;
+    background: #EDB085;
 }
 
 /* === FOOTER === */
@@ -450,6 +472,15 @@ footer p {
 footer .footer-tagline {
     margin-top: 0.5rem;
     font-style: italic;
+}
+
+footer .footer-link {
+    border-bottom: 1px solid #555;
+    padding-bottom: 1px;
+    transition: border-bottom-color 0.15s ease;
+}
+footer .footer-link:hover {
+    border-bottom-color: transparent;
 }
 
 /* === RESPONSIVE === */
@@ -478,6 +509,10 @@ footer .footer-tagline {
 
     .contact-box h2 { font-size: 2.75rem; }
     .contact-box p { font-size: 1rem; }
+
+    .pull-quote p { font-size: 1.0625rem; }
+    .about-area .pull-quote,
+    .track-area .pull-quote { margin-top: 1.5rem; }
 }
 
 @media (max-width: 480px) {
