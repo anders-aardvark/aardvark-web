@@ -87,6 +87,15 @@ a { color: inherit; text-decoration: none; }
     color: #0A0A0A;
 }
 
+.nav-mark-extra {
+    font-weight: 800;
+}
+
+@media (max-width: 600px) {
+    .nav-mark { font-size: 1rem; }
+    .nav-mark-extra { display: none; }
+}
+
 .nav-links {
     display: flex;
     gap: 2rem;

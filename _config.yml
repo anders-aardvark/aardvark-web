@@ -1,0 +1,13 @@
+# Jekyll configuration for GitHub Pages
+# Files listed here are NOT served at https://aardvark.pm
+
+exclude:
+  - CLAUDE.md
+  - README.md
+  - DESIGN-PRINCIPLES.md
+  - DESIGN-UPDATE-PLAN.md
+  - QA-AUDIT-2025.md
+  - docs/
+  - .gitignore
+  - .DS_Store
+  - _config.yml
